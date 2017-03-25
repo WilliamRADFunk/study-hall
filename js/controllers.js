@@ -2,6 +2,7 @@
 studyHallApp.controller('MainController', ['appData', function(app) {
 	var self = this;
 
+	self.isLoggedIn = app.isLoggedIn;
 	self.active = false;
 	self.miscData = app.miscData;
 	self.state = app.state;

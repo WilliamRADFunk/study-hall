@@ -44,3 +44,25 @@ body
 @media (min-width: 1200px) {
 	
 }
+
+#login-container .form-login{
+    background-color: #ffa500;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#FFA500;
+    border-width: 5px;
+    box-shadow:0 2px 0 #cfcfcf;
+}
+
+#login-container .cntr-container {
+    margin: auto;
+    width: 40%;
+    padding: 10px;
+}
+
+#login-container .center-text {
+    text-align: center;
+}

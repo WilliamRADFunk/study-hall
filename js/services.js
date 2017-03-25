@@ -15,7 +15,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 				id: id
 			}
 		}).then(function successCallback(response) {
-			console.log(response);
+			console.log(response.data);
 		}, function errorCallback(response) {
 			console.log(response);
 		});

@@ -30,6 +30,9 @@
 <body>
 	<div class="container" ng-app="studyHallApp">
 		<div ng-controller="MainController as mainCtrl">
+			<div id="login-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div ng-include src="'partials/login.html'"></div>
+			</div>
 			<div id="events-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div ng-include src="'partials/events.html'"></div>
 			</div>

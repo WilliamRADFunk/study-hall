@@ -6,56 +6,12 @@ and mentored by William R.A.D. Funk - http://WilliamRobertFunk.com
 */
 body
 {
-	background-color: #FFFFFF;
-	color: #000000;
+	background-color: #000000;
+	color: #FFFFFF;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	width: 100%;
-}
-#nav
-{
-	background-color: #000000;
-	display: block;
-	text-align: left;
-}
-#nav ul
-{
-	list-style: none;
-	margin-left: 0px;
-	margin-top: 0px;
-	padding-left: 0px;
-	padding-top: 12px;
-}
-#nav ul li
-{
-	color: #FFFFFF;
-	display: inline-block;
-	margin-right: 10px;
-	margin-top: 0px;
-}
-.btn-primary
-{
-	background-color: "00004b";
-	border-color: #FF8C00;
-	color: #000000;
-}
-.btn-primary:hover
-{
-	background-color: "#FFFF00" !important;
-	border-color: #8064A2;
-	color: #000000;
-}
-.btn-primary:active
-{
-	background-color: "#0000FF";
-	border-color: #8064A2;
-}
-.btn-primary:focus
-{
-	background-color: "00004b";
-	border-color: #FFFF00;
-	color: #000000;
 }
 .centered
 {
@@ -64,6 +20,10 @@ body
 .left
 {
 	float: left;
+}
+.row
+{
+	background-color: #FF8C00;
 }
 .right
 {

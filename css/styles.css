@@ -96,3 +96,13 @@ body
     border-width: 5px;
     box-shadow:0 2px 0 #cfcfcf;
 }
+
+#login-container .cntr-container {
+    margin: auto;
+    width: 40%;
+    padding: 10px;
+}
+
+#login-container .center-text {
+    text-align: center;
+}

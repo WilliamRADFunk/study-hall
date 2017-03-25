@@ -1,0 +1,42 @@
+/* 
+Study Hall Stylesheet v1.0
+Last Updated: 2017-Mar-25
+Author: Jorge Rodriguez http://jitorodriguez.com,
+and mentored by William R.A.D. Funk - http://WilliamRobertFunk.com 
+*/
+body
+{
+	background-color: #000000;
+	color: #FFFFFF;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.centered
+{
+	text-align: center;
+}
+.left
+{
+	float: left;
+}
+.right
+{
+	float: right;
+}
+@media (min-width: 300px) {
+
+}
+@media (min-width: 500px) {
+
+}
+@media (min-width: 768px) {
+
+}
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1200px) {
+	
+}

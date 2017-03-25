@@ -1,0 +1,8 @@
+<div id="nav" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<ul>
+		<li><h2>Event Note</h2></li>
+		<li><button class="btn btn-primary" ng-if="mainCtrl.loggedIn" ng-click="eventsCtrl.togglePublicEvents()" ng-init="eventsCtrl.isPublicEvents=true">Public Core</br>Events</li>
+		<li><button class="btn btn-primary" ng-if="mainCtrl.loggedIn" ng-click="eventsCtrl.gotoGetAllMovies()">Private Core</br>Events</li>
+		<li><button class="btn btn-primary" ng-if="mainCtrl.loggedIn" ng-click="eventsCtrl.gotoCreateMovie()">RSOs</button></li>
+	</ul>
+</div>

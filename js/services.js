@@ -1,10 +1,24 @@
 studyHallApp.factory('appData', ['$http', function($http) {
 	var app = {};								// Main object the service passes back to controller.
-	app.isLoggedIn = true;						// Ensures user is logged in and allowed in certain areas.
 
 	app.eventListData = {};						// Angular prefers objects to primitives for binding.
 	app.eventListData.isPublicEvents = true;	// Lets us know the view public events toggle is on.
+	app.eventListData.isPrivateEvents = false;	// Lets us know the view private events toggle is on.
 
+	app.state = {};								// Manages overall state of application.
+	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
+	app.state.events = false;					// User is on list events page.
+	app.state.event = false;					// User is on individual event page.
+	app.state.rsos = false;						// User is on rsos page.
+	app.state.rso = false;						// User is on individual rso page.
+	app.state.userId = 0;						// User's id after logging in.
+
+	login = function(userId=null) {
+		if(userId) {
+			app.state.isLoggedIn = true;
+			app.state.events = true;
+		}
+	}
 	// Post template
 	app.editEvent = function(id) {
 		$http({
@@ -42,6 +56,14 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log("failure", response.statusText);
 		});
 	};
+	// Toggles the public events view
+	app.togglePublicEvents = function() {
+		app.eventListData.isPublicEvents = !app.eventListData.isPublicEvents;
+	}
+	// Toggles the public events view
+	app.togglePrivateEvents = function() {
+		app.eventListData.isPrivateEvents = !app.eventListData.isPrivateEvents;
+	}
 	// Pass one-way data to those dependent on the service.
 	return app;
 }]);

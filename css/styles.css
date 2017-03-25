@@ -45,6 +45,12 @@ body
 	background-color: #9EBBA6;
 	color: #08291D;
 }
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav > li > a:hover
+{
+	background-color: #030302;
+	color: #9EBBA6;
+}
 .centered
 {
 	text-align: center;

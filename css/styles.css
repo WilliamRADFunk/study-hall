@@ -106,3 +106,9 @@ body
 #login-container .center-text {
     text-align: center;
 }
+
+#login-container .form-control {
+    border-radius: 10px;
+    margin: auto;
+    width: 92%;
+}

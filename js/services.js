@@ -23,6 +23,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Called when user lands on main page.
 	// @param {int} mode - public, private, all determines query type.
 	app.listEvents = function(userId=null, univId=null) {
+		console.log(userId, univId);
 		var mode = '';
 		if(userId && univId) {
 			mode = '?user_id=' + userId + '&uni=' + univId;
@@ -31,11 +32,14 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}
 		$http({
 			method: 'GET',
-			url: './actions/event.php' + mode
+			url: './actions/event.php' + mode,
+			transformResponse: [function (data) {
+				return data;
+			}]
 		}).then(function successCallback(response) {
-			console.log("Success");
+			console.log("success", response.data);
 		}, function errorCallback(response) {
-			console.log(response.statusText);
+			console.log("failure", response.statusText);
 		});
 	};
 	// Pass one-way data to those dependent on the service.

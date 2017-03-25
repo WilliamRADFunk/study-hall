@@ -9,7 +9,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.editEvent = function(id) {
 		$http({
 			method: 'POST',
-			url: 'http://jitorodriguez.com/EventNote/event.php',
+			url: '.actions/event.php',
 			data:
 			{
 				id: id
@@ -31,12 +31,11 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}
 		$http({
 			method: 'GET',
-			url: 'http://jitorodriguez.com/EventNote/event.php' + mode
+			url: '.actions/event.php' + mode
 		}).then(function successCallback(response) {
 			console.log("Success");
 		}, function errorCallback(response) {
 			console.log(response.statusText);
-			getNewMovies();
 		});
 	};
 	// Pass one-way data to those dependent on the service.

@@ -9,7 +9,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.editEvent = function(id) {
 		$http({
 			method: 'POST',
-			url: '.actions/event.php',
+			url: './actions/event.php',
 			data:
 			{
 				id: id
@@ -31,7 +31,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}
 		$http({
 			method: 'GET',
-			url: '.actions/event.php' + mode
+			url: './actions/event.php' + mode
 		}).then(function successCallback(response) {
 			console.log("Success");
 		}, function errorCallback(response) {

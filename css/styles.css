@@ -22,7 +22,9 @@ body
 #nav ul
 {
 	list-style: none;
+	margin-left: 0px;
 	margin-top: 0px;
+	padding-left: 0px;
 	padding-top: 12px;
 }
 #nav ul li
@@ -35,7 +37,7 @@ body
 .btn-primary
 {
 	background-color: "00004b";
-	border-color: #FFFF00;
+	border-color: #FF8C00;
 	color: #000000;
 }
 .btn-primary:hover

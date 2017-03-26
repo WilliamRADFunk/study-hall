@@ -45,13 +45,23 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 // Main function is manage event lists "page".
 studyHallApp.controller('EventsController', ['appData', function(app) {
 	var self = this;
-	var mymap = L.map('mapid').setView([28.6024, 81.2001], 2);
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		maxZoom: 18,
-		id: 'your.mapbox.project.id',
-		accessToken: 'your.mapbox.public.access.token'
-	}).addTo(mymap);
+	// var mymap = L.map('mapid').setView([28.6024, 81.2001], 2);
+	// L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	// 	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	// 	maxZoom: 18,
+	// 	id: 'your.mapbox.project.id',
+	// 	accessToken: 'your.mapbox.public.access.token'
+	// }).addTo(mymap);
+
+	var map = L.map('map').setView([51.505, -0.09], 13);
+
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	L.marker([51.5, -0.09]).addTo(map)
+	    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+	    .openPopup();
 
 	self.active = false;
 	self.eventListData = app.eventListData;

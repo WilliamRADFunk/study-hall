@@ -6,8 +6,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventListData.isPrivateEvents = false;	// Lets us know the view private events toggle is on.
 
 	app.state = {};								// Manages overall state of application.
-	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
-	app.state.events = false;					// User is on list events page.
+	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
+	app.state.events = true;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
 	app.state.rso = false;						// User is on individual rso page.

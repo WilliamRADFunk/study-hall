@@ -99,3 +99,7 @@ body {
 	color: red;
 	font-size: 12px;
 }
+
+#map {
+	height: 480px;
+}

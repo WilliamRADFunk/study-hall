@@ -4,6 +4,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventListData = {};						// Angular prefers objects to primitives for binding.
 	app.eventListData.isPublicEvents = true;	// Lets us know the view public events toggle is on.
 	app.eventListData.isPrivateEvents = false;	// Lets us know the view private events toggle is on.
+	app.eventListData.events = [];				// List of event objects returned from query.
 
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
@@ -87,6 +88,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			}]
 		}).then(function successCallback(response) {
 			console.log("success", response.data);
+			var parsed = JSON.parse(response.data);
+			app.eventListData.events = parsed;
 		}, function errorCallback(response) {
 			console.log("failure", response.statusText);
 		});

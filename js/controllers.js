@@ -47,22 +47,25 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 // Main function is manage event lists "page".
 studyHallApp.controller('EventsController', ['appData', function(app) {
 	var self = this;
-
-	var map = L.map('map-events').setView([28.6024, -81.2001], 16);
-
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-	    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
-
-	L.marker([28.6024, -81.2001]).addTo(map)
-	    .bindPopup('University of<br>Central Florida')
-	    .openPopup();
+	var map;
 
 	self.active = false;
 	self.eventListData = app.eventListData;
 	self.state = app.state;
 
-	self.getEventList = function() {
-		app.listEvents();
+	// Calls the service to get the list of events
+	self.getEventList = function(userId=null, univId=null) {
+		app.listEvents(userId, univId);
 	};
+
+	self.getEventList();
+
+	map = L.map('map-events').setView([28.6024, -81.2001], 16);
+
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	L.marker([28.6024, -81.2001]).addTo(map)
+		.bindPopup('University of<br>Central Florida');
 }]);

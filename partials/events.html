@@ -1,7 +1,18 @@
 <div ng-controller="EventsController as eventsCtrl">
 	<div class="row">
 		<div class="col-lg-5">
-			a
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Current Events</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="x in eventsCtrl.eventListData.events">
+					<tr>
+						<td>{{x.name}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<div class="col-lg-7">
 			<button id="btn-create-event" class="btn btn-primary col-lg-12">Create Event</button>

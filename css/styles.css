@@ -46,8 +46,20 @@ body {
 .centered {
 	text-align: center;
 }
+.full-width {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 0px;
+	width: 100%;
+}
 .left {
 	float: left;
+}
+.no-padding {
+	padding: 0px;
+}
+.no-padding-right {
+	padding-right: 0px;
 }
 .right {
 	float: right;
@@ -98,6 +110,17 @@ body {
 #login-container h3 {
 	color: red;
 	font-size: 12px;
+}
+
+#events-container .table-responsive {
+	background-color: #FFFFFF;
+	max-height: 515px;
+	min-height: 515px;
+	padding: 0px;
+}
+
+#events-container table thead {
+	background-color: #29DD9B;
 }
 
 #map-events {

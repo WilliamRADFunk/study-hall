@@ -13,12 +13,44 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state.rso = false;						// User is on individual rso page.
 	app.state.userId = 0;						// User's id after logging in.
 
+	goToEvent = function(eventId=null) {
+		if(app.state.isLoggedIn && eventId) {
+			app.state.events = false;
+			app.state.event = true;
+			app.state.rsos = false;
+			app.state.rso = false;
+		}
+	};
+	goToEvents = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = true;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+		}
+	};
+	goToRSO = function(rsoId=null) {
+		if(app.state.isLoggedIn && rsoId) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = true;
+		}
+	};
+	goToRSOs = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = true;
+			app.state.rso = false;
+		}
+	};
 	login = function(userId=null) {
 		if(userId) {
 			app.state.isLoggedIn = true;
 			app.state.events = true;
 		}
-	}
+	};
 	// Post template
 	app.editEvent = function(id) {
 		$http({

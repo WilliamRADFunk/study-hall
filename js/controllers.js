@@ -73,6 +73,10 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 			app.login(self.user, self.pass);
 		}
 	};
+
+	self.toRegister = function(){
+		app.sendToRegister();
+	}
 }]);
 // Main function is manage event lists "page".
 studyHallApp.controller('EventsController', ['appData', function(app) {

@@ -92,19 +92,19 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.login = function(user=null, passw=null) {
 		$http({
 			method: 'POST',
-			url: './actions/event.php',
+			url: './actions/user.php',
 			data:
 			{
-				type: log,
-				user: id,
+				type: 'log',
+				user: user,
 				pass: passw
 			},
 			transformResponse: [function (data) {
 				return data;
 			}]
 		}).then(function successCallback(response) {
-			console.log(response.data);
-			login(response.data.s_id);
+			var parsed = JSON.parse(response.data);
+			login(parsed[0].s_id);
 		}, function errorCallback(response) {
 			console.log(response);
 			//Call failure here?

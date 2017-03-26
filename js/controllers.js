@@ -25,19 +25,19 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 	self.loginActivate = function() {
 
 		resetLogin();
-		var self = 1;
+		var validInput = true;
 		if(self.user === ""){
 			//Toggle user error. Dont call app.login
-			self = 0;
+			validInput = false;
 			self.falseInputUser = 1;
 		}
 		if(self.pass === ""){
 			//Toggle password error
-			self = 0;
+			validInput = false;
 			self.falseInputPass = 1;
 		}
 
-		if(self === 1){
+		if(validInput){
 			app.login(self.user, self.pass);
 		}
 	};

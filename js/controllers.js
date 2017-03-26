@@ -16,10 +16,12 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 	self.state = app.state;
 	self.falseInputUser = 0;
 	self.falseInputPass = 0;
+	self.invalidUserPass = false;
 
 	resetLogin = function() {
 		self.falseInputUser = 0;
 		self.falseInputPass = 0;
+		self.invalidUserPass = false;
 	};
 
 	self.loginActivate = function() {

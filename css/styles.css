@@ -106,3 +106,8 @@ body
     margin: auto;
     width: 92%;
 }
+
+#login-container h3 {
+	color: red;
+	font-size: 12px;
+}

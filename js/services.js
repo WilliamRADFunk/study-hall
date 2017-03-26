@@ -13,6 +13,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state.rso = false;						// User is on individual rso page.
 	app.state.userId = 0;						// User's id after logging in.
 
+	app.loginData = {};
+	app.loginData.errorLogin = false;
+
 	goToEvent = function(eventId=null) {
 		if(app.state.isLoggedIn && eventId) {
 			app.state.events = false;
@@ -90,6 +93,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	};
 
 	app.login = function(user=null, passw=null) {
+		app.loginData.errorLogin = false;
 		$http({
 			method: 'POST',
 			url: './actions/user.php',
@@ -103,8 +107,14 @@ studyHallApp.factory('appData', ['$http', function($http) {
 				return data;
 			}]
 		}).then(function successCallback(response) {
-			var parsed = JSON.parse(response.data);
-			login(parsed[0].s_id);
+			if(response.data === '"{}"'){
+				//Error on login. Incorrect username or password
+				app.loginData.errorLogin = true;
+			}
+			else{
+				var parsed = JSON.parse(response.data);
+				login(parsed[0].s_id);
+			}
 		}, function errorCallback(response) {
 			console.log(response);
 			//Call failure here?

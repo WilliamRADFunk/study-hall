@@ -8,6 +8,18 @@ studyHallApp.controller('MainController', ['appData', function(app) {
 	self.state = app.state;
 }]);
 // Main function is manage event lists "page".
+studyHallApp.controller('LoginController', ['appData', function(app) {
+	var self = this;
+
+	self.active = false;
+	self.loginData = app.loginData;
+	self.state = app.state;
+
+	self.loginActivate = function() {
+		app.login();
+	};
+}]);
+// Main function is manage event lists "page".
 studyHallApp.controller('EventsController', ['appData', function(app) {
 	var self = this;
 

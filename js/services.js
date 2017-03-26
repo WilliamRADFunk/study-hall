@@ -11,7 +11,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
-	app.state.isRegistration = false;			// User is on register page.
+	app.state.registration = false;				// User is on register page.
 	app.state.events = true;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
@@ -28,6 +28,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.event = true;
 			app.state.rsos = false;
 			app.state.rso = false;
+			app.state.registration = false;
 		}
 	};
 	goToEvents = function() {
@@ -36,6 +37,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.event = false;
 			app.state.rsos = false;
 			app.state.rso = false;
+			app.state.registration = false;
 		}
 	};
 	goToRSO = function(rsoId=null) {
@@ -44,6 +46,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.event = false;
 			app.state.rsos = false;
 			app.state.rso = true;
+			app.state.registration = false;
 		}
 	};
 	goToRSOs = function() {
@@ -52,6 +55,16 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.event = false;
 			app.state.rsos = true;
 			app.state.rso = false;
+			app.state.registration = false;
+		}
+	};
+	goToRegistration = function() {
+		if(!app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = true;
 		}
 	};
 	login = function(userId=null) {

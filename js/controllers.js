@@ -14,9 +14,32 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 	self.active = false;
 	self.loginData = app.loginData;
 	self.state = app.state;
+	self.falseInputUser = 0;
+	self.falseInputPass = 0;
+
+	resetLogin = function() {
+		self.falseInputUser = 0;
+		self.falseInputPass = 0;
+	};
 
 	self.loginActivate = function() {
-		app.login();
+
+		resetLogin();
+		var self = 1;
+		if(self.user === ""){
+			//Toggle user error. Dont call app.login
+			self = 0;
+			self.falseInputUser = 1;
+		}
+		if(self.pass === ""){
+			//Toggle password error
+			self = 0;
+			self.falseInputPass = 1;
+		}
+
+		if(self === 1){
+			app.login(self.user, self.pass);
+		}
 	};
 }]);
 // Main function is manage event lists "page".

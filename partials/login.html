@@ -4,9 +4,9 @@
 	        <div class="col-lg-12 col-md-12 col-sm-12 center-text">
 	            <div class="form-login">
 		            <h4>EventNote Login</h4>
-		            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+		            <input type="text" id="userName" ng-model="loginCtrl.user" class="form-control input-sm chat-input" placeholder="username" />
 		            </br>
-		            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+		            <input type="text" id="userPassword" ng-model="loginCtrl.pass" class="form-control input-sm chat-input" placeholder="password" />
 		            </br>
 		            <div class="wrapper">
 			            <button class="btn btn-primary btn-md" ng-click="loginCtrl.loginActivate()">login</button>

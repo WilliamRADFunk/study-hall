@@ -6,7 +6,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventListData.isPrivateEvents = false;	// Lets us know the view private events toggle is on.
 
 	app.state = {};								// Manages overall state of application.
-	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
+	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 	app.state.events = false;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
@@ -54,6 +54,28 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log("success", response.data);
 		}, function errorCallback(response) {
 			console.log("failure", response.statusText);
+		});
+	};
+
+	app.login = function(user=null, passw=null) {
+		$http({
+			method: 'POST',
+			url: './actions/event.php',
+			data:
+			{
+				type: log,
+				user: id,
+				pass: passw
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			console.log(response.data);
+			login(response.data.s_id);
+		}, function errorCallback(response) {
+			console.log(response);
+			//Call failure here?
 		});
 	};
 	// Toggles the public events view

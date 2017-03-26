@@ -6,6 +6,36 @@ studyHallApp.controller('MainController', ['appData', function(app) {
 	self.active = false;
 	self.miscData = app.miscData;
 	self.state = app.state;
+
+	// Calls the service to toggle public events display
+	self.togglePublicEvents = function() {
+		app.togglePublicEvents();
+		if(!app.eventListData.isPublicEvents && !app.eventListData.isPrivateEvents) {
+			app.togglePublicEvents();
+		} else {
+			var myElem = angular.element( document.querySelector( '#public-events' ) );
+			if(app.eventListData.isPublicEvents) {
+				myElem.addClass('active');
+			} else {
+				myElem.removeClass('active');
+			}
+		}
+	};
+
+	// Calls the service to toggle public events display
+	self.togglePrivateEvents = function() {
+		app.togglePrivateEvents();
+		if(!app.eventListData.isPublicEvents && !app.eventListData.isPrivateEvents) {
+			app.togglePrivateEvents();
+		} else {
+			var myElem = angular.element( document.querySelector( '#private-events' ) );
+			if(app.eventListData.isPrivateEvents) {
+				myElem.addClass('active');
+			} else {
+				myElem.removeClass('active');
+			}
+		}
+	};
 }]);
 // Main function is manage event lists "page".
 studyHallApp.controller('LoginController', ['appData', function(app) {
@@ -54,8 +84,15 @@ studyHallApp.controller('EventsController', ['appData', function(app) {
 	self.state = app.state;
 
 	// Calls the service to get the list of events
-	self.getEventList = function(userId=null, univId=null) {
-		app.listEvents(userId, univId);
+	self.getEventList = function() {
+		app.listEvents();
+	};
+
+	// Calls the service to route to specific event page.
+	self.selectEvent = function(eventIndex=null) {
+		if(eventIndex !== null) {
+			app.getEventById(self.eventListData.events[eventIndex]);
+		}
 	};
 
 	self.getEventList();

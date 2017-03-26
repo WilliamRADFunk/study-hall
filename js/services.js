@@ -6,8 +6,12 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventListData.isPrivateEvents = false;	// Lets us know the view private events toggle is on.
 	app.eventListData.events = [];				// List of event objects returned from query.
 
+	app.eventData = {};
+	app.eventData.event = {};					// event object of selected event.
+
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
+	app.state.isRegistration = false;			// User is on register page.
 	app.state.events = true;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
@@ -15,10 +19,11 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state.userId = 0;						// User's id after logging in.
 
 	app.loginData = {};
+	app.loginData.userId = null;
 	app.loginData.errorLogin = false;
 
-	goToEvent = function(eventId=null) {
-		if(app.state.isLoggedIn && eventId) {
+	goToEvent = function() {
+		if(app.state.isLoggedIn) {
 			app.state.events = false;
 			app.state.event = true;
 			app.state.rsos = false;
@@ -53,6 +58,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		if(userId) {
 			app.state.isLoggedIn = true;
 			app.state.events = true;
+			app.loginData.userId = userId;
 		}
 	};
 	// Post template
@@ -70,15 +76,28 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log(response);
 		});
 	};
+	// Called when user clicks on a specific id.
+	app.getEventById = function(event=null) {
+		console.log(event);
+		if(event !== null) {
+			app.eventData.event = event;
+			goToEvent();
+		}
+	};
 	// Called when user lands on main page.
 	// @param {int} mode - public, private, all determines query type.
-	app.listEvents = function(userId=null, univId=null) {
-		console.log(userId, univId);
+	app.listEvents = function() {
 		var mode = '';
-		if(userId && univId) {
-			mode = '?user_id=' + userId + '&uni=' + univId;
-		} else if(userId) {
-			mode = '?user_id=' + userId;
+		if(app.loginData.userId
+			&& !app.eventListData.isPublicEvents
+			&& app.eventListData.isPrivateEvents
+		) {
+			mode = '?user_id=' + app.loginData.userId + '&private';
+		} else if(app.loginData.userId
+			&& app.eventListData.isPublicEvents
+			&& app.eventListData.isPrivateEvents
+		) {
+			mode = '?user_id=' + app.loginData.userId;
 		}
 		$http({
 			method: 'GET',
@@ -87,7 +106,6 @@ studyHallApp.factory('appData', ['$http', function($http) {
 				return data;
 			}]
 		}).then(function successCallback(response) {
-			console.log("success", response.data);
 			var parsed = JSON.parse(response.data);
 			app.eventListData.events = parsed;
 		}, function errorCallback(response) {
@@ -126,10 +144,12 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Toggles the public events view
 	app.togglePublicEvents = function() {
 		app.eventListData.isPublicEvents = !app.eventListData.isPublicEvents;
+		app.listEvents();
 	}
 	// Toggles the public events view
 	app.togglePrivateEvents = function() {
 		app.eventListData.isPrivateEvents = !app.eventListData.isPrivateEvents;
+		app.listEvents();
 	}
 	// Pass one-way data to those dependent on the service.
 	return app;

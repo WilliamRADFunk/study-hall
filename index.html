@@ -51,18 +51,21 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events"><a href="#">Public Events</a></li>
-							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events"><a href="#">Private Events</a></li>
+							<li id="public-events" class="active" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events" ng-click="mainCtrl.togglePublicEvents()"><a href="#">Public Events</a></li>
+							<li id="private-events" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events" ng-click="mainCtrl.togglePrivateEvents()"><a href="#">Private Events</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos"><a href="#">RSO Groups</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos"><a href="#">RSO Events</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.event || mainCtrl.state.rso)"><a href="#">Core Events</a></li>
-							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.events || mainCtrl.state.rsos || mainCtrl.state.rso)"><a href="#">RSOs</a></li>
+							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.events || mainCtrl.state.event || mainCtrl.state.rsos || mainCtrl.state.rso)"><a href="#">RSOs</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav><!-- /.nav -->
-			<div id="login-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="!mainCtrl.state.isLoggedIn">
+			<div id="login-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="!mainCtrl.state.isLoggedIn && !mainCtrl.state.isRegistration">
 				<div ng-include src="'partials/login.html'"></div>
+			</div>
+			<div id="register-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="!mainCtrl.state.isLoggedIn && mainCtrl.state.isRegistration">
+				<div ng-include src="'partials/register.html'"></div>
 			</div>
 			<div id="events-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events">
 				<div ng-include src="'partials/events.html'"></div>

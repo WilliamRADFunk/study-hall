@@ -45,6 +45,13 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 // Main function is manage event lists "page".
 studyHallApp.controller('EventsController', ['appData', function(app) {
 	var self = this;
+	var mymap = L.map('mapid').setView([28.6024, 81.2001], 2);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		maxZoom: 18,
+		id: 'your.mapbox.project.id',
+		accessToken: 'your.mapbox.public.access.token'
+	}).addTo(mymap);
 
 	self.active = false;
 	self.eventListData = app.eventListData;

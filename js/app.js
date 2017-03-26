@@ -1,1 +1,1 @@
-var studyHallApp = angular.module('studyHallApp',[]);
+var studyHallApp = angular.module('studyHallApp',['leaflet-directive']);

@@ -4,8 +4,7 @@ Last Updated: 2017-Mar-25
 Author: Jorge Rodriguez http://jitorodriguez.com,
 and mentored by William R.A.D. Funk - http://WilliamRobertFunk.com 
 */
-body
-{
+body {
 	background-color: #9EBBA6;
 	color: #08291D;
 	height: 100%;
@@ -13,54 +12,44 @@ body
 	padding: 0;
 	width: 100%;
 }
-.container-fluid
-{
+.container-fluid {
 	background-color: #030302;
 }
-.navbar-default
-{
+.navbar-default {
 	border: none;
 }
-.navbar-default .navbar-collapse, .navbar-default .navbar-form
-{
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
 	background-color: #030302;
 	color: #FFFFFF;
 }
-.navbar-default .navbar-brand
-{
+.navbar-default .navbar-brand {
 	color: #FFFFFF;
 }
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-nav > .visited > a,
 .navbar-default .navbar-nav > .visited > a:focus,
-.navbar-default .navbar-nav > .visited > a:hover
-{
+.navbar-default .navbar-nav > .visited > a:hover {
 	background-color: #030302;
 	color: #FFFFFF;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:focus,
-.navbar-default .navbar-nav > .active > a:hover
-{
+.navbar-default .navbar-nav > .active > a:hover {
 	background-color: #9EBBA6;
 	color: #08291D;
 }
 .navbar-default .navbar-brand:hover,
-.navbar-default .navbar-nav > li > a:hover
-{
+.navbar-default .navbar-nav > li > a:hover {
 	background-color: #030302;
 	color: #9EBBA6;
 }
-.centered
-{
+.centered {
 	text-align: center;
 }
-.left
-{
+.left {
 	float: left;
 }
-.right
-{
+.right {
 	float: right;
 }
 @media (min-width: 300px) {
@@ -105,4 +94,8 @@ body
     border-radius: 10px;
     margin: auto;
     width: 92%;
+}
+
+#mapid {
+	height: 180px;
 }

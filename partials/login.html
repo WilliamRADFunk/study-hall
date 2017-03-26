@@ -4,8 +4,11 @@
 	        <div class="col-lg-12 col-md-12 col-sm-12 center-text">
 	            <div class="form-login">
 		            <h4>EventNote Login</h4>
-		            <input type="text" id="userName" ng-model="loginCtrl.user" class="form-control input-sm chat-input" placeholder="username" />
+		            <input type="text" id="userName" ng-model="loginCtrl.user" ng-init="loginCtrl.user=''" class="form-control input-sm chat-input" placeholder="username" />
 		            </br>
+		            <div ng-if = "loginCtrl.falseInputUser" >
+		            	<P>USERNAME must be provided.</P>
+		            </div>
 		            <input type="text" id="userPassword" ng-model="loginCtrl.pass" class="form-control input-sm chat-input" placeholder="password" />
 		            </br>
 		            <div class="wrapper">

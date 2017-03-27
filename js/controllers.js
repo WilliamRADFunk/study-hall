@@ -21,8 +21,7 @@ studyHallApp.controller('MainController', ['appData', function(app) {
 			}
 		}
 	};
-
-	// Calls the service to toggle public events display
+	// Calls the service to toggle private events display
 	self.togglePrivateEvents = function() {
 		app.togglePrivateEvents();
 		if(!app.eventListData.isPublicEvents && !app.eventListData.isPrivateEvents) {
@@ -79,15 +78,23 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 	}
 }]);
 // Main function is manage event lists "page".
-studyHallApp.controller('EventsController', ['appData', function(app) {
+studyHallApp.controller('EventsController', ['appData', '$scope', function(app, $scope) {
 	var self = this;
-	var map;
 
 	self.active = false;
 	self.eventListData = app.eventListData;
 	self.state = app.state;
 
-	// Calls the service to get the list of events
+	// Create the leaflet map, and attach it to the map with that id.
+	var map = L.map('map-events');
+	// Setup a marker group.
+	var markers = L.featureGroup();
+	// Sets up background image of map and associates type.
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	// Calls the service to get the list of events.
 	self.getEventList = function() {
 		app.listEvents();
 	};
@@ -98,15 +105,34 @@ studyHallApp.controller('EventsController', ['appData', function(app) {
 			app.getEventById(self.eventListData.events[eventIndex]);
 		}
 	};
+	// Called by service everytime the list of events is changed.
+	var updateEvents = function() {
+		// Wipe all markers off the map.
+		markers.clearLayers();
 
+		// Centers map on the first marker.
+		if(self.eventListData.events[0]
+			&& self.eventListData.events[0].latitude
+			&& self.eventListData.events[0].longitude
+			) {
+			map.setView([self.eventListData.events[0].latitude,
+				self.eventListData.events[0].longitude
+			], 15);
+		}
+
+		// Create each individual marker.
+		self.eventListData.events.forEach(function(elem) {
+			var marker = L.marker([elem.latitude, elem.longitude
+			]).addTo(map)
+				.bindPopup(elem.name + '<br>' + elem.specificName);
+			// Add marker to the group.
+            markers.addLayer(marker);
+		});
+		// Places all markers on the map.
+		map.addLayer(markers);
+	};
+	// Registers the map updater function with the service's observer pattern.
+	app.registerObserverCallback(updateEvents);
+	// Initial call to populate table with events.
 	self.getEventList();
-
-	map = L.map('map-events').setView([28.6024, -81.2001], 16);
-
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
-
-	L.marker([28.6024, -81.2001]).addTo(map)
-		.bindPopup('University of<br>Central Florida');
 }]);

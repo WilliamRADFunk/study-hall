@@ -21,6 +21,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.loginData = {};
 	app.loginData.errorLogin = false;
 
+	app.registerData = {};
+	app.registerData.registered = false;
+
 	// Router function to send user to individual event page.
 	goToEvent = function() {
 		if(app.state.isLoggedIn) {
@@ -80,6 +83,16 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			goToEvents();
 		}
 	};
+
+	goToLogin = function(){
+		app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
+		app.state.registration = false;				// User is on register page.
+		app.state.events = false;					// User is on list events page.
+		app.state.event = false;					// User is on individual event page.
+		app.state.rsos = false;						// User is on rsos page.
+		app.state.rso = false;
+	};
+
 	// Post template
 	app.editEvent = function(id) {
 		$http({
@@ -161,19 +174,56 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 
+	app.register = function(email=null, user=null, pass=null, name=null, major=null, minor=null, bio=null) {
+		app.loginData.errorLogin = false;
+		$http({
+			method: 'POST',
+			url: './actions/usercreate.php',
+			data:
+			{
+				email: email,
+				username: user,
+				password: pass,
+				name: name
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				//Error on login. Incorrect username or password
+				app.registerData.registered = true;
+				console.log("SUCCESS");
+				goToLogin();
+			}
+			else{
+				console.log('failure registering');
+				app.registerData.registered = false;
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+			//Call failure here?
+		});
+	};
+
 	app.sendToRegister = function() {
 		goToRegistration();
+	};
+
+	app.sendToLogin = function() {
+		goToLogin();
 	};
 	// Toggles the public events view
 	app.togglePublicEvents = function() {
 		app.eventListData.isPublicEvents = !app.eventListData.isPublicEvents;
 		app.listEvents();
-	}
+	};
 	// Toggles the public events view
 	app.togglePrivateEvents = function() {
 		app.eventListData.isPrivateEvents = !app.eventListData.isPrivateEvents;
 		app.listEvents();
-	}
+	};
 	/*** Allows service to call controller when significant change happens - START ***/
 	var observerCallbacks = [];
 

@@ -75,7 +75,68 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 
 	self.toRegister = function(){
 		app.sendToRegister();
-	}
+	};
+}]);
+
+studyHallApp.controller('RegisterController', ['appData', function(app) {
+	var self = this;
+
+	self.active = false;
+	self.registerData = app.registerData;
+	self.state = app.state;
+
+	self.falseInputEmail = false;
+	self.falseInputUser = false;
+	self.falseInputPass = false;
+	self.falseInputConfirmPass = false;
+	self.falsePassCompare = false;
+
+	self.invalidUserPass = false;
+
+	resetRegister = function() {
+		self.falseInputEmail = false;
+		self.falseInputUser = false;
+		self.falseInputPass = false;
+		self.falseInputConfirmPass = false;
+		self.falsePassCompare = false;
+	};
+
+	self.registerActivate = function() {
+
+		console.log("registerActivate activated.");
+		resetRegister();
+		var validInput = true;
+
+		if(self.email === ""){
+			//Toggle user error. Dont call app.login
+			validInput = false;
+			self.falseInputEmail = true;
+		}
+		if(self.user === ""){
+			//Toggle password error
+			validInput = false;
+			self.falseInputUser = true;
+		}
+		if(self.pass === ""){
+			//Toggle password error
+			validInput = false;
+			self.falseInputPass = true;
+		}
+		if(self.passConfirm === ""){
+			//Toggle password error
+			validInput = false;
+			self.falseInputConfirmPass = true;
+		}
+		if(validInput){
+			var fullName = self.fName + " " + self.lName;
+			console.log(self.email, self.user, self.pass, self.passConfirm, self.major, self.minor, self.bio);
+			app.register(self.email, self.user, self.pass, fullName, self.major, self.minor, self.bio);
+		}
+	};
+
+	self.toLogin = function(){
+		app.sendToLogin();
+	};
 }]);
 // Main function is manage event lists "page".
 studyHallApp.controller('EventsController', ['appData', '$scope', function(app, $scope) {

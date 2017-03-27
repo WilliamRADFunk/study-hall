@@ -1,5 +1,5 @@
 <div ng-controller="RegisterController as RegisterCtrl">
-  <form class="form-horizontal center-register" action='' method="POST">
+  <form class="form-horizontal center-register">
     <fieldset>
       <div id="legend">
         <legend class="">Register</legend>
@@ -10,7 +10,7 @@
           <!-- E-mail -->
           <label class="control-label" for="email">E-mail</label>
           <div class="controls">
-            <input type="text" id="email" name="email" placeholder="University E-mail" class="input-xlarge">
+            <input type="text" id="email" ng-model="RegisterCtrl.email" ng-init="RegisterCtrl.email=''" placeholder="University E-mail" class="input-xlarge">
           </div>
         </div>
 
@@ -18,7 +18,7 @@
           <!-- First Name -->
           <label class="control-label" for="firstName">First Name</label>
           <div class="controls">
-            <input type="text" id="firstName" name="firstName" placeholder="First Name" class="input-xlarge">
+            <input type="text" id="firstName" ng-model="RegisterCtrl.fName" ng-init="RegisterCtrl.fName=''" name="firstName" placeholder="First Name" class="input-xlarge">
           </div>
         </div>
 
@@ -26,7 +26,7 @@
           <!-- Last Name -->
           <label class="control-label"  for="lastName">Last Name</label>
           <div class="controls">
-            <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="input-xlarge">
+            <input type="text" id="lastName" ng-model="RegisterCtrl.lName" ng-init="RegisterCtrl.lName=''" name="lastName" placeholder="Last Name" class="input-xlarge">
           </div>
         </div>
 
@@ -34,23 +34,23 @@
           <!-- Username -->
           <label class="control-label"  for="username">Username</label>
           <div class="controls">
-            <input type="text" id="username" name="username" placeholder="Username" class="input-xlarge">
+            <input type="text" id="username" ng-model="RegisterCtrl.user" ng-init="RegisterCtrl.user=''" placeholder="Username" class="input-xlarge">
           </div>
         </div>
      
         <div class="control-group">
           <!-- Password-->
-          <label class="control-label" for="password">Password</label>
+          <label class="control-label">Password</label>
           <div class="controls">
-            <input type="password" id="password" name="password" placeholder="Password" class="input-xlarge">
+            <input type="text" id="userPassword" ng-model="RegisterCtrl.pass" ng-init="RegisterCtrl.pass=''" placeholder="Password" class="input-xlarge">
           </div>
         </div>
      
         <div class="control-group">
           <!-- Password -->
-          <label class="control-label"  for="password_confirm">Password (Confirm)</label>
+          <label class="control-label">Password (Confirm)</label>
           <div class="controls">
-            <input type="password" id="password_confirm" name="password_confirm" placeholder="Password (Confirm)" class="input-xlarge">
+            <input type="text" id="userPassword_confirm" ng-model="RegisterCtrl.passConfirm" ng-init="RegisterCtrl.passConfirm=''" placeholder="Password (Confirm)" class="input-xlarge">
           </div>
         </div>
 
@@ -58,7 +58,7 @@
           <!-- Major -->
           <label class="control-label" for="major">Major</label>
           <div class="controls">
-            <input type="text" id="major" name="major" placeholder="Major" class="input-xlarge">
+            <input type="text" id="major" ng-model="RegisterCtrl.major" ng-init="RegisterCtrl.major=''" placeholder="Major" class="input-xlarge">
           </div>
         </div>
 
@@ -66,7 +66,7 @@
           <!-- Minor -->
           <label class="control-label" for="minor">Minor</label>
           <div class="controls">
-            <input type="text" id="minor" name="minor" placeholder="Minor" class="input-xlarge">
+            <input type="text" id="minor" ng-model="RegisterCtrl.minor" ng-init="RegisterCtrl.minor=''" placeholder="Minor" class="input-xlarge">
           </div>
         </div>
 
@@ -74,7 +74,7 @@
           <!-- Bio -->
           <label class="control-label" for="bio">Bio</label>
           <div class="controls">
-            <textarea rows="5" cols="50"></textarea>
+            <textarea rows="5" cols="50" ng-model="RegisterCtrl.bio" ng-init="RegisterCtrl.bio=''"></textarea>
             <!--<input type="text" id="bio" name="bio" class="bigfield" placeholder="Tell us about yourself">-->
           </div>
         </div>
@@ -83,14 +83,16 @@
         <div class="control-group">
           <!-- Button -->
           <div class="controls">
-            <button class="btn btn-success">Register</button>
+            <button class="btn btn-primary btn-md" ng-click="RegisterCtrl.registerActivate()">Register</button>
           </div>
           </br>
           <div class="controls">
-            <button class="btn btn-success">Return To Login</button>
+            <button class="btn btn-primary btn-md" ng-click="RegisterCtrl.toLogin()">Return To Login</button>
           </div>
         </div>
       </div>
     </fieldset>
   </form>
 </div>
+<!-- ng-click="RegisterCtrl.registerActivate()"-->
+<!-- ng-click="RegisterCtrl.returnToLogin()"-->

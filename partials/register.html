@@ -1,95 +1,94 @@
 <div ng-controller="RegisterController as RegisterCtrl">
-  <form class="form-horizontal" action='' method="POST">
+  <form class="form-horizontal center-register" action='' method="POST">
     <fieldset>
       <div id="legend">
         <legend class="">Register</legend>
       </div>
 
-      <div class="control-group">
-        <!-- E-mail -->
-        <label class="control-label" for="email">E-mail</label>
-        <div class="controls">
-          <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-          <p class="help-block">Please provide your E-mail</p>
+      <div class= "form-register">
+        <div class="control-group">
+          <!-- E-mail -->
+          <label class="control-label" for="email">E-mail</label>
+          <div class="controls">
+            <input type="text" id="email" name="email" placeholder="University E-mail" class="input-xlarge">
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <!-- First Name -->
-        <label class="control-label" for="firstName">First Name</label>
-        <div class="controls">
-          <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge">
-          <p class="help-block">Please provide first name</p>
+        <div class="control-group">
+          <!-- First Name -->
+          <label class="control-label" for="firstName">First Name</label>
+          <div class="controls">
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" class="input-xlarge">
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <!-- Last Name -->
-        <label class="control-label"  for="lastName">Last Name</label>
-        <div class="controls">
-          <input type="text" id="lastName" name="lastName" placeholder="" class="input-xlarge">
-          <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+        <div class="control-group">
+          <!-- Last Name -->
+          <label class="control-label"  for="lastName">Last Name</label>
+          <div class="controls">
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" class="input-xlarge">
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <!-- Username -->
-        <label class="control-label"  for="username">Username</label>
-        <div class="controls">
-          <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-          <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+        <div class="control-group">
+          <!-- Username -->
+          <label class="control-label"  for="username">Username</label>
+          <div class="controls">
+            <input type="text" id="username" name="username" placeholder="Username" class="input-xlarge">
+          </div>
         </div>
-      </div>
-   
-      <div class="control-group">
-        <!-- Password-->
-        <label class="control-label" for="password">Password</label>
-        <div class="controls">
-          <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-          <p class="help-block">Password should be at least 4 characters</p>
+     
+        <div class="control-group">
+          <!-- Password-->
+          <label class="control-label" for="password">Password</label>
+          <div class="controls">
+            <input type="password" id="password" name="password" placeholder="Password" class="input-xlarge">
+          </div>
         </div>
-      </div>
-   
-      <div class="control-group">
-        <!-- Password -->
-        <label class="control-label"  for="password_confirm">Password (Confirm)</label>
-        <div class="controls">
-          <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-          <p class="help-block">Please confirm password</p>
+     
+        <div class="control-group">
+          <!-- Password -->
+          <label class="control-label"  for="password_confirm">Password (Confirm)</label>
+          <div class="controls">
+            <input type="password" id="password_confirm" name="password_confirm" placeholder="Password (Confirm)" class="input-xlarge">
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <!-- Major -->
-        <label class="control-label" for="major">Major</label>
-        <div class="controls">
-          <input type="text" id="major" name="major" placeholder="" class="input-xlarge">
-          <p class="help-block">Check univeristy listings for confirmation (major) </p>
+        <div class="control-group">
+          <!-- Major -->
+          <label class="control-label" for="major">Major</label>
+          <div class="controls">
+            <input type="text" id="major" name="major" placeholder="Major" class="input-xlarge">
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <!-- Minor -->
-        <label class="control-label" for="minor">Minor</label>
-        <div class="controls">
-          <input type="text" id="minor" name="minor" placeholder="" class="input-xlarge">
-          <p class="help-block">Check univeristy listings for confirmation (minor)</p>
+        <div class="control-group">
+          <!-- Minor -->
+          <label class="control-label" for="minor">Minor</label>
+          <div class="controls">
+            <input type="text" id="minor" name="minor" placeholder="Minor" class="input-xlarge">
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <!-- Bio -->
-        <label class="control-label" for="bio">Bio</label>
-        <div class="controls">
-          <input type="text" id="bio" name="bio" placeholder="" class="input-xlarge">
-          <p class="help-block">Tell us about yourself (optional)</p>
+        <div class="control-group">
+          <!-- Bio -->
+          <label class="control-label" for="bio">Bio</label>
+          <div class="controls">
+            <textarea rows="5" cols="50"></textarea>
+            <!--<input type="text" id="bio" name="bio" class="bigfield" placeholder="Tell us about yourself">-->
+          </div>
         </div>
-      </div>
-   
-      <div class="control-group">
-        <!-- Button -->
-        <div class="controls">
-          <button class="btn btn-success">Register</button>
+     
+        </br>
+        <div class="control-group">
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success">Register</button>
+          </div>
+          </br>
+          <div class="controls">
+            <button class="btn btn-success">Return To Login</button>
+          </div>
         </div>
       </div>
     </fieldset>

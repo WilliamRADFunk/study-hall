@@ -128,3 +128,22 @@ body {
 #map-events {
 	height: 480px;
 }
+
+#register-container  .center-register {
+	margin: auto;
+    width: 70%;
+    padding: 10px;
+}
+
+#register-container  .form-register {
+	text-align: center;
+	background-color: #ffa500;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#FFA500;
+    border-width: 5px;
+    box-shadow:0 2px 0 #cfcfcf;
+}

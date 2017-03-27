@@ -10,9 +10,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventData.event = {};					// event object of selected event.
 
 	app.state = {};								// Manages overall state of application.
-	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
+	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 	app.state.registration = false;				// User is on register page.
-	app.state.events = true;					// User is on list events page.
+	app.state.events = false;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
 	app.state.rso = false;						// User is on individual rso page.
@@ -153,6 +153,10 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log(response);
 			//Call failure here?
 		});
+	};
+
+	app.sendToRegister = function() {
+		goToRegistration();
 	};
 	// Toggles the public events view
 	app.togglePublicEvents = function() {

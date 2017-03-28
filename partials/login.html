@@ -17,6 +17,9 @@
 		            <div ng-if = "loginCtrl.loginData.errorLogin" >
 		            	<h3>Incorrect username or password.</h3>
 		            </div>
+		            <div ng-if = "loginCtrl.loginData.registrationSuccess" >
+		            	<h3>Registered Successfully!</h3>
+		            </div>
 		            <div class="wrapper">
 			            <button class="btn btn-primary btn-md" ng-click="loginCtrl.loginActivate()">login</button>
 		            </div>

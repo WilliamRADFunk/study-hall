@@ -20,6 +20,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.loginData = {};
 	app.loginData.errorLogin = false;
+	app.loginData.registrationSuccess = false;
 
 	app.registerData = {};
 	app.registerData.registered = false;
@@ -147,6 +148,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Called when user attempts to login.
 	app.login = function(user=null, passw=null) {
 		app.loginData.errorLogin = false;
+		app.loginData.registrationSuccess = false;
 		$http({
 			method: 'POST',
 			url: './actions/user.php',
@@ -176,6 +178,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.register = function(email=null, user=null, pass=null, name=null, major=null, minor=null, bio=null) {
 		app.loginData.errorLogin = false;
+		app.loginData.registrationSuccess = false;
 		$http({
 			method: 'POST',
 			url: './actions/usercreate.php',
@@ -197,6 +200,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			if(parsed.status === "success"){
 				//Error on login. Incorrect username or password
 				app.registerData.registered = true;
+				app.loginData.registrationSuccess = true;
 				console.log("SUCCESS");
 				goToLogin();
 			}
@@ -208,6 +212,10 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log(response);
 			//Call failure here?
 		});
+	};
+
+	app.resetLog = function() {
+		app.loginData.registrationSuccess = false;
 	};
 
 	app.sendToRegister = function() {

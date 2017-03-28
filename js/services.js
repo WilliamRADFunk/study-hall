@@ -184,7 +184,10 @@ studyHallApp.factory('appData', ['$http', function($http) {
 				email: email,
 				username: user,
 				password: pass,
-				name: name
+				name: name,
+				major: major,
+				minor: minor,
+				bio: bio
 			},
 			transformResponse: [function (data) {
 				return data;

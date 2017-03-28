@@ -8,10 +8,15 @@
       <div class= "form-register">
         <div class="control-group">
           <!-- E-mail -->
-          <label class="control-label" for="email">E-mail</label>
+          <label class="control-label" for="email">E-mail*</label>
           <div class="controls">
             <input type="text" id="email" ng-model="RegisterCtrl.email" ng-init="RegisterCtrl.email=''" placeholder="University E-mail" class="input-xlarge">
           </div>
+
+          <div ng-if = "RegisterCtrl.noEmail">
+            <h3>Email required for registration. Please provide University approved e-mail.</h3>
+          </div>
+
         </div>
 
         <div class="control-group">
@@ -32,26 +37,45 @@
 
         <div class="control-group">
           <!-- Username -->
-          <label class="control-label"  for="username">Username</label>
+          <label class="control-label"  for="username">Username*</label>
           <div class="controls">
             <input type="text" id="username" ng-model="RegisterCtrl.user" ng-init="RegisterCtrl.user=''" placeholder="Username" class="input-xlarge">
           </div>
+
+          <div ng-if = "RegisterCtrl.noUser">
+            <h3>Please provide username for registration.</h3>
+          </div>
+
         </div>
      
         <div class="control-group">
           <!-- Password-->
-          <label class="control-label">Password</label>
+          <label class="control-label">Password*</label>
           <div class="controls">
-            <input type="text" id="userPassword" ng-model="RegisterCtrl.pass" ng-init="RegisterCtrl.pass=''" placeholder="Password" class="input-xlarge">
+            <input type="password" id="userPassword" ng-model="RegisterCtrl.pass" ng-init="RegisterCtrl.pass=''" placeholder="Password" class="input-xlarge">
           </div>
+
+          <div ng-if = "RegisterCtrl.noPass">
+            <h3>Please provide password for registration.</h3>
+          </div>
+
         </div>
      
         <div class="control-group">
           <!-- Password -->
-          <label class="control-label">Password (Confirm)</label>
+          <label class="control-label">Password* (Confirm)</label>
           <div class="controls">
-            <input type="text" id="userPassword_confirm" ng-model="RegisterCtrl.passConfirm" ng-init="RegisterCtrl.passConfirm=''" placeholder="Password (Confirm)" class="input-xlarge">
+            <input type="password" id="userPassword_confirm" ng-model="RegisterCtrl.passConfirm" ng-init="RegisterCtrl.passConfirm=''" placeholder="Password (Confirm)" class="input-xlarge">
           </div>
+
+          <div ng-if = "RegisterCtrl.noConfirm">
+            <h3>Please provide confirmation of password.</h3>
+          </div>
+          <div ng-if = "RegisterCtrl.falsePassCompare">
+            <h3>Password and confirmation do not match. Please try again.</h3>
+          </div>
+
+
         </div>
 
         <div class="control-group">

@@ -86,18 +86,27 @@ studyHallApp.controller('RegisterController', ['appData', function(app) {
 	self.state = app.state;
 
 	self.falseInputEmail = false;
+	self.noEmail = false;
 	self.falseInputUser = false;
+	self.noUser = false;
 	self.falseInputPass = false;
+	self.noPass = false;
 	self.falseInputConfirmPass = false;
+	self.noConfirm = false;
+
 	self.falsePassCompare = false;
 
 	self.invalidUserPass = false;
 
 	resetRegister = function() {
 		self.falseInputEmail = false;
+		self.noEmail = false;
 		self.falseInputUser = false;
+		self.noUser = false;
 		self.falseInputPass = false;
+		self.noPass = false;
 		self.falseInputConfirmPass = false;
+		self.noConfirm = false;
 		self.falsePassCompare = false;
 	};
 
@@ -105,32 +114,44 @@ studyHallApp.controller('RegisterController', ['appData', function(app) {
 
 		console.log("registerActivate activated.");
 		resetRegister();
+
 		var validInput = true;
 
 		if(self.email === ""){
 			//Toggle user error. Dont call app.login
 			validInput = false;
-			self.falseInputEmail = true;
+			self.noEmail = true;
 		}
 		if(self.user === ""){
 			//Toggle password error
 			validInput = false;
-			self.falseInputUser = true;
+			self.noUser = true;
 		}
 		if(self.pass === ""){
 			//Toggle password error
 			validInput = false;
-			self.falseInputPass = true;
+			self.noPass = true;
 		}
-		if(self.passConfirm === ""){
+		else if(self.passConfirm === ""){
 			//Toggle password error
 			validInput = false;
-			self.falseInputConfirmPass = true;
+			self.noConfirm = true;
+		}
+		else{
+			if(self.pass !== self.passConfirm)
+			{
+				self.falsePassCompare = true;
+				validInput = false;
+			}
 		}
 		if(validInput){
 			var fullName = self.fName + " " + self.lName;
 			console.log(self.email, self.user, self.pass, self.passConfirm, self.major, self.minor, self.bio);
 			app.register(self.email, self.user, self.pass, fullName, self.major, self.minor, self.bio);
+		}
+		else
+		{
+			//Registration failed
 		}
 	};
 

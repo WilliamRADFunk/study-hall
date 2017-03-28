@@ -147,3 +147,8 @@ body {
     border-width: 5px;
     box-shadow:0 2px 0 #cfcfcf;
 }
+
+#register-container h3 {
+	color: red;
+	font-size: 12px;
+}

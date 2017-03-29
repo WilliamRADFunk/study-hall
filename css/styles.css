@@ -152,3 +152,46 @@ body {
 	color: red;
 	font-size: 12px;
 }
+
+#create-container .formAlignment {
+	margin: auto;
+	width: 70%;
+}
+
+#create-container  .form-register {
+	background-color: #29DD9B;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#FFA500;
+    border-width: 5px;
+    box-shadow:0 2px 0 #cfcfcf;
+}
+
+#create-container  .form-element{
+
+}
+
+#create-container  .text-right{
+	float: left;
+}
+
+#create-container  .input-right{
+	float: right;
+}
+
+#create-container  .textarea{
+	width: 200px;
+}
+
+#create-container  .fullWidth {
+	margin: auto;
+	width: 80%;
+}
+
+#create-container  .textbox{
+	width: 200px;
+	height: 150px;
+}

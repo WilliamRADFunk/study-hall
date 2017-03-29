@@ -17,6 +17,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state.rsos = false;						// User is on rsos page.
 	app.state.rso = false;						// User is on individual rso page.
 	app.state.userId = 0;						// User's id after logging in.
+	app.state.createEvent = false;
 
 	app.loginData = {};
 	app.loginData.errorLogin = false;
@@ -24,6 +25,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.registerData = {};
 	app.registerData.registered = false;
+
+	app.eventCreate = {};
 
 	// Router function to send user to individual event page.
 	goToEvent = function() {

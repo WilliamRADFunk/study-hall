@@ -159,6 +159,80 @@ studyHallApp.controller('RegisterController', ['appData', function(app) {
 		app.sendToLogin();
 	};
 }]);
+
+studyHallApp.controller('EventCreateController', ['appData', function(app) {
+	var self = this;
+
+	self.active = false;
+	self.registerData = app.eventCreateData;
+	self.state = app.state;
+
+
+	self.falsePassCompare = false;
+
+	self.invalidUserPass = false;
+
+	resetRegister = function() {
+		self.falseInputEmail = false;
+		self.noEmail = false;
+		self.falseInputUser = false;
+		self.noUser = false;
+		self.falseInputPass = false;
+		self.noPass = false;
+		self.falseInputConfirmPass = false;
+		self.noConfirm = false;
+		self.falsePassCompare = false;
+	};
+
+	self.registerActivate = function() {
+
+		console.log("registerActivate activated.");
+		resetRegister();
+
+		var validInput = true;
+
+		if(self.email === ""){
+			//Toggle user error. Dont call app.login
+			validInput = false;
+			self.noEmail = true;
+		}
+		if(self.user === ""){
+			//Toggle password error
+			validInput = false;
+			self.noUser = true;
+		}
+		if(self.pass === ""){
+			//Toggle password error
+			validInput = false;
+			self.noPass = true;
+		}
+		else if(self.passConfirm === ""){
+			//Toggle password error
+			validInput = false;
+			self.noConfirm = true;
+		}
+		else{
+			if(self.pass !== self.passConfirm)
+			{
+				self.falsePassCompare = true;
+				validInput = false;
+			}
+		}
+		if(validInput){
+			var fullName = self.fName + " " + self.lName;
+			console.log(self.email, self.user, self.pass, self.passConfirm, self.major, self.minor, self.bio);
+			app.register(self.email, self.user, self.pass, fullName, self.major, self.minor, self.bio);
+		}
+		else
+		{
+			//Registration failed
+		}
+	};
+
+	self.toLogin = function(){
+		app.sendToLogin();
+	};
+}]);
 // Main function is manage event lists "page".
 studyHallApp.controller('EventsController', ['appData', '$scope', function(app, $scope) {
 	var self = this;

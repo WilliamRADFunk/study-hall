@@ -1,0 +1,86 @@
+<div ng-controller="EventCreateController as EventCreateCtrl">
+  <form class="form-horizontal formAlignment">
+    <fieldset>
+      <div id="legend">
+        <legend class="">Create Event</legend>
+      </div>
+    </fieldset>
+
+    <div class="form-register">
+    <!-- Name of Event -->
+      <div class ="row form-element">
+        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <p>Event Name:</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+          <input type="text" id="email" placeholder="e.g 'The Awesome Festival!'" class="textarea fullWidth">
+        </div>
+      </div>
+      </br>
+      <!-- Start Time -->
+      <div class ="row form-element">
+        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <p>Start Time:</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+          <input type="text" id="email" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
+        </div>
+      </div>
+      </br>
+      <!-- End Time -->
+      <div class ="row form-element">
+        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <p>End Time:</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+          <input type="text" id="email" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
+        </div>
+      </div>
+      </br>
+      <!-- Event Type -->
+       <div class ="row form-element">
+        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <p>Type Of Event:</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+          <select name="type">
+            <option value=0 selected>Public (Everyone)</option>
+            <option value=1>Private (University)</option>
+            <option value=2>Registered Student Organization</option>
+          </select>
+        </div>
+      </div>
+      </br>
+      <!-- Event Description -->
+      <div class ="row form-element">
+        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <p>Description:</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+          <textArea name="description" id="email" placeholder="Tell us about your event" rows="10" cols="27" class="fullWidth"></textArea>
+        </div>
+      </div>
+      </br>
+      <div class ="row form-element">
+        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <p>Contact Info:</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+          <input type="text" id="email" placeholder="Name" class="textarea fullWidth">
+          <input type="text" id="email" placeholder="Phone-Number: Ex: '9876543210'" class="textarea fullWidth">
+          <input type="text" id="email" placeholder="E-mail" class="textarea fullWidth">
+        </div>
+      </div>
+      </br>
+    </div>
+    <!-- Map Module for Location Selection -->
+  </form>
+</div>
+<!-- ng-click="RegisterCtrl.registerActivate()"-->
+<!-- ng-click="RegisterCtrl.returnToLogin()"-->

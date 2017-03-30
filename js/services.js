@@ -217,6 +217,48 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 
+	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null) {
+	
+		$http({
+			method: 'POST',
+			url: './actions/event.php',
+			data:
+			{
+				user_id: id,
+				type: "create",
+				location_info:{
+					latitude: latitude,
+					longitude: longitude,
+					name: nameL
+				},
+				event_info:{
+					event_type: type,
+					name: nameE,
+					start_time: start,
+					end_time: end,
+					description: desc,
+					phone_num: phone,
+					email: email
+					}
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				//Error on login. Incorrect username or password
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure registering');
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+			//Call failure here?
+		});
+	};
+
 	app.resetLog = function() {
 		app.loginData.registrationSuccess = false;
 	};

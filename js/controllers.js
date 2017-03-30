@@ -164,73 +164,41 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	var self = this;
 
 	self.active = false;
-	self.registerData = app.eventCreateData;
+	self.eventCreateData = app.eventCreateData;
 	self.state = app.state;
 
+	self.createActivate = function() {
 
-	self.falsePassCompare = false;
+	//TEMP VARIABLES EXPECTED LATER BY EVENTCREATE.html
+	var latitude = 99.0001;
+	var longitude = 99.0002;
+	var specific = "THE TEST";
 
-	self.invalidUserPass = false;
+	var id = self.state.userId;
+	var verified = true;
 
-	resetRegister = function() {
-		self.falseInputEmail = false;
-		self.noEmail = false;
-		self.falseInputUser = false;
-		self.noUser = false;
-		self.falseInputPass = false;
-		self.noPass = false;
-		self.falseInputConfirmPass = false;
-		self.noConfirm = false;
-		self.falsePassCompare = false;
-	};
+	console.log(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email);
 
-	self.registerActivate = function() {
+	if(self.nameE === ""){
+		//NO EVENT NAME
+		verified = false;
+	}
+	if(self.start === ""){
+		//NO START
+		verified = false;
+	}
+	if(self.end === ""){
+		//NO END
+		verified = false;
+	}
+	if(self.type === -1){
+		//NO TYPE
+		verified = false;
+	}
+	if(verified){
+		app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, latitude, longitude, specific);
+	}
 
-		console.log("registerActivate activated.");
-		resetRegister();
-
-		var validInput = true;
-
-		if(self.email === ""){
-			//Toggle user error. Dont call app.login
-			validInput = false;
-			self.noEmail = true;
-		}
-		if(self.user === ""){
-			//Toggle password error
-			validInput = false;
-			self.noUser = true;
-		}
-		if(self.pass === ""){
-			//Toggle password error
-			validInput = false;
-			self.noPass = true;
-		}
-		else if(self.passConfirm === ""){
-			//Toggle password error
-			validInput = false;
-			self.noConfirm = true;
-		}
-		else{
-			if(self.pass !== self.passConfirm)
-			{
-				self.falsePassCompare = true;
-				validInput = false;
-			}
-		}
-		if(validInput){
-			var fullName = self.fName + " " + self.lName;
-			console.log(self.email, self.user, self.pass, self.passConfirm, self.major, self.minor, self.bio);
-			app.register(self.email, self.user, self.pass, fullName, self.major, self.minor, self.bio);
-		}
-		else
-		{
-			//Registration failed
-		}
-	};
-
-	self.toLogin = function(){
-		app.sendToLogin();
 	};
 }]);
 // Main function is manage event lists "page".

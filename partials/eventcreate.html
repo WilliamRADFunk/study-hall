@@ -14,7 +14,7 @@
           <p>Event Name:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" placeholder="e.g 'The Awesome Festival!'" class="textarea fullWidth">
+          <input type="text" id="email" ng-model="EventCreateCtrl.nameE" ng-init="EventCreateCtrl.nameE=''" placeholder="e.g 'The Awesome Festival!'" class="textarea fullWidth">
         </div>
       </div>
       </br>
@@ -25,7 +25,7 @@
           <p>Start Time:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
+          <input type="text" id="email" ng-model="EventCreateCtrl.start" ng-init="EventCreateCtrl.start=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
         </div>
       </div>
       </br>
@@ -36,7 +36,7 @@
           <p>End Time:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
+          <input type="text" id="email" ng-model="EventCreateCtrl.end" ng-init="EventCreateCtrl.end=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
         </div>
       </div>
       </br>
@@ -47,7 +47,7 @@
           <p>Type Of Event:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <select name="type">
+          <select name="type" ng-model="EventCreateCtrl.type" ng-init="EventCreateCtrl.type=''">
             <option value=0 selected>Public (Everyone)</option>
             <option value=1>Private (University)</option>
             <option value=2>Registered Student Organization</option>
@@ -62,7 +62,7 @@
           <p>Description:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <textArea name="description" id="email" placeholder="Tell us about your event" rows="10" cols="27" class="fullWidth"></textArea>
+          <textArea name="description" id="email" ng-model="EventCreateCtrl.desc" ng-init="EventCreateCtrl.desc=''" placeholder="Tell us about your event" rows="10" cols="27" class="fullWidth"></textArea>
         </div>
       </div>
       </br>
@@ -72,14 +72,18 @@
           <p>Contact Info:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" placeholder="Name" class="textarea fullWidth">
-          <input type="text" id="email" placeholder="Phone-Number: Ex: '9876543210'" class="textarea fullWidth">
-          <input type="text" id="email" placeholder="E-mail" class="textarea fullWidth">
+          <input type="text" id="email" ng-model="EventCreateCtrl.name" ng-init="EventCreateCtrl.name=''" placeholder="Name" class="textarea fullWidth">
+          <input type="text" id="email" ng-model="EventCreateCtrl.phone" ng-init="EventCreateCtrl.phone=''" placeholder="Phone-Number: Ex: '9876543210'" class="textarea fullWidth">
+          <input type="text" id="email" ng-model="EventCreateCtrl.email" ng-init="EventCreateCtrl.email=''" placeholder="E-mail" class="textarea fullWidth">
         </div>
       </div>
       </br>
+        <div class="wrapper">
+          <button class="btn btn-primary btn-md" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
+        </div>
     </div>
     <!-- Map Module for Location Selection -->
+    
   </form>
 </div>
 <!-- ng-click="RegisterCtrl.registerActivate()"-->

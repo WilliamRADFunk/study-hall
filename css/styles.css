@@ -195,3 +195,13 @@ body {
 	width: 200px;
 	height: 150px;
 }
+
+#create-container h3 {
+	color: red;
+	font-size: 12px;
+	margin-top: 0px;
+}
+
+#create-container  .buttonAdjust {
+	margin: auto;
+}

@@ -11,50 +11,63 @@
       <div class ="row form-element">
         <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Event Name:</p>
+          <p>Event Name*:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
           <input type="text" id="email" ng-model="EventCreateCtrl.nameE" ng-init="EventCreateCtrl.nameE=''" placeholder="e.g 'The Awesome Festival!'" class="textarea fullWidth">
         </div>
       </div>
-      </br>
+        <div ng-if = "EventCreateCtrl.falseInputEvent" >
+          <h3>Event Name required.</h3>
+        </div>
+        <div ng-if = "!EventCreateCtrl.falseInputEvent"></br></div>
       <!-- Start Time -->
       <div class ="row form-element">
         <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Start Time:</p>
+          <p>Start Time*:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
           <input type="text" id="email" ng-model="EventCreateCtrl.start" ng-init="EventCreateCtrl.start=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
         </div>
       </div>
-      </br>
+        <div ng-if = "EventCreateCtrl.falseInputStart" >
+          <h3>Start Time Required.</h3>
+        </div>
+        <div ng-if = "!EventCreateCtrl.falseInputStart"></br></div>
       <!-- End Time -->
       <div class ="row form-element">
         <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>End Time:</p>
+          <p>End Time*:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
           <input type="text" id="email" ng-model="EventCreateCtrl.end" ng-init="EventCreateCtrl.end=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
         </div>
       </div>
-      </br>
+        <div ng-if = "EventCreateCtrl.falseInputEnd" >
+          <h3>End Time required.</h3>
+        </div>
+        <div ng-if = "!EventCreateCtrl.falseInputEnd"></br></div>
       <!-- Event Type -->
        <div class ="row form-element">
         <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Type Of Event:</p>
+          <p>Type Of Event*:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
           <select name="type" ng-model="EventCreateCtrl.type" ng-init="EventCreateCtrl.type=''">
+            <option value="" disabled selected>Select Event Type</option>
             <option value=0 selected>Public (Everyone)</option>
             <option value=1>Private (University)</option>
             <option value=2>Registered Student Organization</option>
           </select>
         </div>
       </div>
-      </br>
+        <div ng-if = "EventCreateCtrl.falseInputType" >
+          <h3>Please select an event type from the drop down menu.</h3>
+        </div>
+        <div ng-if = "!EventCreateCtrl.falseInputType"></br></div>
       <!-- Event Description -->
       <div class ="row form-element">
         <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
@@ -79,7 +92,7 @@
       </div>
       </br>
         <div class="wrapper">
-          <button class="btn btn-primary btn-md" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
+          <button class="btn btn-primary btn-md buttonAdjust" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
         </div>
     </div>
     <!-- Map Module for Location Selection -->

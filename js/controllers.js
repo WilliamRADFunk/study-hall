@@ -167,8 +167,13 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	self.eventCreateData = app.eventCreateData;
 	self.state = app.state;
 
-	self.createActivate = function() {
+	self.falseInputEvent = false;
+	self.falseInputStart = false;
+	self.falseInputEnd = false;
+	self.falseInputType = false;
 
+	self.createActivate = function() {
+	ResetCreateEvent();
 	//TEMP VARIABLES EXPECTED LATER BY EVENTCREATE.html
 	var latitude = 99.0001;
 	var longitude = 99.0002;
@@ -182,23 +187,34 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	if(self.nameE === ""){
 		//NO EVENT NAME
 		verified = false;
+		self.falseInputEvent = true;
 	}
 	if(self.start === ""){
 		//NO START
 		verified = false;
+		self.falseInputStart = true;
 	}
 	if(self.end === ""){
 		//NO END
 		verified = false;
+		self.falseInputEnd = true;
 	}
-	if(self.type === -1){
+	if(self.type === ""){
 		//NO TYPE
 		verified = false;
+		self.falseInputType = true;
 	}
 	if(verified){
 		app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, latitude, longitude, specific);
 	}
 
+	};
+
+	ResetCreateEvent = function(){
+		self.falseInputEvent = false;
+		self.falseInputStart = false;
+		self.falseInputEnd = false;
+		self.falseInputType = false;
 	};
 }]);
 // Main function is manage event lists "page".

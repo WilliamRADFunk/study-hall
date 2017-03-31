@@ -175,14 +175,14 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	self.createActivate = function() {
 	ResetCreateEvent();
 	//TEMP VARIABLES EXPECTED LATER BY EVENTCREATE.html
-	var latitude = 99.0001;
+	var latitude = 99.0005;
 	var longitude = 99.0002;
-	var specific = "THE TEST";
+	var specific = "THE TESTER";
 
 	var id = self.state.userId;
 	var verified = true;
 
-	console.log(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email);
+	console.log(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, self.rso);
 
 	if(self.nameE === ""){
 		//NO EVENT NAME
@@ -205,7 +205,7 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		self.falseInputType = true;
 	}
 	if(verified){
-		app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, latitude, longitude, specific);
+		app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, latitude, longitude, specific, self.rso);
 	}
 
 	};
@@ -215,6 +215,7 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		self.falseInputStart = false;
 		self.falseInputEnd = false;
 		self.falseInputType = false;
+		app.getAvailableRSO();
 	};
 }]);
 // Main function is manage event lists "page".

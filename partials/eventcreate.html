@@ -68,6 +68,20 @@
           <h3>Please select an event type from the drop down menu.</h3>
         </div>
         <div ng-if = "!EventCreateCtrl.falseInputType"></br></div>
+
+      <div class ="row form-element" ng-if="EventCreateCtrl.type == 2">
+        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <p>Pick RSO*:</p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+          <select name="rso" ng-model="EventCreateCtrl.rso" ng-init="EventCreateCtrl.rso=''">
+            <option value="" disabled selected>Select Available RSO</option>
+            <option ng-repeat="x in EventCreateCtrl.eventCreateData.rso" value={{x.rso_id}}>{{x.name}}</option>
+          </select>
+        </div>
+      </div>
+
       <!-- Event Description -->
       <div class ="row form-element">
         <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>

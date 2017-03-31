@@ -26,7 +26,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.registerData = {};
 	app.registerData.registered = false;
 
-	app.eventCreate = {};
+	app.eventCreateData = {};
+	app.eventCreateData.rso = [];
 
 	// Router function to send user to individual event page.
 	goToEvent = function() {
@@ -217,7 +218,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 
-	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null) {
+	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null, rso=null) {
 	
 		$http({
 			method: 'POST',
@@ -256,6 +257,23 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}, function errorCallback(response) {
 			console.log(response);
 			//Call failure here?
+		});
+	};
+
+	app.getAvailableRSO = function() {
+
+		$http({
+			method: 'GET',
+			url: './actions/rso.php?user_id=' + app.state.userId + '&rso_id',
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			console.log(response);
+			var parsed = JSON.parse(response.data);
+			app.eventCreateData.rso = parsed;
+		}, function errorCallback(response) {
+			console.log("failure", response.statusText);
 		});
 	};
 

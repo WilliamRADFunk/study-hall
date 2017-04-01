@@ -44,6 +44,8 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 	self.active = false;
 	self.loginData = app.loginData;
 	self.state = app.state;
+	self.nav = app.navigation;
+	
 	self.falseInputUser = 0;
 	self.falseInputPass = 0;
 	self.invalidUserPass = false;
@@ -75,7 +77,7 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 	};
 
 	self.toRegister = function(){
-		app.sendToRegister();
+		app.navigation.goToRegistration();
 	};
 }]);
 
@@ -85,6 +87,7 @@ studyHallApp.controller('RegisterController', ['appData', function(app) {
 	self.active = false;
 	self.registerData = app.registerData;
 	self.state = app.state;
+	self.nav = app.navigation;
 
 	self.falseInputEmail = false;
 	self.noEmail = false;
@@ -157,7 +160,7 @@ studyHallApp.controller('RegisterController', ['appData', function(app) {
 	};
 
 	self.toLogin = function(){
-		app.sendToLogin();
+		app.navigation.goToLogin();
 	};
 }]);
 

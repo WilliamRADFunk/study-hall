@@ -6,31 +6,33 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventListData.isPrivateEvents = false;	// Lets us know the view private events toggle is on.
 	app.eventListData.events = [];				// List of event objects returned from query.
 
-	app.eventData = {};
-	app.eventData.event = {};					// event object of selected event.
+	app.eventData = {};							// Object to individual event page variables.
+	app.eventData.event = {};					// Event object of selected event.
 
 	app.state = {};								// Manages overall state of application.
-	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
+	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
+	app.state.userId = 2;						// User's id after logging in.
+	app.state.latitude = 28.6024;				// User's school's latitude for map centering.
+	app.state.latitude = -81.2001;				// User's school's longitude for map centering.
 	app.state.registration = false;				// User is on register page.
 	app.state.events = false;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
 	app.state.rso = false;						// User is on individual rso page.
-	app.state.userId = 2;						// User's id after logging in.
-	app.state.createEvent = true;
-	app.state.createRSO = false;
+	app.state.createEvent = false;				// User is on event creation page.
+	app.state.createRSO = false;				// User is on rso creation page.
 
-	app.navigation = {};
+	app.navigation = {};						// Contains service navigation functions.
 
-	app.loginData = {};
-	app.loginData.errorLogin = false;
-	app.loginData.registrationSuccess = false;
+	app.loginData = {};							// Data object to contain returned login data.
+	app.loginData.errorLogin = false;			// Error boolean to trigger hide/show of error msg.
+	app.loginData.registrationSuccess = false;	// Boolean to default set username/password if just registered.
 
-	app.registerData = {};
-	app.registerData.registered = false;
+	app.registerData = {};						// Data object for registration variables.
+	app.registerData.registered = false;		// Flag to determine if registration succeeded.
 
-	app.eventCreateData = {};
-	app.eventCreateData.rso = [];
+	app.eventCreateData = {};					// Data object containing variables for event creation page.
+	app.eventCreateData.rso = [];				// Array of possible rsos available to attach event to.
 
 	// Router function to send user (on successful login) to events list page.
 	login = function(userId=null) {
@@ -38,7 +40,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.isLoggedIn = true;
 			app.state.events = true;
 			app.state.userId = userId;
-			goToEvents();
+			app.navigation.goToEvents();
 		}
 	};
 	// Router function to send user to create event page.
@@ -89,6 +91,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.createRSO = false;
 		}
 	};
+	// Router function to send user to login page.
 	app.navigation.goToLogin = function(){
 		app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 		app.state.registration = false;				// User is on register page.
@@ -217,7 +220,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			//Call failure here?
 		});
 	};
-
+	// API function to send registration information to db.
 	app.register = function(email=null, user=null, pass=null, name=null, major=null, minor=null, bio=null) {
 		app.loginData.errorLogin = false;
 		app.loginData.registrationSuccess = false;
@@ -255,7 +258,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			//Call failure here?
 		});
 	};
-
+	// API call to send event data to db for event creation.
 	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null, rso=null) {
 	
 		$http({
@@ -298,7 +301,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			//Call failure here?
 		});
 	};
-
+	// GET to receive rsos available to user for event creation purposes.
 	app.getAvailableRSO = function() {
 
 		$http({
@@ -315,17 +318,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log("failure", response.statusText);
 		});
 	};
-
+	// Trigger to clear login page form fields.
 	app.resetLog = function() {
 		app.loginData.registrationSuccess = false;
-	};
-
-	app.sendToRegister = function() {
-		goToRegistration();
-	};
-
-	app.sendToLogin = function() {
-		goToLogin();
 	};
 	// Toggles the public events view
 	app.togglePublicEvents = function() {

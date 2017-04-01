@@ -45,7 +45,7 @@ studyHallApp.controller('LoginController', ['appData', function(app) {
 	self.loginData = app.loginData;
 	self.state = app.state;
 	self.nav = app.navigation;
-	
+
 	self.falseInputUser = 0;
 	self.falseInputPass = 0;
 	self.invalidUserPass = false;
@@ -259,6 +259,12 @@ studyHallApp.controller('EventsController', ['appData', '$scope', function(app, 
 			app.getEventById(self.eventListData.events[eventIndex]);
 		}
 	};
+
+	// Calls the service to route to event creation page.
+	self.createEvent = function(eventIndex=null) {
+		app.navigation.goToCreateEvent();
+	};
+
 	// Called by service everytime the list of events is changed.
 	var updateEvents = function() {
 		// Wipe all markers off the map.

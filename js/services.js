@@ -11,9 +11,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
-	app.state.userId = 2;						// User's id after logging in.
-	app.state.latitude = 28.6024;				// User's school's latitude for map centering.
-	app.state.latitude = -81.2001;				// User's school's longitude for map centering.
+	app.state.userId = 0;						// User's id after logging in.
+	app.state.latitude = 0;				// User's school's latitude for map centering.
+	app.state.longitude = 0;				// User's school's longitude for map centering.
 	app.state.registration = false;				// User is on register page.
 	app.state.events = false;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
@@ -21,7 +21,6 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state.rso = false;						// User is on individual rso page.
 	app.state.createEvent = false;				// User is on event creation page.
 	app.state.createRSO = false;				// User is on rso creation page.
-	app.state.userId = 0;						// User's id after logging in.
 
 	app.navigation = {};						// Contains service navigation functions.
 
@@ -36,11 +35,13 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventCreateData.rso = [];				// Array of possible rsos available to attach event to.
 
 	// Router function to send user (on successful login) to events list page.
-	login = function(userId=null) {
+	login = function(userId=null, lat=null, long=null) {
 		if(userId) {
 			app.state.isLoggedIn = true;
 			app.state.events = true;
 			app.state.userId = userId;
+			app.state.latitude = lat;
+			app.state.longitude = long;
 			app.navigation.goToEvents();
 		}
 	};
@@ -216,7 +217,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 				var parsed = JSON.parse(response.data);
 				//, parsed[0].latitude, parsed[0].longitude
 				console.log(parsed);
-				login(parsed[0].s_id);
+				login(parsed[0].s_id, parsed[0].latitude, parsed[0].longitude);
 			}
 		}, function errorCallback(response) {
 			console.log(response);

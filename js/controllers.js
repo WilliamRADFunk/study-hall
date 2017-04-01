@@ -168,11 +168,14 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	self.eventCreateData = app.eventCreateData;
 	self.state = app.state;
 
+	// Creates the map for this page.
 	var map = L.map('map-create');
 	// Sets up background image of map and associates type.
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
+	// Center the map on school's lat and long.
+	map.setView([28.6024, -81.2001], 16);
 
 	self.falseInputEvent = false;
 	self.falseInputStart = false;
@@ -184,39 +187,38 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	};
 
 	self.createActivate = function() {
-	ResetCreateEvent();
-	//TEMP VARIABLES EXPECTED LATER BY EVENTCREATE.html
-	var latitude = 99.0005;
-	var longitude = 99.0002;
-	var specific = "THE TESTER";
+		ResetCreateEvent();
+		//TEMP VARIABLES EXPECTED LATER BY EVENTCREATE.html
+		var latitude = 99.0005;
+		var longitude = 99.0002;
+		var specific = "THE TESTER";
 
-	var id = self.state.userId;
-	var verified = true;
+		var id = self.state.userId;
+		var verified = true;
 
-	if(self.nameE === ""){
-		//NO EVENT NAME
-		verified = false;
-		self.falseInputEvent = true;
-	}
-	if(self.start === ""){
-		//NO START
-		verified = false;
-		self.falseInputStart = true;
-	}
-	if(self.end === ""){
-		//NO END
-		verified = false;
-		self.falseInputEnd = true;
-	}
-	if(self.type === ""){
-		//NO TYPE
-		verified = false;
-		self.falseInputType = true;
-	}
-	if(verified){
-		app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, latitude, longitude, specific, self.rso);
-	}
-
+		if(self.nameE === ""){
+			//NO EVENT NAME
+			verified = false;
+			self.falseInputEvent = true;
+		}
+		if(self.start === ""){
+			//NO START
+			verified = false;
+			self.falseInputStart = true;
+		}
+		if(self.end === ""){
+			//NO END
+			verified = false;
+			self.falseInputEnd = true;
+		}
+		if(self.type === ""){
+			//NO TYPE
+			verified = false;
+			self.falseInputType = true;
+		}
+		if(verified){
+			app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, latitude, longitude, specific, self.rso);
+		}
 	};
 
 	ResetCreateEvent = function(){

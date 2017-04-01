@@ -53,8 +53,8 @@
 						<ul class="nav navbar-nav">
 							<li id="public-events" class="active" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events" ng-click="mainCtrl.togglePublicEvents()"><a href="#">Public Events</a></li>
 							<li id="private-events" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events" ng-click="mainCtrl.togglePrivateEvents()"><a href="#">Private Events</a></li>
-							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos"><a href="#">RSO Groups</a></li>
-							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos"><a href="#">RSO Events</a></li>
+							<li id="rso-groups" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos" ng-click="mainCtrl.toggleRsoGroups()"><a href="#">RSO Groups</a></li>
+							<li id="rso-events" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos" ng-click="mainCtrl.toggleRsoEvents()"><a href="#">RSO Events</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.event || mainCtrl.state.rso || mainCtrl.state.rsos || mainCtrl.state.createEvent)" ng-click="mainCtrl.nav.goToEvents()"><a href="#">Core Events</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.events || mainCtrl.state.event || mainCtrl.state.rso || mainCtrl.state.createEvent)" ng-click="mainCtrl.nav.goToRSOs()"><a href="#">RSOs</a></li>
 						</ul>

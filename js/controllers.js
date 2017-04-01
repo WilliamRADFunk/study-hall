@@ -36,6 +36,34 @@ studyHallApp.controller('MainController', ['appData', function(app) {
 			}
 		}
 	};
+	// Calls the service to toggle rso groups display
+	self.toggleRsoGroups = function() {
+		app.toggleRsoGroups();
+		if(!app.rsoListData.isRsoGroups && !app.rsoListData.isRsoGroups) {
+			app.toggleRsoGroups();
+		} else {
+			var myElem = angular.element( document.querySelector( '#rso-events' ) );
+			if(app.rsoListData.isRsoGroups) {
+				myElem.addClass('active');
+			} else {
+				myElem.removeClass('active');
+			}
+		}
+	};
+	// Calls the service to toggle rso events display
+	self.toggleRsoEvents = function() {
+		app.toggleRsoEvents();
+		if(!app.rsoListData.isRsoEvents && !app.rsoListData.isRsoEvents) {
+			app.toggleRsoEvents();
+		} else {
+			var myElem = angular.element( document.querySelector( '#rso-events' ) );
+			if(app.rsoListData.isRsoEvents) {
+				myElem.addClass('active');
+			} else {
+				myElem.removeClass('active');
+			}
+		}
+	};
 }]);
 // Main function is manage event lists "page".
 studyHallApp.controller('LoginController', ['appData', function(app) {

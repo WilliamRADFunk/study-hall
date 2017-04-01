@@ -8,8 +8,8 @@
 					</tr>
 				</thead>
 				<tbody ng-repeat="x in eventsCtrl.eventListData.events">
-					<tr ng-click="eventsCtrl.selectEvent($index)">
-						<td>
+					<tr>
+						<td ng-click="eventsCtrl.selectEvent($index)">
 							<div>{{x.name}}</div>
 							<div>{{x.specificName}}</div>
 							<div>{{x['start_time']}}</div>

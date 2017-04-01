@@ -158,10 +158,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	};
 	// Called when user clicks on a specific id.
 	app.getEventById = function(event=null) {
-		console.log(event);
 		if(event !== null) {
 			app.eventData.event = event;
-			goToEvent();
+			app.navigation.goToEvent();
 		}
 	};
 	// Called when user lands on events list page.

@@ -254,7 +254,7 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	// Center the map on school's lat and long.
 	centerMap();
 }]);
-// Main function is manage event lists "page".
+// Main function is manage event list "page".
 studyHallApp.controller('EventsController', ['appData', function(app) {
 	var self = this;
 
@@ -284,7 +284,7 @@ studyHallApp.controller('EventsController', ['appData', function(app) {
 	};
 
 	// Calls the service to route to event creation page.
-	self.createEvent = function(eventIndex=null) {
+	self.createEvent = function() {
 		app.navigation.goToCreateEvent();
 	};
 
@@ -318,4 +318,74 @@ studyHallApp.controller('EventsController', ['appData', function(app) {
 	app.registerObserverCallback(updateEvents);
 	// Initial call to populate table with events.
 	self.getEventList();
+}]);
+// Main function is manage RSO list "page".
+studyHallApp.controller('RSOsController', ['appData', function(app) {
+	var self = this;
+
+	self.active = false;
+	self.rsoListData = app.rsoListData;
+	self.state = app.state;
+
+	// Create the leaflet map, and attach it to the map with that id.
+	var map = L.map('map-rsos');
+	// Setup a marker group.
+	var markers = L.featureGroup();
+	// Sets up background image of map and associates type.
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	// Calls the service to get the list of RSOs.
+	self.getRsoList = function() {
+		app.listRsos();
+	};
+
+	// Calls the service to route to specific RSO event page.
+	self.selectRso = function(rsoIndex=null) {
+		if(eventIndex !== null) {
+			app.getRsoById(self.eventListData.events[eventIndex]);
+		}
+	};
+
+	// Calls the service to route to event creation page.
+	self.createEvent = function() {
+		app.navigation.goToCreateEvent();
+	};
+
+	// Calls the service to route to rso group creation page.
+	self.createGroup = function() {
+		app.navigation.goToCreateGroup();
+	};
+
+	// Called by service everytime the list of events is changed.
+	var updateEvents = function() {
+		// Wipe all markers off the map.
+		markers.clearLayers();
+
+		// Centers map on the first marker.
+		if(self.rsoListData.events[0]
+			&& self.rsoListData.events[0].latitude
+			&& self.rsoListData.events[0].longitude
+			) {
+			map.setView([self.rsoListData.events[0].latitude,
+				self.rsoListData.events[0].longitude
+			], 15);
+		}
+
+		// Create each individual marker.
+		self.rsoListData.events.forEach(function(elem) {
+			var marker = L.marker([elem.latitude, elem.longitude
+			]).addTo(map)
+				.bindPopup(elem.name + '<br>' + elem.specificName);
+			// Add marker to the group.
+			markers.addLayer(marker);
+		});
+		// Places all markers on the map.
+		map.addLayer(markers);
+	};
+	// Registers the map updater function with the service's observer pattern.
+	app.registerObserverCallback(updateEvents);
+	// Initial call to populate table with rso groups and events.
+	self.getRsoList();
 }]);

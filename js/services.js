@@ -200,25 +200,30 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.listRsos = function() {
 		var mode = '';
 		if(app.state.userId
-			&& !app.eventListData.isPublicEvents
-			&& app.eventListData.isPrivateEvents
+			&& !app.rsoListData.isRsoGroups
+			&& app.rsoListData.isRsoEvents
 		) {
-			mode = '?user_id=' + app.state.userId + '&private';
+			mode = '?user_id=' + app.state.userId + '&events';
 		} else if(app.state.userId
-			&& app.eventListData.isPublicEvents
-			&& app.eventListData.isPrivateEvents
+			&& app.rsoListData.isRsoGroups
+			&& !app.rsoListData.isRsoEvents
+		) {
+			mode = '?user_id=' + app.state.userId + '&rso';
+		} else if(app.state.userId
+			&& app.rsoListData.isRsoGroups
+			&& app.rsoListData.isRsoEvents
 		) {
 			mode = '?user_id=' + app.state.userId;
 		}
 		$http({
 			method: 'GET',
-			url: './actions/event.php' + mode,
+			url: './actions/rso.php' + mode,
 			transformResponse: [function (data) {
 				return data;
 			}]
 		}).then(function successCallback(response) {
 			var parsed = JSON.parse(response.data);
-			app.eventListData.events = parsed;
+			app.rsoListData.rsos = parsed;
 			notifyObservers(); // Call to update map markers.
 		}, function errorCallback(response) {
 			console.log("failure", response.statusText);

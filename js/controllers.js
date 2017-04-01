@@ -364,6 +364,8 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
 
+	map.setView([app.state.latitude, app.state.longitude], 15);
+
 	// Calls the service to get the list of RSOs.
 	self.getRsoList = function() {
 		app.listRsos();
@@ -388,32 +390,41 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 
 	// Called by service everytime the list of events is changed.
 	var updateRsos = function() {
+		var events = [];
+		var groups = [];
 		// Wipe all markers off the map.
 		markers.clearLayers();
 
+		// Separates rso events from rso groups for mapping purposes.
+		self.rsoListData.rsos.forEach(function(elem, index) {
+			if(elem['rso_id']) {
+				groups.push(elem);
+			} else if(elem['e_id']) {
+				events.push(elem);
+			}
+		});
+
 		// Centers map on the first marker.
-		// if(self.rsoListData.events[0]
-		// 	&& self.rsoListData.events[0].latitude
-		// 	&& self.rsoListData.events[0].longitude
-		// 	) {
-		// 	map.setView([self.rsoListData.events[0].latitude,
-		// 		self.rsoListData.events[0].longitude
-		// 	], 15);
-		// }
+		if(events[0]
+			&& events[0].latitude
+			&& events[0].longitude
+			) {
+			map.setView([events[0].latitude, events[0].longitude], 15);
+		}
 
 		// Create each individual marker.
-		// self.rsoListData.events.forEach(function(elem) {
-		// 	var marker = L.marker([elem.latitude, elem.longitude
-		// 	]).addTo(map)
-		// 		.bindPopup(elem.name + '<br>' + elem.specificName);
-		// 	// Add marker to the group.
-		// 	markers.addLayer(marker);
-		// });
+		events.forEach(function(elem) {
+			var marker = L.marker([elem.latitude, elem.longitude])
+				.addTo(map)
+				.bindPopup(elem.name + '<br>' + elem.specificName + '<br><i>' + elem['rso_name'] + '</i>');
+			// Add marker to the group.
+			markers.addLayer(marker);
+		});
 		// Places all markers on the map.
-		// map.addLayer(markers);
+		map.addLayer(markers);
 	};
 	// Registers the map updater function with the service's observer pattern.
-	app.registerObserverCallback(updateEvents);
+	app.registerObserverCallback(updateRsos);
 	// Initial call to populate table with rso groups and events.
 	self.getRsoList();
 }]);

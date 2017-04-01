@@ -18,6 +18,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state.rso = false;						// User is on individual rso page.
 	app.state.userId = 2;						// User's id after logging in.
 	app.state.createEvent = true;
+	app.state.createRSO = false;
+
+	app.navigation = {};
 
 	app.loginData = {};
 	app.loginData.errorLogin = false;
@@ -29,56 +32,6 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventCreateData = {};
 	app.eventCreateData.rso = [];
 
-	// Router function to send user to individual event page.
-	goToEvent = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = true;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = false;
-		}
-	};
-	// Router function to send user to events list page.
-	goToEvents = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = true;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = false;
-		}
-	};
-	// Router function to send user to individual rso page.
-	goToRSO = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = true;
-			app.state.registration = false;
-		}
-	};
-	// Router function to send user to rsos list page.
-	goToRSOs = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = true;
-			app.state.rso = false;
-			app.state.registration = false;
-		}
-	};
-	// Router function to send user to registration page.
-	goToRegistration = function() {
-		if(!app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = true;
-		}
-	};
 	// Router function to send user (on successful login) to events list page.
 	login = function(userId=null) {
 		if(userId) {
@@ -88,14 +41,99 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			goToEvents();
 		}
 	};
-
-	goToLogin = function(){
+	// Router function to send user to create event page.
+	app.navigation.goToCreateEvent = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = true;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to create rso page.
+	app.navigation.goToCreateRSO = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = true;
+		}
+	};
+	// Router function to send user to individual event page.
+	app.navigation.goToEvent = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = true;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to events list page.
+	app.navigation.goToEvents = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = true;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	app.navigation.goToLogin = function(){
 		app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 		app.state.registration = false;				// User is on register page.
 		app.state.events = false;					// User is on list events page.
 		app.state.event = false;					// User is on individual event page.
 		app.state.rsos = false;						// User is on rsos page.
 		app.state.rso = false;
+		app.state.createEvent = false;
+		app.state.createRSO = false;
+	};
+	// Router function to send user to individual rso page.
+	app.navigation.goToRSO = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = true;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to rsos list page.
+	app.navigation.goToRSOs = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = true;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to registration page.
+	app.navigation.goToRegistration = function() {
+		if(!app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = true;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
 	};
 
 	// Post template

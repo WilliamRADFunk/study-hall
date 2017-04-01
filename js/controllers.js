@@ -5,6 +5,7 @@ studyHallApp.controller('MainController', ['appData', function(app) {
 	self.isLoggedIn = app.isLoggedIn;
 	self.active = false;
 	self.miscData = app.miscData;
+	self.nav = app.navigation;
 	self.state = app.state;
 
 	// Calls the service to toggle public events display

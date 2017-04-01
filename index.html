@@ -55,8 +55,8 @@
 							<li id="private-events" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events" ng-click="mainCtrl.togglePrivateEvents()"><a href="#">Private Events</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos"><a href="#">RSO Groups</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos"><a href="#">RSO Events</a></li>
-							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.event || mainCtrl.state.rso)"><a href="#">Core Events</a></li>
-							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.events || mainCtrl.state.event || mainCtrl.state.rsos || mainCtrl.state.rso)"><a href="#">RSOs</a></li>
+							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.event || mainCtrl.state.rso || mainCtrl.state.createEvent)" ng-click="mainCtrl.nav.goToEvents()"><a href="#">Core Events</a></li>
+							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.events || mainCtrl.state.event || mainCtrl.state.rsos || mainCtrl.state.rso || mainCtrl.state.createEvent)" ng-click="mainCtrl.nav.goToRSOs()"><a href="#">RSOs</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
@@ -70,7 +70,7 @@
 			<div id="events-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events">
 				<div ng-include src="'partials/events.html'"></div>
 			</div>
-			<div id="create-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="mainCtrl.state.isLoggedIn && !mainCtrl.state.events && mainCtrl.state.createEvent">
+			<div id="create-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.createEvent">
 				<div ng-include src="'partials/eventcreate.html'"></div>
 			</div>
 		</div>

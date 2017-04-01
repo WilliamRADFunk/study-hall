@@ -10,14 +10,14 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventData.event = {};					// event object of selected event.
 
 	app.state = {};								// Manages overall state of application.
-	app.state.isLoggedIn = true;				// Ensures user is logged in and allowed in certain areas.
+	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 	app.state.registration = false;				// User is on register page.
 	app.state.events = false;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
 	app.state.rso = false;						// User is on individual rso page.
-	app.state.userId = 2;						// User's id after logging in.
-	app.state.createEvent = true;
+	app.state.userId = 0;						// User's id after logging in.
+	app.state.createEvent = false;
 	app.state.createRSO = false;
 
 	app.navigation = {};
@@ -210,6 +210,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			}
 			else{
 				var parsed = JSON.parse(response.data);
+				//, parsed[0].latitude, parsed[0].longitude
+				console.log(parsed);
 				login(parsed[0].s_id);
 			}
 		}, function errorCallback(response) {

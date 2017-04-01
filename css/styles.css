@@ -22,9 +22,9 @@ body {
 	background-color: #030302;
 	color: #FFFFFF;
 }
-.navbar-default .navbar-brand {
-	color: #FFFFFF;
-}
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:visited,
+.navbar-default .navbar-brand:focus,
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-nav > li > a:visited,
 .navbar-default .navbar-nav > li > a:focus,
@@ -114,23 +114,29 @@ body {
 	font-size: 12px;
 }
 
-#events-container .table-responsive {
+#events-container .table-responsive,
+#rsos-container .table-responsive {
 	background-color: #FFFFFF;
 	max-height: 515px;
 	min-height: 515px;
 	padding: 0px;
 }
 
-#events-container table thead {
+#events-container table thead,
+#rsos-container table thead {
 	background-color: #29DD9B;
 }
 
-.table-hover tbody tr:hover td,
-.table-hover tbody tr:hover th {
+#events-container .table-hover tbody tr:hover td,
+#events-container .table-hover tbody tr:hover th,
+#rsos-container .table-hover tbody tr:hover td,
+#rsos-container .table-hover tbody tr:hover th {
 	background-color: #29DD9B;
 }
 
-#map-events {
+#map-events,
+#map-rsos,
+#map-create {
 	height: 480px;
 }
 
@@ -209,8 +215,4 @@ body {
 
 #create-container  .buttonAdjust {
 	margin: auto;
-}
-
-#create-container  #map-create {
-	height: 480px;
 }

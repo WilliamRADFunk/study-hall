@@ -6,6 +6,11 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventListData.isPrivateEvents = false;	// Lets us know the view private events toggle is on.
 	app.eventListData.events = [];				// List of event objects returned from query.
 
+	app.rsoListData = {};						// Angular prefers objects to primitives for binding.
+	app.rsoListData.isRsoGroups = true;			// Lets us know the view rso groups toggle is on.
+	app.rsoListData.isRsoEvents = false;		// Lets us know the view rso events toggle is on.
+	app.rsoListData.rsos = [];					// List of rso objects returned from query.
+
 	app.eventData = {};							// Object to individual event page variables.
 	app.eventData.event = {};					// Event object of selected event.
 
@@ -191,6 +196,34 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log("failure", response.statusText);
 		});
 	};
+	// Called when user lands on rso list page.
+	app.listRsos = function() {
+		var mode = '';
+		if(app.state.userId
+			&& !app.eventListData.isPublicEvents
+			&& app.eventListData.isPrivateEvents
+		) {
+			mode = '?user_id=' + app.state.userId + '&private';
+		} else if(app.state.userId
+			&& app.eventListData.isPublicEvents
+			&& app.eventListData.isPrivateEvents
+		) {
+			mode = '?user_id=' + app.state.userId;
+		}
+		$http({
+			method: 'GET',
+			url: './actions/event.php' + mode,
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			app.eventListData.events = parsed;
+			notifyObservers(); // Call to update map markers.
+		}, function errorCallback(response) {
+			console.log("failure", response.statusText);
+		});
+	};
 	// Called when user attempts to login.
 	app.login = function(user=null, passw=null) {
 		app.loginData.errorLogin = false;
@@ -332,6 +365,16 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.togglePrivateEvents = function() {
 		app.eventListData.isPrivateEvents = !app.eventListData.isPrivateEvents;
 		app.listEvents();
+	};
+	// Toggles the rso groups view
+	app.toggleRsoGroups = function() {
+		app.rsoListData.isRsoGroups = !app.rsoListData.isRsoGroups;
+		app.listRsos();
+	};
+	// Toggles the rso events view
+	app.toggleRsoEvents = function() {
+		app.rsoListData.isRsoEvents = !app.rsoListData.isRsoEvents;
+		app.listRsos();
 	};
 	/*** Allows service to call controller when significant change happens - START ***/
 	var observerCallbacks = [];

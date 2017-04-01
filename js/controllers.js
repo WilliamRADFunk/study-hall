@@ -39,10 +39,10 @@ studyHallApp.controller('MainController', ['appData', function(app) {
 	// Calls the service to toggle rso groups display
 	self.toggleRsoGroups = function() {
 		app.toggleRsoGroups();
-		if(!app.rsoListData.isRsoGroups && !app.rsoListData.isRsoGroups) {
+		if(!app.rsoListData.isRsoGroups && !app.rsoListData.isRsoEvents) {
 			app.toggleRsoGroups();
 		} else {
-			var myElem = angular.element( document.querySelector( '#rso-events' ) );
+			var myElem = angular.element( document.querySelector( '#rso-groups' ) );
 			if(app.rsoListData.isRsoGroups) {
 				myElem.addClass('active');
 			} else {
@@ -53,7 +53,7 @@ studyHallApp.controller('MainController', ['appData', function(app) {
 	// Calls the service to toggle rso events display
 	self.toggleRsoEvents = function() {
 		app.toggleRsoEvents();
-		if(!app.rsoListData.isRsoEvents && !app.rsoListData.isRsoEvents) {
+		if(!app.rsoListData.isRsoGroups && !app.rsoListData.isRsoEvents) {
 			app.toggleRsoEvents();
 		} else {
 			var myElem = angular.element( document.querySelector( '#rso-events' ) );
@@ -387,30 +387,30 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 	};
 
 	// Called by service everytime the list of events is changed.
-	var updateEvents = function() {
+	var updateRsos = function() {
 		// Wipe all markers off the map.
 		markers.clearLayers();
 
 		// Centers map on the first marker.
-		if(self.rsoListData.events[0]
-			&& self.rsoListData.events[0].latitude
-			&& self.rsoListData.events[0].longitude
-			) {
-			map.setView([self.rsoListData.events[0].latitude,
-				self.rsoListData.events[0].longitude
-			], 15);
-		}
+		// if(self.rsoListData.events[0]
+		// 	&& self.rsoListData.events[0].latitude
+		// 	&& self.rsoListData.events[0].longitude
+		// 	) {
+		// 	map.setView([self.rsoListData.events[0].latitude,
+		// 		self.rsoListData.events[0].longitude
+		// 	], 15);
+		// }
 
 		// Create each individual marker.
-		self.rsoListData.events.forEach(function(elem) {
-			var marker = L.marker([elem.latitude, elem.longitude
-			]).addTo(map)
-				.bindPopup(elem.name + '<br>' + elem.specificName);
-			// Add marker to the group.
-			markers.addLayer(marker);
-		});
+		// self.rsoListData.events.forEach(function(elem) {
+		// 	var marker = L.marker([elem.latitude, elem.longitude
+		// 	]).addTo(map)
+		// 		.bindPopup(elem.name + '<br>' + elem.specificName);
+		// 	// Add marker to the group.
+		// 	markers.addLayer(marker);
+		// });
 		// Places all markers on the map.
-		map.addLayer(markers);
+		// map.addLayer(markers);
 	};
 	// Registers the map updater function with the service's observer pattern.
 	app.registerObserverCallback(updateEvents);

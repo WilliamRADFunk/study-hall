@@ -7,7 +7,8 @@
 		</fieldset>
 
 	<div class="form-register">
-		<div><h2>Select a Location</h2></div>
+		<div><h2>Event Information:</h2></div>
+		<hr/>
 	<!-- Name of Event -->
 		<div class ="row form-element form-group">
 			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
@@ -111,8 +112,12 @@
 			</div>
 		</div>
 		</br>
+
+	<!-- Location Info -->
 		<div><h2>Select a Location</h2></div>
+		<hr/>
 		<div id="map-create"></div>
+		</br>
 		</br>
 		<div class="row form-element form-group">
 			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
@@ -120,6 +125,7 @@
 	</div>
 	<!-- Map Module for Location Selection -->
 	</form>
+	</br>
 </div>
 <!-- ng-click="RegisterCtrl.registerActivate()"-->
 <!-- ng-click="RegisterCtrl.returnToLogin()"-->

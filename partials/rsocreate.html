@@ -1,0 +1,44 @@
+<div ng-controller="RSOCreateController as RSOCreateCtrl">
+	<form class="form-horizontal formAlignment">
+		<fieldset>
+			<div id="legend">
+				<legend class="">Create Registered Student Organization</legend>
+			</div>
+		</fieldset>
+
+	<div class="form-register">
+		<div><h2>Registered Student Organization Information:</h2></div>
+		<hr/>
+	<!-- Name of Event -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Event Name*:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+			  <input type="text" id="email" ng-model="EventCreateCtrl.nameE" ng-init="EventCreateCtrl.nameE=''" placeholder="e.g 'The Awesome Festival!'" class="form-control">
+			</div>
+		</div>
+		<div ng-if = "EventCreateCtrl.falseInputEvent" >
+			<h3>Event Name required.</h3>
+		</div>
+		<div ng-if = "!EventCreateCtrl.falseInputEvent"></br></div>
+
+	<!-- Event Description -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Description:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+				<textArea name="description" id="email" class="form-control" ng-model="EventCreateCtrl.desc" ng-init="EventCreateCtrl.desc=''" placeholder="Tell us about your event" rows="10" cols="27"></textArea>
+			</div>
+		</div>
+		</br>
+	</div>
+	<!-- Map Module for Location Selection -->
+	</form>
+	</br>
+</div>
+<!-- ng-click="RegisterCtrl.registerActivate()"-->
+<!-- ng-click="RegisterCtrl.returnToLogin()"-->

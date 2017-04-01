@@ -172,6 +172,10 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	self.falseInputEnd = false;
 	self.falseInputType = false;
 
+	self.refreshRso = function(){
+		app.getAvailableRSO();
+	};
+
 	self.createActivate = function() {
 	ResetCreateEvent();
 	//TEMP VARIABLES EXPECTED LATER BY EVENTCREATE.html
@@ -215,7 +219,6 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		self.falseInputStart = false;
 		self.falseInputEnd = false;
 		self.falseInputType = false;
-		app.getAvailableRSO();
 	};
 }]);
 // Main function is manage event lists "page".

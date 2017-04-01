@@ -56,7 +56,7 @@
           <p>Type Of Event*:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <select name="type" ng-model="EventCreateCtrl.type" ng-init="EventCreateCtrl.type=''">
+          <select name="type" ng-model="EventCreateCtrl.type" ng-init="EventCreateCtrl.type=''" ng-change="EventCreateCtrl.refreshRso()">
             <option value="" disabled selected>Select Event Type</option>
             <option value=0 selected>Public (Everyone)</option>
             <option value=1>Private (University)</option>

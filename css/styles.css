@@ -205,3 +205,7 @@ body {
 #create-container  .buttonAdjust {
 	margin: auto;
 }
+
+#create-container  #map-create {
+	height: 480px;
+}

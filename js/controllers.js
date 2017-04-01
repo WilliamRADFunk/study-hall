@@ -168,6 +168,12 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	self.eventCreateData = app.eventCreateData;
 	self.state = app.state;
 
+	var map = L.map('map-create');
+	// Sets up background image of map and associates type.
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
 	self.falseInputEvent = false;
 	self.falseInputStart = false;
 	self.falseInputEnd = false;
@@ -186,8 +192,6 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 
 	var id = self.state.userId;
 	var verified = true;
-
-	console.log(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, self.rso);
 
 	if(self.nameE === ""){
 		//NO EVENT NAME

@@ -99,12 +99,14 @@
           <p>Contact Info:</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" ng-model="EventCreateCtrl.name" ng-init="EventCreateCtrl.name=''" placeholder="Name" class="textarea fullWidth">
           <input type="text" id="email" ng-model="EventCreateCtrl.phone" ng-init="EventCreateCtrl.phone=''" placeholder="Phone-Number: Ex: '9876543210'" class="textarea fullWidth">
           <input type="text" id="email" ng-model="EventCreateCtrl.email" ng-init="EventCreateCtrl.email=''" placeholder="E-mail" class="textarea fullWidth">
         </div>
       </div>
       </br>
+      <div><h2>Select a Location</h2></div>
+      <div id="map-create"></div>
+
         <div class="wrapper">
           <button class="btn btn-primary btn-md buttonAdjust" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
         </div>

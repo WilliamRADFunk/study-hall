@@ -12,10 +12,10 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 	app.state.userId = 0;						// User's id after logging in.
-	app.state.latitude = 0;						// User's school's latitude for map centering.
-	app.state.longitude = 0;					// User's school's longitude for map centering.
+	app.state.latitude = 1;						// User's school's latitude for map centering.
+	app.state.longitude = 1;					// User's school's longitude for map centering.
 	app.state.registration = false;				// User is on register page.
-	app.state.events = true;					// User is on list events page.
+	app.state.events = false;					// User is on list events page.
 	app.state.event = false;					// User is on individual event page.
 	app.state.rsos = false;						// User is on rsos page.
 	app.state.rso = false;						// User is on individual rso page.
@@ -214,8 +214,6 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			}
 			else{
 				var parsed = JSON.parse(response.data);
-				//, parsed[0].latitude, parsed[0].longitude
-				console.log(parsed);
 				login(parsed[0].s_id, parsed[0].latitude, parsed[0].longitude);
 			}
 		}, function errorCallback(response) {

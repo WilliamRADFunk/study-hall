@@ -177,8 +177,6 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
-	// Center the map on school's lat and long.
-	map.setView([28.6024, -81.2001], 16);
 
 	self.falseInputEvent = false;
 	self.falseInputStart = false;
@@ -224,15 +222,23 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		}
 	};
 
-	ResetCreateEvent = function(){
+	var ResetCreateEvent = function(){
 		self.falseInputEvent = false;
 		self.falseInputStart = false;
 		self.falseInputEnd = false;
 		self.falseInputType = false;
 	};
+
+	var centerMap = function() {
+		// Center the map on school's lat and long.
+		map.setView([Number(self.state.latitude), Number(self.state.longitude)], 16);
+	};
+
+	// Center the map on school's lat and long.
+	centerMap();
 }]);
 // Main function is manage event lists "page".
-studyHallApp.controller('EventsController', ['appData', '$scope', function(app, $scope) {
+studyHallApp.controller('EventsController', ['appData', function(app) {
 	var self = this;
 
 	self.active = false;

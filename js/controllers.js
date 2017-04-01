@@ -166,6 +166,8 @@ studyHallApp.controller('RegisterController', ['appData', function(app) {
 
 studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	var self = this;
+	self.eventLat = 0;
+	self.eventLong = 0;
 
 	self.active = false;
 	self.eventCreateData = app.eventCreateData;
@@ -173,10 +175,25 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 
 	// Creates the map for this page.
 	var map = L.map('map-create');
+	// Setup a marker group.
+	var markers = L.featureGroup();
 	// Sets up background image of map and associates type.
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
+
+	map.on('click', function(e) {
+		// Wipe all markers off the map.
+		markers.clearLayers();
+		self.eventLat = e.latlng.lat;
+		self.eventLong = e.latlng.lng;
+	    // Create each individual marker.
+		var marker = L.marker([self.eventLat, self.eventLong]).addTo(map);
+		// Add marker to the group.
+		markers.addLayer(marker);
+		// Places all markers on the map.
+		map.addLayer(markers);
+	});
 
 	self.falseInputEvent = false;
 	self.falseInputStart = false;
@@ -190,8 +207,6 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	self.createActivate = function() {
 		ResetCreateEvent();
 		//TEMP VARIABLES EXPECTED LATER BY EVENTCREATE.html
-		var latitude = 99.0005;
-		var longitude = 99.0002;
 		var specific = "THE TESTER";
 
 		var id = self.state.userId;
@@ -218,7 +233,7 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 			self.falseInputType = true;
 		}
 		if(verified){
-			app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, latitude, longitude, specific, self.rso);
+			app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, self.eventLat, self.eventLong, specific, self.rso);
 		}
 	};
 
@@ -232,6 +247,8 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	var centerMap = function() {
 		// Center the map on school's lat and long.
 		map.setView([Number(self.state.latitude), Number(self.state.longitude)], 16);
+		self.eventLat = self.state.latitude;
+		self.eventLong = self.state.longitude;
 	};
 
 	// Center the map on school's lat and long.
@@ -292,7 +309,7 @@ studyHallApp.controller('EventsController', ['appData', function(app) {
 			]).addTo(map)
 				.bindPopup(elem.name + '<br>' + elem.specificName);
 			// Add marker to the group.
-            markers.addLayer(marker);
+			markers.addLayer(marker);
 		});
 		// Places all markers on the map.
 		map.addLayer(markers);

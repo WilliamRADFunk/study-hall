@@ -21,6 +21,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state.rso = false;						// User is on individual rso page.
 	app.state.createEvent = false;				// User is on event creation page.
 	app.state.createRSO = false;				// User is on rso creation page.
+	app.state.userId = 0;						// User's id after logging in.
 
 	app.navigation = {};						// Contains service navigation functions.
 
@@ -213,6 +214,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			}
 			else{
 				var parsed = JSON.parse(response.data);
+				//, parsed[0].latitude, parsed[0].longitude
+				console.log(parsed);
 				login(parsed[0].s_id);
 			}
 		}, function errorCallback(response) {

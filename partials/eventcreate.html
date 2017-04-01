@@ -1,119 +1,125 @@
 <div ng-controller="EventCreateController as EventCreateCtrl">
-  <form class="form-horizontal formAlignment">
-    <fieldset>
-      <div id="legend">
-        <legend class="">Create Event</legend>
-      </div>
-    </fieldset>
+	<form class="form-horizontal formAlignment">
+		<fieldset>
+			<div id="legend">
+				<legend class="">Create Event</legend>
+			</div>
+		</fieldset>
 
-    <div class="form-register">
-    <!-- Name of Event -->
-      <div class ="row form-element">
-        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Event Name*:</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" ng-model="EventCreateCtrl.nameE" ng-init="EventCreateCtrl.nameE=''" placeholder="e.g 'The Awesome Festival!'" class="textarea fullWidth">
-        </div>
-      </div>
-        <div ng-if = "EventCreateCtrl.falseInputEvent" >
-          <h3>Event Name required.</h3>
-        </div>
-        <div ng-if = "!EventCreateCtrl.falseInputEvent"></br></div>
-      <!-- Start Time -->
-      <div class ="row form-element">
-        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Start Time*:</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" ng-model="EventCreateCtrl.start" ng-init="EventCreateCtrl.start=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
-        </div>
-      </div>
-        <div ng-if = "EventCreateCtrl.falseInputStart" >
-          <h3>Start Time Required.</h3>
-        </div>
-        <div ng-if = "!EventCreateCtrl.falseInputStart"></br></div>
-      <!-- End Time -->
-      <div class ="row form-element">
-        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>End Time*:</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" ng-model="EventCreateCtrl.end" ng-init="EventCreateCtrl.end=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="textarea">
-        </div>
-      </div>
-        <div ng-if = "EventCreateCtrl.falseInputEnd" >
-          <h3>End Time required.</h3>
-        </div>
-        <div ng-if = "!EventCreateCtrl.falseInputEnd"></br></div>
-      <!-- Event Type -->
-       <div class ="row form-element">
-        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Type Of Event*:</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <select name="type" ng-model="EventCreateCtrl.type" ng-init="EventCreateCtrl.type=''" ng-change="EventCreateCtrl.refreshRso()">
-            <option value="" disabled selected>Select Event Type</option>
-            <option value=0 selected>Public (Everyone)</option>
-            <option value=1>Private (University)</option>
-            <option value=2>Registered Student Organization</option>
-          </select>
-        </div>
-      </div>
-        <div ng-if = "EventCreateCtrl.falseInputType" >
-          <h3>Please select an event type from the drop down menu.</h3>
-        </div>
-        <div ng-if = "!EventCreateCtrl.falseInputType"></br></div>
+	<div class="form-register">
+		<div><h2>Select a Location</h2></div>
+	<!-- Name of Event -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Event Name*:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+			  <input type="text" id="email" ng-model="EventCreateCtrl.nameE" ng-init="EventCreateCtrl.nameE=''" placeholder="e.g 'The Awesome Festival!'" class="form-control">
+			</div>
+		</div>
+		<div ng-if = "EventCreateCtrl.falseInputEvent" >
+			<h3>Event Name required.</h3>
+		</div>
+		<div ng-if = "!EventCreateCtrl.falseInputEvent"></br></div>
 
-      <div class ="row form-element" ng-if="EventCreateCtrl.type == 2"> <!-- NG-Change -->
-        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Pick RSO*:</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <select name="rso" ng-model="EventCreateCtrl.rso" ng-init="EventCreateCtrl.rso=''">
-            <option value="" disabled selected>Select Available RSO</option>
-            <option ng-repeat="x in EventCreateCtrl.eventCreateData.rso" value={{x.rso_id}}>{{x.name}}</option>
-          </select>
-        </div>
-      </div>
+	<!-- Start Time -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Start Time*:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+				<input type="text" id="email" ng-model="EventCreateCtrl.start" ng-init="EventCreateCtrl.start=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="form-control">
+			</div>
+		</div>
+		<div ng-if = "EventCreateCtrl.falseInputStart" >
+			<h3>Start Time Required.</h3>
+		</div>
+		<div ng-if = "!EventCreateCtrl.falseInputStart"></br></div>
 
-      <!-- Event Description -->
-      <div class ="row form-element">
-        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Description:</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <textArea name="description" id="email" ng-model="EventCreateCtrl.desc" ng-init="EventCreateCtrl.desc=''" placeholder="Tell us about your event" rows="10" cols="27" class="fullWidth"></textArea>
-        </div>
-      </div>
-      </br>
-      <div class ="row form-element">
-        <div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <p>Contact Info:</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-          <input type="text" id="email" ng-model="EventCreateCtrl.phone" ng-init="EventCreateCtrl.phone=''" placeholder="Phone-Number: Ex: '9876543210'" class="textarea fullWidth">
-          <input type="text" id="email" ng-model="EventCreateCtrl.email" ng-init="EventCreateCtrl.email=''" placeholder="E-mail" class="textarea fullWidth">
-        </div>
-      </div>
-      </br>
-      <div><h2>Select a Location</h2></div>
-      <div id="map-create"></div>
+	<!-- End Time -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			  <p>End Time*:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+			  <input type="text" id="email" ng-model="EventCreateCtrl.end" ng-init="EventCreateCtrl.end=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="form-control">
+			</div>
+		</div>
+		<div ng-if = "EventCreateCtrl.falseInputEnd" >
+			<h3>End Time required.</h3>
+		</div>
+		<div ng-if = "!EventCreateCtrl.falseInputEnd"></br></div>
 
-        <div class="wrapper">
-          <button class="btn btn-primary btn-md buttonAdjust" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
-        </div>
-    </div>
-    <!-- Map Module for Location Selection -->
-    
-  </form>
+	<!-- Event Type -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Type Of Event*:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+				<select name="type" class="form-control" ng-model="EventCreateCtrl.type" ng-init="EventCreateCtrl.type=''" ng-change="EventCreateCtrl.refreshRso()">
+						<option value="" disabled selected>Select Event Type</option>
+						<option value=0 selected>Public (Everyone)</option>
+						<option value=1>Private (University)</option>
+						<option value=2>Registered Student Organization</option>
+				</select>
+			</div>
+		</div>
+		<div ng-if = "EventCreateCtrl.falseInputType" >
+			<h3>Please select an event type from the drop down menu.</h3>
+		</div>
+		<div ng-if = "!EventCreateCtrl.falseInputType"></br></div>
+
+	<!-- Type Of RSO -->
+		<div class ="row form-element form-group" ng-if="EventCreateCtrl.type == 2"> <!-- NG-Change -->
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Pick RSO*:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+				<select name="rso" class="form-control" ng-model="EventCreateCtrl.rso" ng-init="EventCreateCtrl.rso=''">
+					<option value="" disabled selected>Select Available RSO</option>
+					<option ng-repeat="x in EventCreateCtrl.eventCreateData.rso" value={{x.rso_id}}>{{x.name}}</option>
+				</select>
+			</div>
+	  </div>
+
+	<!-- Event Description -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Description:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+				<textArea name="description" id="email" class="form-control" ng-model="EventCreateCtrl.desc" ng-init="EventCreateCtrl.desc=''" placeholder="Tell us about your event" rows="10" cols="27"></textArea>
+			</div>
+		</div>
+		</br>
+
+	<!-- Contact Info -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			  <p>Contact Info:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+				<input type="text" id="email" class="form-control" ng-model="EventCreateCtrl.phone" ng-init="EventCreateCtrl.phone=''" placeholder="Phone-Number: Ex: '9876543210'">
+				<input type="text" id="email" class="form-control" ng-model="EventCreateCtrl.email" ng-init="EventCreateCtrl.email=''" placeholder="E-mail">
+			</div>
+		</div>
+		</br>
+		<div><h2>Select a Location</h2></div>
+		<div id="map-create"></div>
+		</br>
+		<div class="row form-element form-group">
+			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
+		</div>
+	</div>
+	<!-- Map Module for Location Selection -->
+	</form>
 </div>
 <!-- ng-click="RegisterCtrl.registerActivate()"-->
 <!-- ng-click="RegisterCtrl.returnToLogin()"-->

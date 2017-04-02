@@ -55,7 +55,7 @@
 		<div ng-if = "!EventCreateCtrl.falseInputEnd"></br></div>
 
 	<!-- Event Type -->
-		<div class ="row form-element form-group">
+		<div class ="row form-element form-group" ng-if="EventCreateCtrl.eventCreateData.mode === 'Create'">
 			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
 				<p>Type Of Event*:</p>
@@ -69,13 +69,13 @@
 				</select>
 			</div>
 		</div>
-		<div ng-if = "EventCreateCtrl.falseInputType" >
+		<div ng-if = "EventCreateCtrl.falseInputType" ng-if="EventCreateCtrl.eventCreateData.mode === 'Create'">
 			<h3>Please select an event type from the drop down menu.</h3>
 		</div>
-		<div ng-if = "!EventCreateCtrl.falseInputType"></br></div>
+		<div ng-if = "!EventCreateCtrl.falseInputType"ng-if="EventCreateCtrl.eventCreateData.mode === 'Create'"></br></div>
 
 	<!-- Type Of RSO -->
-		<div class ="row form-element form-group" ng-if="EventCreateCtrl.type == 2"> <!-- NG-Change -->
+		<div class ="row form-element form-group" ng-if="EventCreateCtrl.eventCreateData.mode === 'Create' && EventCreateCtrl.type == 2"> <!-- NG-Change -->
 			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
 				<p>Pick RSO*:</p>
@@ -86,7 +86,7 @@
 					<option ng-repeat="x in EventCreateCtrl.eventCreateData.rso" value={{x.rso_id}}>{{x.name}}</option>
 				</select>
 			</div>
-	  </div>
+		</div>
 
 	<!-- Event Description -->
 		<div class ="row form-element form-group">

@@ -47,6 +47,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventCreateData.start = '';				// Event's start date and time.
 	app.eventCreateData.end = '';				// Event's end date and time.
 	app.eventCreateData.nameE = '';				// Name of the event.
+	app.eventCreateData.latitude = 1;			// Lat coord of the event.
+	app.eventCreateData.longitude = 1;			// Lat coord of the event.
 	app.eventCreateData.rso = [];				// Array of possible rsos available to attach event to.
 	app.eventCreateData.failure = false;		// Boolean to determin if user event was properly created.
 
@@ -62,7 +64,9 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.userId = userId;
 			app.state.role = role;
 			app.state.latitude = lat;
+			app.eventCreateData.latitude = lat;
 			app.state.longitude = long;
+			app.eventCreateData.longitude = long;
 			app.navigation.goToEvents();
 		}
 	};

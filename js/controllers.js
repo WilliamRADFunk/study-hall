@@ -194,11 +194,10 @@ studyHallApp.controller('RegisterController', ['appData', function(app) {
 
 studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	var self = this;
-	self.eventLat = 0;
-	self.eventLong = 0;
 
 	self.active = false;
 	self.eventCreateData = app.eventCreateData;
+	self.eventData = app.eventData;
 	self.state = app.state;
 
 	// Creates the map for this page.
@@ -213,8 +212,8 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	map.on('click', function(e) {
 		// Wipe all markers off the map.
 		markers.clearLayers();
-		self.eventLat = e.latlng.lat;
-		self.eventLong = e.latlng.lng;
+		self.eventCreateData.latitude = e.latlng.lat;
+		self.eventCreateData.longitude = e.latlng.lng;
 	    // Create each individual marker.
 		var marker = L.marker([self.eventLat, self.eventLong]).addTo(map);
 		// Add marker to the group.
@@ -261,8 +260,31 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 			self.falseInputType = true;
 		}
 		if(verified){
-			app.createEvent(id, self.eventCreateData.nameE, self.eventCreateData.start, self.eventCreateData.end, self.type, self.eventCreateData.desc, self.eventCreateData.phone, self.eventCreateData.email, self.eventLat, self.eventLong, EventCreateCtrl.eventCreateData.locationName, self.rso);
+			app.createEvent(id, self.eventCreateData.nameE, self.eventCreateData.start, self.eventCreateData.end, self.type, self.eventCreateData.desc, self.eventCreateData.phone, self.eventCreateData.email, self.eventCreateData.latitude, self.eventCreateData.longitude, EventCreateCtrl.eventCreateData.locationName, self.rso);
 		}
+	};
+
+	self.editActivate = function() {
+		var id = self.state.userId;
+		var verified = true;
+
+		if(self.eventCreateData.nameE === ""){
+			//NO EVENT NAME
+			verified = false;
+			self.falseInputEvent = true;
+		}
+		if(self.eventCreateData.start === ""){
+			//NO START
+			verified = false;
+			self.falseInputStart = true;
+		}
+		if(self.eventCreateData.end === ""){
+			//NO END
+			verified = false;
+			self.falseInputEnd = true;
+		}
+		if(verified){
+			app.createEvent(id, self.eventCreateData.nameE, self.eventCreateData.start, self.eventCreateData.end, self.eventData.event.type, self.eventCreateData.desc, self.eventCreateData.phone, self.eventCreateData.email, self.eventCreateData.latitude, self.eventCreateData.longitude, EventCreateCtrl.eventCreateData.locationName, self.eventData.event['rso_id']);
 	};
 
 	var ResetCreateEvent = function(){
@@ -275,8 +297,8 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	var centerMap = function() {
 		// Center the map on school's lat and long.
 		map.setView([Number(self.state.latitude), Number(self.state.longitude)], 16);
-		self.eventLat = self.state.latitude;
-		self.eventLong = self.state.longitude;
+		self.eventCreateData.latitude = self.state.latitude;
+		self.eventCreateData.longitude = self.state.longitude;
 	};
 
 	// Center the map on school's lat and long.
@@ -290,6 +312,8 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 	self.active = false;
 	self.eventData = app.eventData;
 	self.state = app.state;
+
+	console.log(self.eventData.event);
 
 	// Create the leaflet map, and attach it to the map with that id.
 	var map = L.map('map-event');

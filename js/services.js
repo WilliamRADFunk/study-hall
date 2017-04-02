@@ -18,6 +18,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 	app.state.userId = 0;						// User's id after logging in.
+	app.state.role = 0;							// User's role: 0 = student. 1 = Super Admin.
 	app.state.latitude = 1;						// User's school's latitude for map centering.
 	app.state.longitude = 1;					// User's school's longitude for map centering.
 	app.state.registration = false;				// User is on register page.
@@ -45,11 +46,12 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.RSOCreateData.failure - false;			// Boolean to determin if user rso was properly created.
 
 	// Router function to send user (on successful login) to events list page.
-	login = function(userId=null, lat=null, long=null) {
+	login = function(userId=null, lat=null, long=null, role=0) {
 		if(userId) {
 			app.state.isLoggedIn = true;
 			app.state.events = true;
 			app.state.userId = userId;
+			app.state.role = role;
 			app.state.latitude = lat;
 			app.state.longitude = long;
 			app.navigation.goToEvents();
@@ -269,7 +271,11 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			}
 			else{
 				var parsed = JSON.parse(response.data);
-				login(parsed[0].s_id, parsed[0].latitude, parsed[0].longitude);
+				if(parsed[0].superAdmin) {
+					login(parsed[0].s_id, parsed[0].latitude, parsed[0].longitude, 1);
+				} else {
+					login(parsed[0].s_id, parsed[0].latitude, parsed[0].longitude);
+				}
 			}
 		}, function errorCallback(response) {
 			console.log(response);

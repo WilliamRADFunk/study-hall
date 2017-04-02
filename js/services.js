@@ -135,14 +135,40 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			}
 		}, function errorCallback(response) {
 			console.log(response);
-			//Call failure here?
 			app.RSOCreateData.failure = true;
 
 		});
 	};
 	// Called by controller to delete event from db and redirect user to event list page.
 	app.deleteEvent = function(id) {
-		// Make POST to delete event, use modal to redirect user.
+		app.eventData.failure = false;
+		$http({
+			method: 'POST',
+			url: './actions/event.php',
+			data:
+			{
+				type: "delete",
+				user_id: app.state.userId,
+				event_id: id
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+				app.navigation.goToEvents();
+			}
+			else{
+				console.log('failure registering');
+				app.RSOCreateData.failure = true;
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+			app.eventData.failure.failure = true;
+
+		});
 		console.log("I'm deleting an event.");
 	};
 	// Called by controller to pass data to "Creation/Edit" page for edit.

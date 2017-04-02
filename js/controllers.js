@@ -360,9 +360,17 @@ studyHallApp.controller('RSOCreateController', ['appData', function(app) {
 	self.validInput = true;
 
 	self.CreateActivate = function() {
+
+		var id = self.state.userId;
+
 		if(self.name === '')
 		{
 			validInput = false;
+		}
+
+		if(self.validInput)
+		{
+			app.createRSO(id, self.name, self.desc);
 		}
 	};
 }]);

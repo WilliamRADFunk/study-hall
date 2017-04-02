@@ -285,6 +285,7 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		}
 		if(verified){
 			app.createEvent(id, self.eventCreateData.nameE, self.eventCreateData.start, self.eventCreateData.end, self.eventData.event.type, self.eventCreateData.desc, self.eventCreateData.phone, self.eventCreateData.email, self.eventCreateData.latitude, self.eventCreateData.longitude, EventCreateCtrl.eventCreateData.locationName, self.eventData.event['rso_id']);
+		}
 	};
 
 	var ResetCreateEvent = function(){
@@ -301,6 +302,22 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		self.eventCreateData.longitude = self.state.longitude;
 	};
 
+	var editMarker = function() {
+		// Wipe all markers off the map.
+		markers.clearLayers();
+		// Creates individual marker.
+		var marker = L.marker([
+			self.eventCreateData.latitude,
+			self.eventCreateData.longitude
+		]).addTo(map);
+		// Add marker to the group.
+		markers.addLayer(marker);
+		// Places all markers on the map.
+		map.addLayer(markers);
+	};
+
+	// Registers the map updater function with the service's observer pattern.
+	app.registerObserverCallback(editMarker);
 	// Center the map on school's lat and long.
 	centerMap();
 }]);

@@ -13,6 +13,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.eventData = {};							// Object to individual event page variables.
 	app.eventData.event = {};					// Event object of selected event.
+	app.eventData.group = {};					// Group object of selected event.
 
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
@@ -161,11 +162,18 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log(response);
 		});
 	};
-	// Called when user clicks on a specific id.
+	// Called when user clicks on a specific event.
 	app.getEventById = function(event=null) {
 		if(event !== null) {
 			app.eventData.event = event;
 			app.navigation.goToEvent();
+		}
+	};
+	// Called when user clicks on a specific group.
+	app.getGroupById = function(group=null) {
+		if(group !== null) {
+			app.eventData.group = group;
+			app.navigation.goToRSO();
 		}
 	};
 	// Called when user lands on events list page.
@@ -224,6 +232,11 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}).then(function successCallback(response) {
 			var parsed = JSON.parse(response.data);
 			app.rsoListData.rsos = parsed;
+			app.rsoListData.rsos.forEach(function(elem) {
+				if(elem['rso_id'] && elem.description === null) {
+					elem.description = 'No description';
+				}
+			});
 			notifyObservers(); // Call to update map markers.
 		}, function errorCallback(response) {
 			console.log("failure", response.statusText);

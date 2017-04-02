@@ -400,9 +400,16 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 	};
 
 	// Calls the service to route to specific RSO event page.
-	self.selectRso = function(rsoIndex=null) {
+	self.selectEvent = function(eventIndex=null) {
 		if(eventIndex !== null) {
-			app.getRsoById(self.eventListData.events[eventIndex]);
+			app.getEventById(self.rsoListData.events[eventIndex]);
+		}
+	};
+
+	// Calls the service to route to specific RSO group page.
+	self.selectGroup = function(groupIndex=null) {
+		if(groupIndex !== null) {
+			app.getGroupById(self.rsoListData.groups[groupIndex]);
 		}
 	};
 
@@ -413,35 +420,40 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 
 	// Calls the service to route to rso group creation page.
 	self.createGroup = function() {
-		app.navigation.goToCreateGroup();
+		app.navigation.goToCreateRSO();
 	};
 
 	// Called by service everytime the list of events is changed.
 	var updateRsos = function() {
-		var events = [];
-		var groups = [];
+		self.rsoListData.events = [];
+		self.rsoListData.groups = [];
 		// Wipe all markers off the map.
 		markers.clearLayers();
+
+		console.log(self.rsoListData.rsos);
 
 		// Separates rso events from rso groups for mapping purposes.
 		self.rsoListData.rsos.forEach(function(elem, index) {
 			if(elem['rso_id']) {
-				groups.push(elem);
+				self.rsoListData.groups.push(elem);
 			} else if(elem['e_id']) {
-				events.push(elem);
+				self.rsoListData.events.push(elem);
 			}
 		});
 
 		// Centers map on the first marker.
-		if(events[0]
-			&& events[0].latitude
-			&& events[0].longitude
+		if(self.rsoListData.events[0]
+			&& self.rsoListData.events[0].latitude
+			&& self.rsoListData.events[0].longitude
 			) {
-			map.setView([events[0].latitude, events[0].longitude], 15);
+			map.setView([
+				self.rsoListData.events[0].latitude,
+				self.rsoListData.events[0].longitude
+			], 15);
 		}
 
 		// Create each individual marker.
-		events.forEach(function(elem) {
+		self.rsoListData.events.forEach(function(elem) {
 			var marker = L.marker([elem.latitude, elem.longitude])
 				.addTo(map)
 				.bindPopup(elem.name + '<br>' + elem.specificName + '<br><i>' + elem['rso_name'] + '</i>');

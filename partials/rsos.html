@@ -7,12 +7,20 @@
 						<th>Current RSO Groups &amp; Events</th>
 					</tr>
 				</thead>
-				<tbody ng-repeat="x in rsosCtrl.rsoListData.rsos">
+				<tbody ng-repeat="x in rsosCtrl.rsoListData.events">
 					<tr>
-						<td ng-click="rsosCtrl.selectrso($index)">
+						<td ng-click="rsosCtrl.selectEvent($index)">
 							<div>{{x.name}}</div>
 							<div>{{x.specificName}}</div>
 							<div>{{x['start_time']}}</div>
+						</td>
+					</tr>
+				</tbody>
+				<tbody ng-repeat="x in rsosCtrl.rsoListData.groups">
+					<tr>
+						<td ng-click="rsosCtrl.selectGroup($index)">
+							<div>{{x.name}}</div>
+							<div>{{x.description}}</div>
 						</td>
 					</tr>
 				</tbody>

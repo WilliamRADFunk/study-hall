@@ -300,12 +300,27 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
 
+	// Router function to send event object to service.
+	self.editEvent = function(){
+		app.editEvent(self.eventData.event);
+	};
+	// Router function to send event id to service.
+	self.deleteEvent = function(){
+		app.deleteEvent(self.eventData.event['e_id']);
+	};
+	// Router function to send event id to service.
+	self.acceptEvent = function(){
+		app.acceptEvent(self.eventData.event['e_id']);
+	};
+	// Router function to send event id to service.
+	self.rejectEvent = function(){
+		app.rejectEvent(self.eventData.event['e_id']);
+	};
+
 	// Called by service everytime the list of events is changed.
 	var updateEvent = function() {
 		// Wipe all markers off the map.
 		markers.clearLayers();
-
-		console.log(self.eventData.event);
 
 		// Centers map on the first marker.
 		if(self.eventData.event
@@ -486,8 +501,6 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 		self.rsoListData.groups = [];
 		// Wipe all markers off the map.
 		markers.clearLayers();
-
-		console.log(self.rsoListData.rsos);
 
 		// Separates rso events from rso groups for mapping purposes.
 		self.rsoListData.rsos.forEach(function(elem, index) {

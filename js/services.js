@@ -46,7 +46,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.RSOCreateData.failure - false;			// Boolean to determin if user rso was properly created.
 
 	// Router function to send user (on successful login) to events list page.
-	login = function(userId=null, lat=null, long=null, role=0) {
+	var login = function(userId=null, lat=null, long=null, role=0) {
 		if(userId) {
 			app.state.isLoggedIn = true;
 			app.state.events = true;
@@ -57,115 +57,117 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.navigation.goToEvents();
 		}
 	};
-	// Router function to send user to create event page.
-	app.navigation.goToCreateEvent = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = false;
-			app.state.createEvent = true;
-			app.state.createRSO = false;
-		}
-	};
-	// Router function to send user to create rso page.
-	app.navigation.goToCreateRSO = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = false;
-			app.state.createEvent = false;
-			app.state.createRSO = true;
-		}
-	};
-	// Router function to send user to individual event page.
-	app.navigation.goToEvent = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = true;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = false;
-			app.state.createEvent = false;
-			app.state.createRSO = false;
-		}
-	};
-	// Router function to send user to events list page.
-	app.navigation.goToEvents = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = true;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = false;
-			app.state.createEvent = false;
-			app.state.createRSO = false;
-		}
-	};
-	// Router function to send user to login page.
-	app.navigation.goToLogin = function(){
-		app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
-		app.state.registration = false;				// User is on register page.
-		app.state.events = false;					// User is on list events page.
-		app.state.event = false;					// User is on individual event page.
-		app.state.rsos = false;						// User is on rsos page.
-		app.state.rso = false;
-		app.state.createEvent = false;
-		app.state.createRSO = false;
-	};
-	// Router function to send user to individual rso page.
-	app.navigation.goToRSO = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = true;
-			app.state.registration = false;
-			app.state.createEvent = false;
-			app.state.createRSO = false;
-		}
-	};
-	// Router function to send user to rsos list page.
-	app.navigation.goToRSOs = function() {
-		if(app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = true;
-			app.state.rso = false;
-			app.state.registration = false;
-			app.state.createEvent = false;
-			app.state.createRSO = false;
-		}
-	};
-	// Router function to send user to registration page.
-	app.navigation.goToRegistration = function() {
-		if(!app.state.isLoggedIn) {
-			app.state.events = false;
-			app.state.event = false;
-			app.state.rsos = false;
-			app.state.rso = false;
-			app.state.registration = true;
-			app.state.createEvent = false;
-			app.state.createRSO = false;
-		}
-	};
-
-	// Post template
-	app.editEvent = function(id) {
+	// API call to send event data to db for event creation.
+	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null, rso=null) {
+		app.eventCreateData.failure = false;
 		$http({
 			method: 'POST',
 			url: './actions/event.php',
 			data:
 			{
-				id: id
-			}
+				rso_id: rso,
+				user_id: id,
+				type: "create",
+				location_info:{
+					latitude: latitude,
+					longitude: longitude,
+					name: nameL
+				},
+				event_info:{
+					event_type: type,
+					name: nameE,
+					start_time: start,
+					end_time: end,
+					description: desc,
+					phone_num: phone,
+					email: email
+					}
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
 		}).then(function successCallback(response) {
-			console.log(response.data);
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				//Error on login. Incorrect username or password
+				console.log("SUCCESS");
+				app.navigation.goToEvents();
+			}
+			else{
+				console.log('failure registering');
+				app.eventCreateData.failure = true;
+			}
 		}, function errorCallback(response) {
 			console.log(response);
+			app.eventCreateData.failure = true;
+
+			//Call failure here?
+		});
+	};
+	// API call to send RSO data to db for RSO Group creation.
+	app.createRSO = function(id=null, name=null, desc=null) {
+		app.RSOCreateData.failure = false;
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data:
+			{
+				type: "create",
+				user_id: id,
+				rso_info:{
+					name: name,
+					description: desc
+				}
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				//Error on login. Incorrect username or password
+				console.log("SUCCESS");
+				app.navigation.goToRSOs();
+			}
+			else{
+				console.log('failure registering');
+				app.RSOCreateData.failure = true;
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+			//Call failure here?
+			app.RSOCreateData.failure = true;
+
+		});
+	};
+	// Called by controller to delete event from db and redirect user to event list page.
+	app.deleteEvent = function(id) {
+		// Make POST to delete event, use modal to redirect user.
+		console.log("I'm deleting an event.");
+	};
+	// Called by controller to pass data to "Creation/Edit" page for edit.
+	app.editEvent = function(event) {
+		// Redirect user to "Create/Edit" page and use event object to update fields.
+		// The 1 signifies edit, a zero or nothing would signify create. Use this to ng-if
+		// between the "create" and "edit" buttons.
+		console.log("I'm going to edit an event.");
+		app.navigation.goToCreateEvent(1, event);
+	};
+	// GET to receive rsos available to user for event creation purposes.
+	app.getAvailableRSO = function() {
+
+		$http({
+			method: 'GET',
+			url: './actions/rso.php?user_id=' + app.state.userId + '&rso_id',
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			console.log(response);
+			var parsed = JSON.parse(response.data);
+			app.eventCreateData.rso = parsed;
+		}, function errorCallback(response) {
+			console.log("failure", response.statusText);
 		});
 	};
 	// Called when user clicks on a specific event.
@@ -282,6 +284,101 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			//Call failure here?
 		});
 	};
+	// Router function to send user to create event page.
+	app.navigation.goToCreateEvent = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = true;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to create rso page.
+	app.navigation.goToCreateRSO = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = true;
+		}
+	};
+	// Router function to send user to individual event page.
+	app.navigation.goToEvent = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = true;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to events list page.
+	app.navigation.goToEvents = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = true;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to login page.
+	app.navigation.goToLogin = function(){
+		app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
+		app.state.registration = false;				// User is on register page.
+		app.state.events = false;					// User is on list events page.
+		app.state.event = false;					// User is on individual event page.
+		app.state.rsos = false;						// User is on rsos page.
+		app.state.rso = false;
+		app.state.createEvent = false;
+		app.state.createRSO = false;
+	};
+	// Router function to send user to individual rso page.
+	app.navigation.goToRSO = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = true;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to rsos list page.
+	app.navigation.goToRSOs = function() {
+		if(app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = true;
+			app.state.rso = false;
+			app.state.registration = false;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
+	// Router function to send user to registration page.
+	app.navigation.goToRegistration = function() {
+		if(!app.state.isLoggedIn) {
+			app.state.events = false;
+			app.state.event = false;
+			app.state.rsos = false;
+			app.state.rso = false;
+			app.state.registration = true;
+			app.state.createEvent = false;
+			app.state.createRSO = false;
+		}
+	};
 	// API function to send registration information to db.
 	app.register = function(email=null, user=null, pass=null, name=null, major=null, minor=null, bio=null) {
 		app.loginData.errorLogin = false;
@@ -320,110 +417,24 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			//Call failure here?
 		});
 	};
-	// API call to send event data to db for event creation.
-	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null, rso=null) {
-		app.eventCreateData.failure = false;
+	// Trigger to clear login page form fields.
+	app.resetLog = function() {
+		app.loginData.registrationSuccess = false;
+	};
+	// Submits to the db any and all changes to the event.
+	app.submitEventEdit = function(event) {
 		$http({
 			method: 'POST',
 			url: './actions/event.php',
 			data:
 			{
-				rso_id: rso,
-				user_id: id,
-				type: "create",
-				location_info:{
-					latitude: latitude,
-					longitude: longitude,
-					name: nameL
-				},
-				event_info:{
-					event_type: type,
-					name: nameE,
-					start_time: start,
-					end_time: end,
-					description: desc,
-					phone_num: phone,
-					email: email
-					}
-			},
-			transformResponse: [function (data) {
-				return data;
-			}]
+				//id: id
+			}
 		}).then(function successCallback(response) {
-			var parsed = JSON.parse(response.data);
-			if(parsed.status === "success"){
-				//Error on login. Incorrect username or password
-				console.log("SUCCESS");
-				app.navigation.goToEvents();
-			}
-			else{
-				console.log('failure registering');
-				app.eventCreateData.failure = true;
-			}
+			console.log(response.data);
 		}, function errorCallback(response) {
 			console.log(response);
-			app.eventCreateData.failure = true;
-
-			//Call failure here?
 		});
-	};
-
-	app.createRSO = function(id=null, name=null, desc=null) {
-		app.RSOCreateData.failure = false;
-		$http({
-			method: 'POST',
-			url: './actions/rso.php',
-			data:
-			{
-				type: "create",
-				user_id: id,
-				rso_info:{
-					name: name,
-					description: desc
-				}
-			},
-			transformResponse: [function (data) {
-				return data;
-			}]
-		}).then(function successCallback(response) {
-			var parsed = JSON.parse(response.data);
-			if(parsed.status === "success"){
-				//Error on login. Incorrect username or password
-				console.log("SUCCESS");
-				app.navigation.goToRSOs();
-			}
-			else{
-				console.log('failure registering');
-				app.RSOCreateData.failure = true;
-			}
-		}, function errorCallback(response) {
-			console.log(response);
-			//Call failure here?
-			app.RSOCreateData.failure = true;
-
-		});
-	};
-
-	// GET to receive rsos available to user for event creation purposes.
-	app.getAvailableRSO = function() {
-
-		$http({
-			method: 'GET',
-			url: './actions/rso.php?user_id=' + app.state.userId + '&rso_id',
-			transformResponse: [function (data) {
-				return data;
-			}]
-		}).then(function successCallback(response) {
-			console.log(response);
-			var parsed = JSON.parse(response.data);
-			app.eventCreateData.rso = parsed;
-		}, function errorCallback(response) {
-			console.log("failure", response.statusText);
-		});
-	};
-	// Trigger to clear login page form fields.
-	app.resetLog = function() {
-		app.loginData.registrationSuccess = false;
 	};
 	// Toggles the public events view
 	app.togglePublicEvents = function() {

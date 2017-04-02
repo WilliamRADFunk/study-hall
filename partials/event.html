@@ -50,15 +50,17 @@
 						</td>
 					</tr>
 					<tr ng-if="eventCtrl.state.userId === eventCtrl.eventData.event['s_id']">
+						<th></th>
 						<td>
-							<button class="col-lg-6">Delete &#xf1f8;</button>
-							<button class="col-lg-6">Edit &#xf044;</button>
+							<button class="col-lg-6 btn btn-primary" ng-click="eventCtrl.editEvent()">Edit <span class="fa fa-edit"></span></button>
+							<button class="col-lg-6 btn btn-danger" ng-click="eventCtrl.deleteEvent()">Delete <span class="fa fa-trash"></span></button>
 						</td>
 					</tr>
 					<tr ng-if="eventCtrl.state.role">
+						<th></th>
 						<td>
-							<button class="col-lg-6">Accept &#xf087;</button>
-							<button class="col-lg-6">Reject &#xf088;</button>
+							<button class="col-lg-6 btn btn-success" ng-click="eventCtrl.acceptEvent()">Accept <span class="fa fa-thumbs-o-up"></span></button>
+							<button class="col-lg-6 btn btn-danger" ng-click="eventCtrl.rejectEvent()">Reject <span class="fa fa-thumbs-o-down"></span></button>
 						</td>
 					</tr>
 				</tbody>

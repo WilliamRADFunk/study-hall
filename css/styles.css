@@ -127,6 +127,16 @@ body {
 	background-color: #29DD9B;
 }
 
+#rsos-container .table-hover tbody tr.rso-event td,
+#rsos-container .table-hover tbody tr.rso-event th {
+	background-color: #67E6EC;
+}
+
+#rsos-container .table-hover tbody tr.rso-group td,
+#rsos-container .table-hover tbody tr.rso-group th {
+	background-color: #97FFFF;
+}
+
 #events-container .table-hover tbody tr:hover td,
 #events-container .table-hover tbody tr:hover th,
 #rsos-container .table-hover tbody tr:hover td,

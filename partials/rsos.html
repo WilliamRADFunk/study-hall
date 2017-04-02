@@ -8,16 +8,17 @@
 					</tr>
 				</thead>
 				<tbody ng-repeat="x in rsosCtrl.rsoListData.events">
-					<tr>
+					<tr class="rso-event">
 						<td ng-click="rsosCtrl.selectEvent($index)">
 							<div>{{x.name}}</div>
 							<div>{{x.specificName}}</div>
+							<div>{{x['rso_name']}}</div>
 							<div>{{x['start_time']}}</div>
 						</td>
 					</tr>
 				</tbody>
 				<tbody ng-repeat="x in rsosCtrl.rsoListData.groups">
-					<tr>
+					<tr class="rso-group">
 						<td ng-click="rsosCtrl.selectGroup($index)">
 							<div>{{x.name}}</div>
 							<div>{{x.description}}</div>

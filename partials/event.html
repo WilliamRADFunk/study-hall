@@ -1,0 +1,59 @@
+<div ng-controller="EventController as eventCtrl">
+	<div class="row">
+		<div class="col-lg-5 table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Event: </th>
+						<td>{{eventCtrl.eventData.event['name']}}</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Start: </th>
+						<td>{{eventCtrl.eventData.event['start_time']}}</td>
+					</tr>
+					<tr>
+						<th>End: </th>
+						<td>{{eventCtrl.eventData.event['end_time']}}</td>
+					</tr>
+					<tr>
+						<th>Address: </th>
+						<td>{{eventCtrl.eventData.event['specificName']}}</td>
+					</tr>
+					<tr>
+						<th>Description: </th>
+						<td>{{eventCtrl.eventData.event['description']}}</td>
+					</tr>
+					<tr ng-if="eventCtrl.eventData.event['creatorName']">
+						<th>Contact Name: </th>
+						<td>
+							{{eventCtrl.eventData.event['creatorName']}}
+						</td>
+					</tr>
+					<tr ng-if="eventCtrl.eventData.event['phone_num']">
+						<th>Contact Phone: </th>
+						<td>
+							{{eventCtrl.eventData.event['phone_num']}}
+						</td>
+					</tr>
+					<tr ng-if="eventCtrl.eventData.event['email']">
+						<th>Contact Email: </th>
+						<td>
+							{{eventCtrl.eventData.event['email']}}
+						</td>
+					</tr>
+					<tr ng-if="eventCtrl.eventData.event['rso_name']">
+						<th>RSO Group: </th>
+						<td>
+							{{eventCtrl.eventData.event['rso_name']}}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-lg-7 no-padding-right">
+			<div id="map-event"></div>
+		</div>
+	</div>
+</div>

@@ -70,6 +70,9 @@
 			<div id="events-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.events">
 				<div ng-include src="'partials/events.html'"></div>
 			</div>
+			<div id="event-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.event">
+				<div ng-include src="'partials/event.html'"></div>
+			</div>
 			<div id="rsos-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos">
 				<div ng-include src="'partials/rsos.html'"></div>
 			</div>

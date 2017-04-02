@@ -114,6 +114,7 @@ body {
 	font-size: 12px;
 }
 
+#event-container .table-responsive,
 #events-container .table-responsive,
 #rsos-container .table-responsive {
 	background-color: #FFFFFF;
@@ -122,9 +123,16 @@ body {
 	padding: 0px;
 }
 
+#event-container .table-responsive {
+	max-height: 480px;
+	min-height: 480px;
+}
+
+#event-container table thead,
 #events-container table thead,
 #rsos-container table thead {
 	background-color: #29DD9B;
+	width: 100%;
 }
 
 #rsos-container .table-hover tbody tr.rso-event td,
@@ -145,6 +153,7 @@ body {
 }
 
 #map-events,
+#map-event,
 #map-rsos,
 #map-create {
 	height: 480px;

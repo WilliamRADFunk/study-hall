@@ -282,6 +282,59 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	// Center the map on school's lat and long.
 	centerMap();
 }]);
+
+// Main function is to manage individual event "page".
+studyHallApp.controller('EventController', ['appData', function(app) {
+	var self = this;
+
+	self.active = false;
+	self.eventData = app.eventData;
+	self.state = app.state;
+
+	// Create the leaflet map, and attach it to the map with that id.
+	var map = L.map('map-event');
+	// Setup a marker group.
+	var markers = L.featureGroup();
+	// Sets up background image of map and associates type.
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	// Called by service everytime the list of events is changed.
+	var updateEvent = function() {
+		// Wipe all markers off the map.
+		markers.clearLayers();
+
+		console.log(self.eventData.event);
+
+		// Centers map on the first marker.
+		if(self.eventData.event
+			&& self.eventData.event.latitude
+			&& self.eventData.event.longitude
+			) {
+			map.setView([
+				self.eventData.event.latitude,
+				self.eventData.event.longitude
+			], 15);
+		}
+
+		// Creates individual marker.
+		var marker = L.marker([
+			self.eventData.event.latitude,
+			self.eventData.event.longitude
+		]).addTo(map)
+			.bindPopup(self.eventData.event.name + '<br>' + self.eventData.event.specificName);
+		// Add marker to the group.
+		markers.addLayer(marker);
+		// Places all markers on the map.
+		map.addLayer(markers);
+	};
+	// Registers the map updater function with the service's observer pattern.
+	app.registerObserverCallback(updateEvent);
+	// Initial call to populate table with events.
+	updateEvent();
+}]);
+
 // Main function is manage event list "page".
 studyHallApp.controller('EventsController', ['appData', function(app) {
 	var self = this;

@@ -2,7 +2,7 @@
 	<form class="form-horizontal formAlignment">
 		<fieldset>
 			<div id="legend">
-				<legend class="">Create Event</legend>
+				<legend class="">{{EventCreateCtrl.eventCreateData.mode}} Event</legend>
 			</div>
 		</fieldset>
 
@@ -16,7 +16,7 @@
 				<p>Event Name*:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-			  <input type="text" id="email" ng-model="EventCreateCtrl.nameE" ng-init="EventCreateCtrl.nameE=''" placeholder="e.g 'The Awesome Festival!'" class="form-control">
+			  <input type="text" id="email" ng-model="EventCreateCtrl.eventCreateData.nameE" placeholder="e.g 'The Awesome Festival!'" class="form-control">
 			</div>
 		</div>
 		<div ng-if = "EventCreateCtrl.falseInputEvent" >
@@ -31,7 +31,7 @@
 				<p>Start Time*:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-				<input type="text" id="email" ng-model="EventCreateCtrl.start" ng-init="EventCreateCtrl.start=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="form-control">
+				<input type="text" id="email" ng-model="EventCreateCtrl.eventCreateData.start" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="form-control">
 			</div>
 		</div>
 		<div ng-if = "EventCreateCtrl.falseInputStart" >
@@ -46,7 +46,7 @@
 			  <p>End Time*:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-			  <input type="text" id="email" ng-model="EventCreateCtrl.end" ng-init="EventCreateCtrl.end=''" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="form-control">
+			  <input type="text" id="email" ng-model="EventCreateCtrl.eventCreateData.end" placeholder="e.g. 'YYYY-MM-DD HH:MM:SS'" class="form-control">
 			</div>
 		</div>
 		<div ng-if = "EventCreateCtrl.falseInputEnd" >
@@ -95,7 +95,7 @@
 				<p>Description:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-				<textArea name="description" id="email" class="form-control" ng-model="EventCreateCtrl.desc" ng-init="EventCreateCtrl.desc=''" placeholder="Tell us about your event" rows="10" cols="27"></textArea>
+				<textArea name="description" id="email" class="form-control" ng-model="EventCreateCtrl.eventCreateData.desc" placeholder="Tell us about your event" rows="10" cols="27"></textArea>
 			</div>
 		</div>
 		</br>
@@ -107,8 +107,8 @@
 			  <p>Contact Info:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-				<input type="text" id="email" class="form-control" ng-model="EventCreateCtrl.phone" ng-init="EventCreateCtrl.phone=''" placeholder="Phone-Number: Ex: '9876543210'">
-				<input type="text" id="email" class="form-control" ng-model="EventCreateCtrl.email" ng-init="EventCreateCtrl.email=''" placeholder="E-mail">
+				<input type="text" id="email" class="form-control" ng-model="EventCreateCtrl.eventCreateData.phone" placeholder="Phone-Number: Ex: '9876543210'">
+				<input type="text" id="email" class="form-control" ng-model="EventCreateCtrl.eventCreateData.email" placeholder="E-mail">
 			</div>
 		</div>
 		</br>
@@ -127,14 +127,15 @@
 				<p>Location Name*:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-			  <input type="text" id="locationName" ng-model="EventCreateCtrl.locationName" ng-init="EventCreateCtrl.locationName=''" placeholder="General Area or 'Bldg Name / Room Number'" class="form-control">
+			  <input type="text" id="locationName" ng-model="EventCreateCtrl.eventCreateData.locationName" placeholder="General Area or 'Bldg Name / Room Number'" class="form-control">
 			</div>
 		</div>
 		</br>
 	<!-- Submit Button -->
 
 		<div class="row form-element form-group">
-			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
+			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="EventCreateCtrl.createActivate()" ng-if="EventCreateCtrl.eventCreateData.mode === 'Create'">Create Event!</button>
+			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="EventCreateCtrl.editActivate()" ng-if="EventCreateCtrl.eventCreateData.mode === 'Edit'">Submit Update!</button>
 		</div>
 		<div ng-if = "EventCreateCtrl.eventCreateData.failure" >
 			<h3>Event Not Registered Successfully. Please review information provided.</h3>

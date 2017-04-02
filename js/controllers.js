@@ -240,17 +240,17 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		var id = self.state.userId;
 		var verified = true;
 
-		if(self.nameE === ""){
+		if(self.eventCreateData.nameE === ""){
 			//NO EVENT NAME
 			verified = false;
 			self.falseInputEvent = true;
 		}
-		if(self.start === ""){
+		if(self.eventCreateData.start === ""){
 			//NO START
 			verified = false;
 			self.falseInputStart = true;
 		}
-		if(self.end === ""){
+		if(self.eventCreateData.end === ""){
 			//NO END
 			verified = false;
 			self.falseInputEnd = true;
@@ -261,7 +261,7 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 			self.falseInputType = true;
 		}
 		if(verified){
-			app.createEvent(id, self.nameE, self.start, self.end, self.type, self.desc, self.phone, self.email, self.eventLat, self.eventLong, self.locationName, self.rso);
+			app.createEvent(id, self.eventCreateData.nameE, self.eventCreateData.start, self.eventCreateData.end, self.type, self.eventCreateData.desc, self.eventCreateData.phone, self.eventCreateData.email, self.eventLat, self.eventLong, EventCreateCtrl.eventCreateData.locationName, self.rso);
 		}
 	};
 

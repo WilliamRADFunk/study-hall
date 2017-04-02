@@ -39,6 +39,14 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.registerData.registered = false;		// Flag to determine if registration succeeded.
 
 	app.eventCreateData = {};					// Data object containing variables for event creation page.
+	app.eventCreateData.mode = 'Create';		// For title of create/edit event page.
+	app.eventCreateData.locationName = '';		// Real address for event.
+	app.eventCreateData.email = '';				// Email for event contact.
+	app.eventCreateData.phone = '';				// Phone for event contact.
+	app.eventCreateData.desc = '';				// Description for event.
+	app.eventCreateData.start = '';				// Event's start date and time.
+	app.eventCreateData.end = '';				// Event's end date and time.
+	app.eventCreateData.nameE = '';				// Name of the event.
 	app.eventCreateData.rso = [];				// Array of possible rsos available to attach event to.
 	app.eventCreateData.failure = false;		// Boolean to determin if user event was properly created.
 
@@ -182,11 +190,15 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	};
 	// Called by controller to pass data to "Creation/Edit" page for edit.
 	app.editEvent = function(event) {
-		// Redirect user to "Create/Edit" page and use event object to update fields.
-		// The 1 signifies edit, a zero or nothing would signify create. Use this to ng-if
-		// between the "create" and "edit" buttons.
-		console.log("I'm going to edit an event.");
-		app.navigation.goToCreateEvent(1, event);
+		app.eventCreateData.nameE = event.name;
+		app.eventCreateData.start = event['start_time'];
+		app.eventCreateData.end = event['end_time'];
+		app.eventCreateData.desc = event.description;
+		app.eventCreateData.phone = event['phone_num'];
+		app.eventCreateData.email = event.email;
+		app.eventCreateData.locationName = event.specificName;
+		console.log(event);
+		app.navigation.goToCreateEvent(1);
 	};
 	// GET to receive rsos available to user for event creation purposes.
 	app.getAvailableRSO = function() {
@@ -320,7 +332,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 	// Router function to send user to create event page.
-	app.navigation.goToCreateEvent = function() {
+	app.navigation.goToCreateEvent = function(mode=0) {
 		if(app.state.isLoggedIn) {
 			resetToggles();
 			app.state.events = false;
@@ -329,6 +341,17 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.rso = false;
 			app.state.registration = false;
 			app.state.createEvent = true;
+			if(mode) app.eventCreateData.mode = 'Edit';
+			else {
+				app.eventCreateData.mode = 'Create';
+				app.eventCreateData.locationName = '';
+				app.eventCreateData.email = '';
+				app.eventCreateData.phone = '';
+				app.eventCreateData.desc = '';
+				app.eventCreateData.start = '';
+				app.eventCreateData.end = '';
+				app.eventCreateData.nameE = '';	
+			}
 			app.state.createRSO = false;
 		}
 	};

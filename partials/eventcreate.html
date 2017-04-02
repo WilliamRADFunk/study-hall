@@ -119,8 +119,25 @@
 		<div id="map-create"></div>
 		</br>
 		</br>
+
+	<!-- Location Name -->
+		<div class ="row form-element form-group">
+			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<p>Location Name*:</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+			  <input type="text" id="locationName" ng-model="EventCreateCtrl.locationName" ng-init="EventCreateCtrl.locationName=''" placeholder="General Area or 'Bldg Name / Room Number'" class="form-control">
+			</div>
+		</div>
+		</br>
+	<!-- Submit Button -->
+
 		<div class="row form-element form-group">
 			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="EventCreateCtrl.createActivate()">Create Event!</button>
+		</div>
+		<div ng-if = "EventCreateCtrl.eventCreateData.failure" >
+			<h3>Event Not Registered Successfully. Please review information provided.</h3>
 		</div>
 	</div>
 	<!-- Map Module for Location Selection -->

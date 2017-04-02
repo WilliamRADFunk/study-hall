@@ -39,6 +39,10 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.eventCreateData = {};					// Data object containing variables for event creation page.
 	app.eventCreateData.rso = [];				// Array of possible rsos available to attach event to.
+	app.eventCreateData.failure = false;		// Boolean to determin if user event was properly created.
+
+	app.RSOCreateData = {};
+	app.RSOCreateData.failure - false;			// Boolean to determin if user rso was properly created.
 
 	// Router function to send user (on successful login) to events list page.
 	login = function(userId=null, lat=null, long=null) {
@@ -312,7 +316,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	};
 	// API call to send event data to db for event creation.
 	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null, rso=null) {
-	
+		app.eventCreateData.failure = false;
 		$http({
 			method: 'POST',
 			url: './actions/event.php',
@@ -344,18 +348,22 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			if(parsed.status === "success"){
 				//Error on login. Incorrect username or password
 				console.log("SUCCESS");
+				app.navigation.goToEvents();
 			}
 			else{
 				console.log('failure registering');
+				app.eventCreateData.failure = true;
 			}
 		}, function errorCallback(response) {
 			console.log(response);
+			app.eventCreateData.failure = true;
+
 			//Call failure here?
 		});
 	};
 
 	app.createRSO = function(id=null, name=null, desc=null) {
-	
+		app.RSOCreateData.failure = false;
 		$http({
 			method: 'POST',
 			url: './actions/rso.php',
@@ -376,13 +384,17 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			if(parsed.status === "success"){
 				//Error on login. Incorrect username or password
 				console.log("SUCCESS");
+				app.navigation.goToRSOs();
 			}
 			else{
 				console.log('failure registering');
+				app.RSOCreateData.failure = true;
 			}
 		}, function errorCallback(response) {
 			console.log(response);
 			//Call failure here?
+			app.RSOCreateData.failure = true;
+
 		});
 	};
 

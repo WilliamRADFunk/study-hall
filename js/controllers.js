@@ -412,7 +412,7 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 
 	// Calls the service to route to rso group creation page.
 	self.createGroup = function() {
-		app.navigation.goToCreateGroup();
+		app.navigation.goToCreateRSO();
 	};
 
 	// Called by service everytime the list of events is changed.

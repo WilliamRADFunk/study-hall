@@ -361,11 +361,15 @@ studyHallApp.controller('RSOCreateController', ['appData', function(app) {
 
 	self.CreateActivate = function() {
 
+		self.validInput = true;
+		self.falseInputRSO = false;
+
 		var id = self.state.userId;
 
 		if(self.name === '')
 		{
-			validInput = false;
+			self.validInput = false;
+			self.falseInputRSO = true;
 		}
 
 		if(self.validInput)

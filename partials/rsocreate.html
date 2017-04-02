@@ -39,6 +39,10 @@
 		<div class="row form-element form-group">
 			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="RSOCreateCtrl.CreateActivate()">Create RSO!</button>
 		</div>
+
+		<div ng-if = "RSOCreateCtrl.RSOCreateData.failure" >
+			<h3>RSO Not Registered Successfully. Please review information provided.</h3>
+		</div>
 	</div>
 	<!-- Map Module for Location Selection -->
 	</form>

@@ -347,6 +347,26 @@ studyHallApp.controller('EventsController', ['appData', function(app) {
 	// Initial call to populate table with events.
 	self.getEventList();
 }]);
+
+studyHallApp.controller('RSOCreateController', ['appData', function(app) {
+	var self = this;
+
+	self.active = false;
+	self.RSOCreateData = app.RSOCreateData;
+	self.state = app.state;
+
+	self.falseInputRSO = false;
+
+	self.validInput = true;
+
+	self.CreateActivate = function() {
+		if(self.name === '')
+		{
+			validInput = false;
+		}
+	};
+}]);
+
 // Main function is manage RSO list "page".
 studyHallApp.controller('RSOsController', ['appData', function(app) {
 	var self = this;

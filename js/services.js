@@ -353,6 +353,39 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			//Call failure here?
 		});
 	};
+
+	app.createRSO = function(id=null, name=null, desc=null) {
+	
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data:
+			{
+				type: "create",
+				user_id: id,
+				rso_info:{
+					name: name,
+					description: desc
+				}
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				//Error on login. Incorrect username or password
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure registering');
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+			//Call failure here?
+		});
+	};
+
 	// GET to receive rsos available to user for event creation purposes.
 	app.getAvailableRSO = function() {
 

@@ -48,6 +48,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Router function to send user (on successful login) to events list page.
 	var login = function(userId=null, lat=null, long=null, role=0) {
 		if(userId) {
+			resetToggles();
 			app.state.isLoggedIn = true;
 			app.state.events = true;
 			app.state.userId = userId;
@@ -56,6 +57,14 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.longitude = long;
 			app.navigation.goToEvents();
 		}
+	};
+	// Resets toggles in the rso list and event list views
+	var resetToggles = function() {
+		app.eventListData.isPublicEvents = true;
+		app.eventListData.isPrivateEvents = false;
+		app.rsoListData.isRsoGroups = true;
+		app.rsoListData.isRsoEvents = false;
+		app.listEvents();
 	};
 	// API call to send event data to db for event creation.
 	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null, rso=null) {
@@ -313,6 +322,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Router function to send user to create event page.
 	app.navigation.goToCreateEvent = function() {
 		if(app.state.isLoggedIn) {
+			resetToggles();
 			app.state.events = false;
 			app.state.event = false;
 			app.state.rsos = false;
@@ -325,6 +335,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Router function to send user to create rso page.
 	app.navigation.goToCreateRSO = function() {
 		if(app.state.isLoggedIn) {
+			resetToggles();
 			app.state.events = false;
 			app.state.event = false;
 			app.state.rsos = false;
@@ -337,6 +348,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Router function to send user to individual event page.
 	app.navigation.goToEvent = function() {
 		if(app.state.isLoggedIn) {
+			resetToggles();
 			app.state.events = false;
 			app.state.event = true;
 			app.state.rsos = false;
@@ -349,6 +361,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Router function to send user to events list page.
 	app.navigation.goToEvents = function() {
 		if(app.state.isLoggedIn) {
+			resetToggles();
 			app.state.events = true;
 			app.state.event = false;
 			app.state.rsos = false;
@@ -372,6 +385,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Router function to send user to individual rso page.
 	app.navigation.goToRSO = function() {
 		if(app.state.isLoggedIn) {
+			resetToggles();
 			app.state.events = false;
 			app.state.event = false;
 			app.state.rsos = false;
@@ -384,6 +398,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Router function to send user to rsos list page.
 	app.navigation.goToRSOs = function() {
 		if(app.state.isLoggedIn) {
+			resetToggles();
 			app.state.events = false;
 			app.state.event = false;
 			app.state.rsos = true;

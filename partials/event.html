@@ -49,6 +49,18 @@
 							{{eventCtrl.eventData.event['rso_name']}}
 						</td>
 					</tr>
+					<tr ng-if="eventCtrl.state.userId === eventCtrl.eventData.event['s_id']">
+						<td>
+							<button class="col-lg-6">Delete &#xf1f8;</button>
+							<button class="col-lg-6">Edit &#xf044;</button>
+						</td>
+					</tr>
+					<tr ng-if="eventCtrl.state.role">
+						<td>
+							<button class="col-lg-6">Accept &#xf087;</button>
+							<button class="col-lg-6">Reject &#xf088;</button>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

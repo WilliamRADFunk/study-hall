@@ -13,16 +13,16 @@
 		<div class ="row form-element form-group">
 			<div class ="col-lg-2 col-md-2 col-sm-1 col-xs-0"></div>
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-				<p>Event Name*:</p>
+				<p>RSO Name*:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-			  <input type="text" id="email" ng-model="EventCreateCtrl.nameE" ng-init="EventCreateCtrl.nameE=''" placeholder="e.g 'The Awesome Festival!'" class="form-control">
+			  <input type="text" id="email" ng-model="RSOCreateCtrl.name" ng-init="RSOCreateCtrl.name=''" placeholder="e.g 'The Awesome Festival!'" class="form-control">
 			</div>
 		</div>
-		<div ng-if = "EventCreateCtrl.falseInputEvent" >
-			<h3>Event Name required.</h3>
+		<div ng-if = "RSOCreateCtrl.falseInputRSO" >
+			<h3>RSO Name required.</h3>
 		</div>
-		<div ng-if = "!EventCreateCtrl.falseInputEvent"></br></div>
+		<div ng-if = "!RSOCreateCtrl.falseInputRSO"></br></div>
 
 	<!-- Event Description -->
 		<div class ="row form-element form-group">
@@ -31,10 +31,14 @@
 				<p>Description:</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-				<textArea name="description" id="email" class="form-control" ng-model="EventCreateCtrl.desc" ng-init="EventCreateCtrl.desc=''" placeholder="Tell us about your event" rows="10" cols="27"></textArea>
+				<textArea name="description" id="email" class="form-control" ng-model="RSOCreateCtrl.desc" ng-init="RSOCreateCtrl.desc=''" placeholder="Tell us about your event" rows="10" cols="27"></textArea>
 			</div>
 		</div>
 		</br>
+
+		<div class="row form-element form-group">
+			<button class="btn btn-primary col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10" ng-click="RSOCreateCtrl.CreateActivate()">Create RSO!</button>
+		</div>
 	</div>
 	<!-- Map Module for Location Selection -->
 	</form>

@@ -357,6 +357,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 				app.eventCreateData.nameE = '';	
 			}
 			app.state.createRSO = false;
+			notifyObservers(); // Call to update map markers.
 		}
 	};
 	// Router function to send user to create rso page.

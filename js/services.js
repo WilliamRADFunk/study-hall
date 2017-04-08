@@ -251,6 +251,86 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 
+	app.GetComments = function(eventId=null)
+	{
+		$http({
+			method: 'GET',
+			url: './actions/rso.php?event_id=' + eventId,
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure retrieving comments for event');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
+
+	app.CreateComment = function(id=null, eventId=null, comment=null)
+	{
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data:
+			{
+			    "type": "create",
+			    "user_id": id,
+			    "event_id": eventId,
+			    "comment": comment
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure retrieving comments for event');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
+
+	app.UpdateComment = function(id=null, eventId=null, comment=null)
+	{
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data:
+			{
+			    "type": "update",
+			    "user_id": id,
+			    "event_id": eventId,
+			    "comment": comment
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure retrieving comments for event');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
+
 	// Called by controller to pass data to "Creation/Edit" page for edit.
 	app.editEvent = function(event) {
 		app.eventCreateData.nameE = event.name;

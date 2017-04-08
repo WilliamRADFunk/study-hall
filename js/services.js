@@ -192,6 +192,65 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 		console.log("I'm deleting an event.");
 	};
+
+	//Call to request User to join particular rso
+	app.joinRSO = function(userId=null, rsoId=null)
+	{
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data:
+			{
+				"type": "join",
+				"user_id": userId,
+				"rso_id": rsoId
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure registering');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	}
+
+	//Call to request User to leave particular rso
+	app.leaveRSO = function(userId=null, rsoId=null)
+	{
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data:
+			{
+				"type": "leave",
+				"user_id": userId,
+				"rso_id": rsoId
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure registering');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	}
+
 	// Called by controller to pass data to "Creation/Edit" page for edit.
 	app.editEvent = function(event) {
 		app.eventCreateData.nameE = event.name;

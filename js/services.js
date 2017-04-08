@@ -281,7 +281,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	{
 		$http({
 			method: 'POST',
-			url: './actions/rso.php',
+			url: './actions/comments.php',
 			data:
 			{
 			    "type": "create",
@@ -310,13 +310,41 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	{
 		$http({
 			method: 'POST',
-			url: './actions/rso.php',
+			url: './actions/comments.php',
 			data:
 			{
 			    "type": "update",
 			    "user_id": id,
 			    "event_id": eventId,
 			    "comment": comment
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+			}
+			else{
+				console.log('failure retrieving comments for event');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
+
+	app.DeleteComment = function(id=null, eventId=null, comment=null)
+	{
+		$http({
+			method: 'POST',
+			url: './actions/comments.php',
+			data:
+			{
+			    "type": "delete",
+			    "user_id": id,
+			    "event_id": eventId
 			},
 			transformResponse: [function (data) {
 				return data;

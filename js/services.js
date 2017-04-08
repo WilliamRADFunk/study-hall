@@ -220,7 +220,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}, function errorCallback(response) {
 			console.log(response);
 		});
-	}
+	};
 
 	//Call to request User to leave particular rso
 	app.leaveRSO = function(userId=null, rsoId=null)
@@ -249,7 +249,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}, function errorCallback(response) {
 			console.log(response);
 		});
-	}
+	};
 
 	// Called by controller to pass data to "Creation/Edit" page for edit.
 	app.editEvent = function(event) {

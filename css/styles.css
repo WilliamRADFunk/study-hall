@@ -238,3 +238,7 @@ button > span {
 #create-container  .buttonAdjust {
 	margin: auto;
 }
+#rso-group-banner {
+	background-color: #004f39;
+	border: 2px solid #FFFFFF;
+}

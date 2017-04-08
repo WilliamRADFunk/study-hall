@@ -15,6 +15,10 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventData.event = {};					// Event object of selected event.
 	app.eventData.group = {};					// Group object of selected event.
 
+	app.rsoData = {};							// Object to individual rso page variables.
+	app.rsoData.rso = {};						// RSO object of selected rso.
+	app.rsoData.group = {};						// Group object of selected rso.
+
 	app.state = {};								// Manages overall state of application.
 	app.state.isLoggedIn = false;				// Ensures user is logged in and allowed in certain areas.
 	app.state.userId = 0;						// User's id after logging in.

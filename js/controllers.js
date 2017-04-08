@@ -601,3 +601,29 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 	// Initial call to populate table with rso groups and events.
 	self.getRsoList();
 }]);
+
+// Main function is to manage individual event "page".
+studyHallApp.controller('RSOController', ['appData', function(app) {
+	var self = this;
+
+	self.active = false;
+	self.rsoData = app.rsoData;
+	self.state = app.state;
+
+	// Router function to send rso group object to service.
+	self.editRSO = function(){
+		app.editRSO(self.rsoData.rso);
+	};
+	// Router function to send rso group id to service.
+	self.deleteRSO = function(){
+		app.deleteRSO(self.rsoData.rso['rso_id']);
+	};
+	// Router function to send rso group id to service.
+	self.acceptRSO = function(){
+		app.acceptRSO(self.rsoData.rso['rso_id']);
+	};
+	// Router function to send rso group id to service.
+	self.rejectRSO = function(){
+		app.rejectRSO(self.rsoData.rso['rso_id']);
+	};
+}]);

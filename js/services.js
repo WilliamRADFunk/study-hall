@@ -9,14 +9,14 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.rsoListData = {};						// Angular prefers objects to primitives for binding.
 	app.rsoListData.isRsoGroups = true;			// Lets us know the view rso groups toggle is on.
 	app.rsoListData.isRsoEvents = false;		// Lets us know the view rso events toggle is on.
+	app.rsoListData.events = [];
+	app.rsoListData.groups = [];
 	app.rsoListData.rsos = [];					// List of rso objects returned from query.
 
 	app.eventData = {};							// Object to individual event page variables.
 	app.eventData.event = {};					// Event object of selected event.
-	app.eventData.group = {};					// Group object of selected event.
 
 	app.rsoData = {};							// Object to individual rso page variables.
-	app.rsoData.rso = {};						// RSO object of selected rso.
 	app.rsoData.group = {};						// Group object of selected rso.
 
 	app.state = {};								// Manages overall state of application.
@@ -276,7 +276,6 @@ studyHallApp.factory('appData', ['$http', function($http) {
 				return data;
 			}]
 		}).then(function successCallback(response) {
-			console.log(response);
 			var parsed = JSON.parse(response.data);
 			app.eventCreateData.rso = parsed;
 		}, function errorCallback(response) {
@@ -293,7 +292,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	// Called when user clicks on a specific group.
 	app.getGroupById = function(group=null) {
 		if(group !== null) {
-			app.eventData.group = group;
+			app.rsoData.group = group;
 			app.navigation.goToRSO();
 		}
 	};

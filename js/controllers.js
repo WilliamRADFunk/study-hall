@@ -567,10 +567,10 @@ studyHallApp.controller('RSOsController', ['appData', function(app) {
 
 		// Separates rso events from rso groups for mapping purposes.
 		self.rsoListData.rsos.forEach(function(elem, index) {
-			if(elem['rso_id']) {
-				self.rsoListData.groups.push(elem);
-			} else if(elem['e_id']) {
+			if(elem['e_id']) {
 				self.rsoListData.events.push(elem);
+			} else if(elem['rso_id']) {
+				self.rsoListData.groups.push(elem);
 			}
 		});
 
@@ -612,18 +612,14 @@ studyHallApp.controller('RSOController', ['appData', function(app) {
 
 	// Router function to send rso group object to service.
 	self.editRSO = function(){
-		app.editRSO(self.rsoData.rso);
+		app.editRSO(self.rsoData.group);
+	};
+	// Router function to send rso group object to service.
+	self.joinRSO = function(){
+		app.joinRSO(self.rsoData.group);
 	};
 	// Router function to send rso group id to service.
 	self.deleteRSO = function(){
-		app.deleteRSO(self.rsoData.rso['rso_id']);
-	};
-	// Router function to send rso group id to service.
-	self.acceptRSO = function(){
-		app.acceptRSO(self.rsoData.rso['rso_id']);
-	};
-	// Router function to send rso group id to service.
-	self.rejectRSO = function(){
-		app.rejectRSO(self.rsoData.rso['rso_id']);
+		app.deleteRSO(self.rsoData.group['rso_id']);
 	};
 }]);

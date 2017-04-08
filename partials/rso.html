@@ -5,62 +5,29 @@
 				<thead>
 					<tr>
 						<th>RSO Group: </th>
-						<td>{{rsoCtrl.rsoData.rso['name']}}</td>
+						<td>{{rsoCtrl.rsoData.group['name']}}</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th>Start: </th>
-						<td>{{rsoCtrl.rsoData.rso['start_time']}}</td>
-					</tr>
-					<tr>
-						<th>End: </th>
-						<td>{{rsoCtrl.rsoData.rso['end_time']}}</td>
-					</tr>
-					<tr>
-						<th>Address: </th>
-						<td>{{rsoCtrl.rsoData.rso['specificName']}}</td>
+						<th>Organizer: </th>
+						<td>{{rsoCtrl.rsoData.group['creatorName']}}</td>
 					</tr>
 					<tr>
 						<th>Description: </th>
-						<td>{{rsoCtrl.rsoData.rso['description']}}</td>
+						<td>{{rsoCtrl.rsoData.group['description']}}</td>
 					</tr>
-					<tr ng-if="rsoCtrl.rsoData.rso['creatorName']">
-						<th>Contact Name: </th>
-						<td>
-							{{rsoCtrl.rsoData.rso['creatorName']}}
-						</td>
-					</tr>
-					<tr ng-if="rsoCtrl.rsoData.rso['phone_num']">
-						<th>Contact Phone: </th>
-						<td>
-							{{rsoCtrl.rsoData.rso['phone_num']}}
-						</td>
-					</tr>
-					<tr ng-if="rsoCtrl.rsoData.rso['email']">
-						<th>Contact Email: </th>
-						<td>
-							{{rsoCtrl.rsoData.rso['email']}}
-						</td>
-					</tr>
-					<tr ng-if="rsoCtrl.rsoData.rso['rso_name']">
-						<th>RSO Group: </th>
-						<td>
-							{{rsoCtrl.rsoData.rso['rso_name']}}
-						</td>
-					</tr>
-					<tr ng-if="rsoCtrl.state.userId === rsoCtrl.rsoData.rso['s_id']">
+					<tr ng-if="rsoCtrl.state.userId === rsoCtrl.rsoData.group['s_id']">
 						<th></th>
 						<td>
 							<button class="col-lg-6 btn btn-primary" ng-click="rsoCtrl.editRSO()">Edit <span class="fa fa-edit"></span></button>
 							<button class="col-lg-6 btn btn-danger" ng-click="rsoCtrl.deleteRSO()">Delete <span class="fa fa-trash"></span></button>
 						</td>
 					</tr>
-					<tr ng-if="rsoCtrl.state.role">
+					<tr ng-if="rsoCtrl.state.userId !== rsoCtrl.rsoData.group['s_id']">
 						<th></th>
 						<td>
-							<button class="col-lg-6 btn btn-success" ng-click="rsoCtrl.acceptRSO()">Accept <span class="fa fa-thumbs-o-up"></span></button>
-							<button class="col-lg-6 btn btn-danger" ng-click="rsoCtrl.rejectRSO()">Reject <span class="fa fa-thumbs-o-down"></span></button>
+							<button class="col-lg-12 btn btn-primary" ng-click="rsoCtrl.joinRSO()">Join <span class="fa fa-edit"></span></button>
 						</td>
 					</tr>
 				</tbody>

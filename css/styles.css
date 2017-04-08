@@ -119,6 +119,7 @@ button > span {
 
 #event-container .table-responsive,
 #events-container .table-responsive,
+#rso-container .table-responsive,
 #rsos-container .table-responsive {
 	background-color: #FFFFFF;
 	max-height: 515px;
@@ -126,13 +127,15 @@ button > span {
 	padding: 0px;
 }
 
-#event-container .table-responsive {
+#event-container .table-responsive,
+#rso-container .table-responsive {
 	max-height: 480px;
 	min-height: 480px;
 }
 
 #event-container table thead,
 #events-container table thead,
+#rso-container table thead,
 #rsos-container table thead {
 	background-color: #29DD9B;
 	width: 100%;
@@ -241,4 +244,5 @@ button > span {
 #rso-group-banner {
 	background-color: #004f39;
 	border: 2px solid #FFFFFF;
+	min-height: 480px;
 }

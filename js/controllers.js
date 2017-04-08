@@ -215,7 +215,10 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 		self.eventCreateData.latitude = e.latlng.lat;
 		self.eventCreateData.longitude = e.latlng.lng;
 	    // Create each individual marker.
-		var marker = L.marker([self.eventLat, self.eventLong]).addTo(map);
+		var marker = L.marker([
+			self.eventCreateData.latitude,
+			self.eventCreateData.longitude
+		]).addTo(map);
 		// Add marker to the group.
 		markers.addLayer(marker);
 		// Places all markers on the map.
@@ -296,10 +299,31 @@ studyHallApp.controller('EventCreateController', ['appData', function(app) {
 	};
 
 	var centerMap = function() {
-		// Center the map on school's lat and long.
-		map.setView([Number(self.state.latitude), Number(self.state.longitude)], 16);
-		self.eventCreateData.latitude = self.state.latitude;
-		self.eventCreateData.longitude = self.state.longitude;
+		if(self.eventData.event.latitude &&
+			self.eventData.event.latitude != 0 &&
+			self.eventData.event.longitude &&
+			self.eventData.event.longitude != 0
+			) {
+			// Center the map on event's lat and long.
+			map.setView([
+				Number(self.eventData.event.latitude),
+				Number(self.eventData.event.longitude)
+			], 16);
+			self.eventCreateData.latitude = self.eventData.event.latitude;
+			self.eventCreateData.longitude = self.eventData.event.longitude;
+			editMarker();
+			// Clear these to prevent crossover problems in create event.
+			self.eventData.event.latitude = 0;
+			self.eventData.event.longitude = 0;
+		} else {
+			// Center the map on school's lat and long.
+			map.setView([
+				Number(self.state.latitude),
+				Number(self.state.longitude)
+			], 16);
+			self.eventCreateData.latitude = self.state.latitude;
+			self.eventCreateData.longitude = self.state.longitude;
+		}
 	};
 
 	var editMarker = function() {
@@ -329,8 +353,6 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 	self.active = false;
 	self.eventData = app.eventData;
 	self.state = app.state;
-
-	console.log(self.eventData.event);
 
 	// Create the leaflet map, and attach it to the map with that id.
 	var map = L.map('map-event');

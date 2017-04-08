@@ -201,7 +201,6 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		app.eventCreateData.phone = event['phone_num'];
 		app.eventCreateData.email = event.email;
 		app.eventCreateData.locationName = event.specificName;
-		console.log(event);
 		app.navigation.goToCreateEvent(1);
 	};
 	// GET to receive rsos available to user for event creation purposes.

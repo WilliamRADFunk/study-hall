@@ -549,18 +549,49 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		app.loginData.registrationSuccess = false;
 	};
 	// Submits to the db any and all changes to the event.
-	app.submitEventEdit = function(event) {
+	app.submitEventEdit = function(id=null, nameE=null, start=null, end=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null) {
+		app.eventCreateData.failure = false;
 		$http({
 			method: 'POST',
 			url: './actions/event.php',
 			data:
 			{
-				//id: id
-			}
+				user_id: app.state.userId,
+				type: "update",
+				location_info:{
+					latitude: latitude,
+					longitude: longitude,
+					name: nameL
+				},
+				event_info:{
+					e_id: id,
+					name: nameE,
+					start_time: start,
+					end_time: end,
+					description: desc,
+					phone_num: phone,
+					email: email
+				}
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
 		}).then(function successCallback(response) {
-			console.log(response.data);
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				//Error on login. Incorrect username or password
+				console.log("SUCCESS");
+				app.navigation.goToEvents();
+			}
+			else{
+				console.log('failure registering');
+				app.eventCreateData.failure = true;
+			}
 		}, function errorCallback(response) {
 			console.log(response);
+			app.eventCreateData.failure = true;
+
+			//Call failure here?
 		});
 	};
 	// Toggles the public events view

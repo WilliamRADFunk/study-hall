@@ -413,8 +413,6 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 
 		self.GetComments();
 	};
-	// Registers the map updater function with the service's observer pattern.
-	app.registerObserverCallback(updateEvent);
 	// Initial call to populate table with events.
 	updateEvent();
 }]);

@@ -611,15 +611,15 @@ studyHallApp.controller('RSOController', ['appData', function(app) {
 	self.state = app.state;
 
 	// Router function to send rso group object to service.
-	self.editRSO = function(){
+	self.editRSO = function() {
 		app.editRSO(self.rsoData.group);
 	};
 	// Router function to send rso group object to service.
-	self.joinRSO = function(){
+	self.joinRSO = function() {
 		app.joinRSO(self.rsoData.group);
 	};
 	// Router function to send rso group id to service.
-	self.deleteRSO = function(){
+	self.deleteRSO = function() {
 		app.deleteRSO(self.rsoData.group['rso_id']);
 	};
 }]);

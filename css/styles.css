@@ -261,13 +261,22 @@ button > span {
 	padding-top: 150px;
 	text-align: center;
 }
+#rso-group-banner-wrapper {
+	position: relative;
+	width: 100%;
+}
 #rso-group-banner-symbol {
-	min-width: 30px;
-	text-align: center;
+	left: 25%;
+	min-width: 100px;
+	position: absolute;
+	width: 50%;
+	z-index: 1;
 }
 #rso-group-banner-inner {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 10px;
+	color: #56C4C5;
+	position: absolute;
 	text-align: center;
+	top: 125px;
+	width: 100%;
+	z-index: 5;
 }

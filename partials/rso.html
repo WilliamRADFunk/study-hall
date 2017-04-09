@@ -27,8 +27,8 @@
 					<tr ng-if="rsoCtrl.state.userId !== rsoCtrl.rsoData.group['s_id']">
 						<th></th>
 						<td>
-							<button ng-if="rsoCtrl.rsoData.group['isPartOf'] === 1" class="col-lg-12 btn btn-primary" ng-click="rsoCtrl.leaveRSO()">Leave Group<span class="fa fa-sign-out"></span></button>
-							<button ng-if="rsoCtrl.rsoData.group['isPartOf'] === 0"class="col-lg-12 btn btn-primary" ng-click="rsoCtrl.joinRSO()">Join Group<span class="fa fa-handshake-o"></span></button>
+							<button ng-if="rsoCtrl.rsoData.group['isPartOf'] === '1'" class="col-lg-12 btn btn-primary" ng-click="rsoCtrl.leaveRSO()">Leave Group<span class="fa fa-sign-out"></span></button>
+							<button ng-if="rsoCtrl.rsoData.group['isPartOf'] === '0'"class="col-lg-12 btn btn-primary" ng-click="rsoCtrl.joinRSO()">Join Group<span class="fa fa-handshake-o"></span></button>
 						</td>
 					</tr>
 				</tbody>

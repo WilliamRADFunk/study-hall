@@ -85,6 +85,36 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		app.rsoListData.isRsoEvents = false;
 		app.listEvents();
 	};
+	// SuperAdmin function to accept an event status == 1
+	app.acceptEvent = function(eventId=null, status=2)
+	{
+		$http({
+			method: 'POST',
+			url: './actions/eventstatus.php',
+			data:
+			{
+			    "type": "update",
+			    "user_id": app.state.userId,
+			    "event_id": eventId,
+			    "status": status
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+				app.goToEvents();
+			}
+			else{
+				console.log('failure retrieving comments for event');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+		});
+	};
 	// API call to send event data to db for event creation.
 	app.createEvent = function(id=null, nameE=null, start=null, end=null, type=null, desc=null, phone=null, email=null, latitude=null, longitude=null, nameL=null, rso=null) {
 		app.eventCreateData.failure = false;
@@ -250,6 +280,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			var parsed = JSON.parse(response.data);
 			if(parsed.status === "success"){
 				console.log("SUCCESS");
+				app.navigation.goToRSOs();
 			}
 			else{
 				console.log('failure registering');
@@ -278,6 +309,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			var parsed = JSON.parse(response.data);
 			if(parsed.status === "success"){
 				console.log("SUCCESS");
+				app.navigation.goToRSOs();
 			}
 			else{
 				console.log('failure registering');
@@ -538,6 +570,36 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}, function errorCallback(response) {
 			console.log(response);
 			//Call failure here?
+		});
+	};
+	// SuperAdmin function to reject an event status == 0
+	app.rejectEvent = function(eventId=null, status=2)
+	{
+		$http({
+			method: 'POST',
+			url: './actions/eventstatus.php',
+			data:
+			{
+			    "type": "update",
+			    "user_id": app.state.userId,
+			    "event_id": eventId,
+			    "status": status
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+				app.goToEvents();
+			}
+			else{
+				console.log('failure retrieving comments for event');
+
+			}
+		}, function errorCallback(response) {
+			console.log(response);
 		});
 	};
 	// Router function to send user to create event page.

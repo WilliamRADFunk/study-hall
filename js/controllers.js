@@ -373,11 +373,11 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 	};
 	// Router function to send event id to service.
 	self.acceptEvent = function(){
-		app.acceptEvent(self.eventData.event['e_id']);
+		app.acceptEvent(self.eventData.event['e_id'], 1);
 	};
 	// Router function to send event id to service.
 	self.rejectEvent = function(){
-		app.rejectEvent(self.eventData.event['e_id']);
+		app.rejectEvent(self.eventData.event['e_id'], 0);
 	};
 
 	self.GetComments = function(){

@@ -488,28 +488,39 @@ studyHallApp.controller('RSOCreateController', ['appData', function(app) {
 
 	self.active = false;
 	self.RSOCreateData = app.RSOCreateData;
+	self.rsoData = app.rsoData;
 	self.state = app.state;
 
 	self.falseInputRSO = false;
-
 	self.validInput = true;
 
-	self.CreateActivate = function() {
+	self.createActivate = function() {
 
 		self.validInput = true;
 		self.falseInputRSO = false;
 
-		var id = self.state.userId;
-
-		if(self.name === '')
-		{
+		if(self.name === '') {
 			self.validInput = false;
 			self.falseInputRSO = true;
 		}
+		if(self.validInput) {
+			app.createRSO(self.name, self.desc);
+		}
+	};
+	self.editActivate = function() {
 
-		if(self.validInput)
-		{
-			app.createRSO(id, self.name, self.desc);
+		self.validInput = true;
+		self.falseInputRSO = false;
+
+		if(self.RSOCreateData.name === '') {
+			self.validInput = false;
+			self.falseInputRSO = true;
+		}
+		if(self.validInput) {
+			app.submitRSOEdit(self.rsoData.group['rso_id'],
+				self.RSOCreateData.name,
+				self.RSOCreateData.description
+			);
 		}
 	};
 }]);
@@ -614,15 +625,19 @@ studyHallApp.controller('RSOController', ['appData', function(app) {
 	self.rsoData = app.rsoData;
 	self.state = app.state;
 
-	// Router function to send rso group object to service.
+	// Router function to send rso group object to service for editing.
 	self.editRSO = function() {
 		app.editRSO(self.rsoData.group);
 	};
-	// Router function to send rso group object to service.
-	self.joinRSO = function() {
-		app.joinRSO(self.rsoData.group);
+	// Router function to send rso group id to service for user to leave group.
+	self.leaveRSO = function() {
+		app.leaveRSO(self.rsoData.group['rso_id']);
 	};
-	// Router function to send rso group id to service.
+	// Router function to send rso group id to service for user to join group.
+	self.joinRSO = function() {
+		app.joinRSO(self.rsoData.group['rso_id']);
+	};
+	// Router function to send rso group id to service for user to delete group.
 	self.deleteRSO = function() {
 		app.deleteRSO(self.rsoData.group['rso_id']);
 	};

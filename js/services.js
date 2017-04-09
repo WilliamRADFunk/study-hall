@@ -58,6 +58,8 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	app.eventCreateData.failure = false;		// Boolean to determin if user event was properly created.
 
 	app.RSOCreateData = {};
+	app.RSOCreateData.name = '';
+	app.RSOCreateData.description = '';
 	app.RSOCreateData.failure - false;			// Boolean to determin if user rso was properly created.
 
 	// Router function to send user (on successful login) to events list page.
@@ -131,7 +133,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 	// API call to send RSO data to db for RSO Group creation.
-	app.createRSO = function(id=null, name=null, desc=null) {
+	app.createRSO = function(name=null, desc=null) {
 		app.RSOCreateData.failure = false;
 		$http({
 			method: 'POST',
@@ -139,7 +141,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			data:
 			{
 				type: "create",
-				user_id: id,
+				user_id: app.state.userId,
 				rso_info:{
 					name: name,
 					description: desc
@@ -198,7 +200,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		console.log("I'm deleting an event.");
 	};
 	// Called by controller to delete rso group from db and redirect user to rso list page.
-	app.deleteRSO = function(id) {
+	app.deleteRSO = function(rsoId) {
 		app.rsoData.failure = false;
 		$http({
 			method: 'POST',
@@ -207,7 +209,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			{
 				type: "delete",
 				user_id: app.state.userId,
-				rso_id: id
+				rso_id: rsoId
 			},
 			transformResponse: [function (data) {
 				return data;
@@ -230,7 +232,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		console.log("I'm deleting an rso.");
 	};
 	//Call to request User to join particular rso
-	app.joinRSO = function(userId=null, rsoId=null)
+	app.joinRSO = function(rsoId=null)
 	{
 		$http({
 			method: 'POST',
@@ -238,7 +240,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			data:
 			{
 				"type": "join",
-				"user_id": userId,
+				"user_id": app.state.userId,
 				"rso_id": rsoId
 			},
 			transformResponse: [function (data) {
@@ -258,7 +260,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 	//Call to request User to leave particular rso
-	app.leaveRSO = function(userId=null, rsoId=null)
+	app.leaveRSO = function(rsoId=null)
 	{
 		$http({
 			method: 'POST',
@@ -266,7 +268,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			data:
 			{
 				"type": "leave",
-				"user_id": userId,
+				"user_id": app.state.userId,
 				"rso_id": rsoId
 			},
 			transformResponse: [function (data) {
@@ -391,7 +393,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 
-	// Called by controller to pass data to "Creation/Edit" page for edit.
+	// Called by controller to pass data to "Creation/Edit" page for event edit.
 	app.editEvent = function(event) {
 		app.eventCreateData.nameE = event.name;
 		app.eventCreateData.start = event['start_time'];
@@ -401,6 +403,12 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		app.eventCreateData.email = event.email;
 		app.eventCreateData.locationName = event.specificName;
 		app.navigation.goToCreateEvent(1);
+	};
+	// Called by controller to pass data to "Creation/Edit" page for rso group edit.
+	app.editRSO = function(rso) {
+		app.RSOCreateData.name = rso['name'];
+		app.RSOCreateData.description = rso['description'];
+		app.navigation.goToCreateRSO(1);
 	};
 	// GET to receive rsos available to user for event creation purposes.
 	app.getAvailableRSO = function() {
@@ -558,7 +566,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}
 	};
 	// Router function to send user to create rso page.
-	app.navigation.goToCreateRSO = function() {
+	app.navigation.goToCreateRSO = function(mode=0) {
 		if(app.state.isLoggedIn) {
 			resetToggles();
 			app.state.events = false;
@@ -567,6 +575,12 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			app.state.rso = false;
 			app.state.registration = false;
 			app.state.createEvent = false;
+			if(mode) app.RSOCreateData.mode = 'Edit';
+			else {
+				app.RSOCreateData.mode = 'Create';
+				app.RSOCreateData.name = '';
+				app.RSOCreateData.description = '';
+			}
 			app.state.createRSO = true;
 		}
 	};
@@ -729,6 +743,42 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		}, function errorCallback(response) {
 			console.log(response);
 			app.eventCreateData.failure = true;
+
+			//Call failure here?
+		});
+	};
+	// Submits to the db any and all changes to the rso group.
+	app.submitRSOEdit = function(rsoId=null, name=null, description=null) {
+		app.RSOCreateData.failure = false;
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data: {
+				user_id: app.state.userId,
+				type: "update",
+				rso_info: {
+					rso_id: rsoId,
+					name: name,
+					description: description
+				}
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				//Error on login. Incorrect username or password
+				console.log("SUCCESS");
+				app.navigation.goToRSOs();
+			}
+			else{
+				console.log('failure registering');
+				app.RSOCreateData.failure = true;
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+			app.RSOCreateData.failure = true;
 
 			//Call failure here?
 		});

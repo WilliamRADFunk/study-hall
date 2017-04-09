@@ -197,7 +197,38 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 		console.log("I'm deleting an event.");
 	};
+	// Called by controller to delete rso group from db and redirect user to rso list page.
+	app.deleteRSO = function(id) {
+		app.rsoData.failure = false;
+		$http({
+			method: 'POST',
+			url: './actions/rso.php',
+			data:
+			{
+				type: "delete",
+				user_id: app.state.userId,
+				rso_id: id
+			},
+			transformResponse: [function (data) {
+				return data;
+			}]
+		}).then(function successCallback(response) {
+			var parsed = JSON.parse(response.data);
+			if(parsed.status === "success"){
+				console.log("SUCCESS");
+				app.navigation.goToRSOs();
+			}
+			else{
+				console.log('failure registering');
+				app.rsoData.failure = true;
+			}
+		}, function errorCallback(response) {
+			console.log(response);
+			app.rsoData.failure.failure = true;
 
+		});
+		console.log("I'm deleting an rso.");
+	};
 	//Call to request User to join particular rso
 	app.joinRSO = function(userId=null, rsoId=null)
 	{
@@ -226,7 +257,6 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			console.log(response);
 		});
 	};
-
 	//Call to request User to leave particular rso
 	app.leaveRSO = function(userId=null, rsoId=null)
 	{

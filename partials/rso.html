@@ -27,14 +27,17 @@
 					<tr ng-if="rsoCtrl.state.userId !== rsoCtrl.rsoData.group['s_id']">
 						<th></th>
 						<td>
-							<button class="col-lg-12 btn btn-primary" ng-click="rsoCtrl.joinRSO()">Join <span class="fa fa-edit"></span></button>
+							<button class="col-lg-12 btn btn-primary" ng-click="rsoCtrl.joinRSO()">Join <span class="fa fa-handshake-o"></span></button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div id="rso-group-banner" class="col-lg-7 no-padding-right">
-			
+			<div id="rso-group-banner-symbol" class="fa fa-group"></div>
+			<div id="rso-group-banner-inner">
+				{{rsoCtrl.rsoData.group['name'] | uppercase}}
+			</div>
 		</div>
 	</div>
 </div>

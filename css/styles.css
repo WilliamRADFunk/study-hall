@@ -51,6 +51,10 @@ button > span {
 .centered {
 	text-align: center;
 }
+.date-styling{
+	font-style: italic;
+	padding-right: 20px;
+}
 .full-width {
 	margin-left: 0px;
 	margin-right: 0px;
@@ -62,6 +66,12 @@ button > span {
 }
 .no-padding {
 	padding: 0px;
+}
+.no-padding-bottom {
+	padding-bottom: 0px;
+}
+.no-padding-left {
+	padding-left: 0px;
 }
 .no-padding-right {
 	padding-right: 0px;

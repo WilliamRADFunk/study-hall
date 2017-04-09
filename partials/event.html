@@ -72,11 +72,11 @@
 		<div class="col-lg-12 no-padding-left">
 			</br>
 			<h3>Comments:</h3>
-			<div class="panel panel-default">
-				<div class="panel-heading">USERNAME </div>
-				<div class="panel-body">SAMPLE COMMENT
+			<div ng-repeat="x in eventCtrl.eventData.comments" class="panel panel-default">
+				<div class="panel-heading">{{x.username}}</div>
+				<div class="panel-body">{{x.comment}}
 				</div>
-				<p class="text-right no-padding-bottom date-styling">DATE</p>
+				<p class="text-right no-padding-bottom date-styling">{{x.date}}</p>
 			</div>
 		</div>
 	</div>

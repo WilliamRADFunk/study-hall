@@ -380,6 +380,10 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 		app.rejectEvent(self.eventData.event['e_id']);
 	};
 
+	self.GetComments = function(){
+		app.GetComments(self.eventData.event['e_id']);
+	};
+
 	// Called by service everytime the list of events is changed.
 	var updateEvent = function() {
 		// Wipe all markers off the map.
@@ -406,6 +410,8 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 		markers.addLayer(marker);
 		// Places all markers on the map.
 		map.addLayer(markers);
+
+		self.GetComments();
 	};
 	// Registers the map updater function with the service's observer pattern.
 	app.registerObserverCallback(updateEvent);

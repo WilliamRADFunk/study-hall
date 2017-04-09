@@ -15,6 +15,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.eventData = {};							// Object to individual event page variables.
 	app.eventData.event = {};					// Event object of selected event.
+	app.eventData.comments = [];
 
 	app.rsoData = {};							// Object to individual rso page variables.
 	app.rsoData.group = {};						// Group object of selected rso.
@@ -257,23 +258,20 @@ studyHallApp.factory('appData', ['$http', function($http) {
 
 	app.GetComments = function(eventId=null)
 	{
+		console.log("Retrieving Comments");
 		$http({
 			method: 'GET',
-			url: './actions/rso.php?event_id=' + eventId,
+			url: './actions/comment.php?event_id=' + eventId,
 			transformResponse: [function (data) {
 				return data;
 			}]
 		}).then(function successCallback(response) {
+			console.log(response.data);
 			var parsed = JSON.parse(response.data);
-			if(parsed.status === "success"){
-				console.log("SUCCESS");
-			}
-			else{
-				console.log('failure retrieving comments for event');
-
-			}
+			app.eventData.comments = parsed;
 		}, function errorCallback(response) {
 			console.log(response);
+			console.log("Error getting comments");
 		});
 	};
 

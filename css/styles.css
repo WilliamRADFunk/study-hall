@@ -48,6 +48,11 @@ button > span {
 	background-color: #030302;
 	color: #9EBBA6;
 }
+.btn-custom-edit {
+	position: absolute;
+    top: 3px;
+    right: 3px;
+}
 .centered {
 	text-align: center;
 }
@@ -75,6 +80,9 @@ button > span {
 }
 .no-padding-right {
 	padding-right: 0px;
+}
+.panel-edits {
+	position:relative;
 }
 .right {
 	float: right;

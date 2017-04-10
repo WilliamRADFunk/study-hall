@@ -354,6 +354,8 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 	self.eventData = app.eventData;
 	self.state = app.state;
 
+	self.eventData.editing = false;
+
 	// Create the leaflet map, and attach it to the map with that id.
 	var map = L.map('map-event');
 	// Setup a marker group.
@@ -382,6 +384,17 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 
 	self.GetComments = function(){
 		app.GetComments(self.eventData.event['e_id']);
+	};
+
+	self.toggleEdit = function(){
+		if(self.eventData.editing === false)
+		{
+			self.eventData.editing = true;
+		}
+		else
+		{
+			self.eventData.editing = false;
+		}
 	};
 
 	// Called by service everytime the list of events is changed.

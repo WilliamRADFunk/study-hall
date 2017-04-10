@@ -71,7 +71,7 @@
 		</div>
 		<div class="col-lg-12 no-padding-left">
 			</br>
-			<h3>Comments:</h3>
+			<h3>Comments: <button>Add Comment <span class="fa fa-pencil"></span></button></h3>
 			<div ng-if="eventCtrl.eventData.comments !== '{}'" ng-repeat="x in eventCtrl.eventData.comments" class="panel panel-default">
 				<div class="panel-heading">{{x.username}}</div>
 				<div ng-if ="!eventCtrl.eventData.editing" class="panel-body">{{x.comment}}

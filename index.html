@@ -58,7 +58,7 @@
 							<li id="rso-groups" class="active" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos" ng-click="mainCtrl.toggleRsoGroups()"><a href="#">RSO Groups</a></li>
 							<li id="rso-events" ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.rsos" ng-click="mainCtrl.toggleRsoEvents()"><a href="#">RSO Events</a></li>
 							<li ng-if="mainCtrl.state.isLoggedIn && (mainCtrl.state.event || mainCtrl.state.rso || mainCtrl.state.rsos || mainCtrl.state.createEvent || mainCtrl.state.createRSO)" ng-click="mainCtrl.nav.goToEvents()"><a href="#">Core Events</a></li>
-							<li ng-if="mainCtrl.state.isLoggedIn && app.state.role === 0 && (mainCtrl.state.events || mainCtrl.state.event || mainCtrl.state.rso || mainCtrl.state.createEvent || mainCtrl.state.createRSO)" ng-click="mainCtrl.nav.goToRSOs()"><a href="#">RSOs</a></li>
+							<li ng-if="mainCtrl.state.isLoggedIn && mainCtrl.state.role === 0 && (mainCtrl.state.events || mainCtrl.state.event || mainCtrl.state.rso || mainCtrl.state.createEvent || mainCtrl.state.createRSO)" ng-click="mainCtrl.nav.goToRSOs()"><a href="#">RSOs</a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->

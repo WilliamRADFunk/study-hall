@@ -73,7 +73,7 @@
 			</br>
 			<h3>Comments: <button ng-if ="!eventCtrl.eventData.editing" class="col-lg-2 btn btn-info right">Add Comment <span class="fa fa-pencil"></span></button></h3>
 			<div ng-if="eventCtrl.eventData.comments !== '{}'" ng-repeat="x in eventCtrl.eventData.comments" class="panel panel-default">
-				<div class="panel-heading panel-edits">{{x.username}}<button class="col-lg-2 btn btn-danger btn-custom-edit right"" ng-if="x.s_id === eventCtrl.state.userId" ng-click="eventCtrl.toggleEdit()">Edit <span class="fa fa-thumbs-o-down"></span></button></div>
+				<div class="panel-heading panel-edits">{{x.username}}<button class="col-lg-2 btn btn-danger btn-custom-edit right" ng-if="x.s_id === eventCtrl.state.userId" ng-click="eventCtrl.toggleEdit()">Edit <span class="fa fa-thumbs-o-down"></span></button></div>
 				<div ng-if ="!eventCtrl.eventData.editing" class="panel-body">{{x.comment}}
 				</div>
 				<div ng-if ="eventCtrl.eventData.editing" class="panel-body">

@@ -105,7 +105,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			var parsed = JSON.parse(response.data);
 			if(parsed.status === "success"){
 				console.log("SUCCESS");
-				app.goToEvents();
+				app.navigation.goToEvents();
 			}
 			else{
 				console.log('failure retrieving comments for event');
@@ -482,6 +482,12 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			mode = '?user_id=' + app.state.userId + '&private';
 		} else if(app.state.userId
 			&& app.eventListData.isPublicEvents
+			&& !app.eventListData.isPrivateEvents
+			&& app.state.role === 1
+		) {
+			mode = '?user_id=' + app.state.userId + '&role';
+		} else if(app.state.userId
+			&& app.eventListData.isPublicEvents
 			&& app.eventListData.isPrivateEvents
 		) {
 			mode = '?user_id=' + app.state.userId;
@@ -592,7 +598,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 			var parsed = JSON.parse(response.data);
 			if(parsed.status === "success"){
 				console.log("SUCCESS");
-				app.goToEvents();
+				app.navigation.goToEvents();
 			}
 			else{
 				console.log('failure retrieving comments for event');

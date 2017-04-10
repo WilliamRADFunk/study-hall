@@ -59,8 +59,8 @@
 					<tr ng-if="eventCtrl.state.role">
 						<th></th>
 						<td>
-							<button class="col-lg-6 btn btn-success" ng-click="eventCtrl.acceptEvent()">Accept <span class="fa fa-thumbs-o-up"></span></button>
-							<button class="col-lg-6 btn btn-danger" ng-click="eventCtrl.rejectEvent()">Reject <span class="fa fa-thumbs-o-down"></span></button>
+							<button ng-if="eventCtrl.eventData.event['approved_by_superadmin'] == '0'" class="col-lg-12 btn btn-success" ng-click="eventCtrl.acceptEvent()">Accept <span class="fa fa-thumbs-o-up"></span></button>
+							<button ng-if="eventCtrl.eventData.event['approved_by_superadmin'] == '1'" class="col-lg-12 btn btn-danger" ng-click="eventCtrl.rejectEvent()">Reject <span class="fa fa-thumbs-o-down"></span></button>
 						</td>
 					</tr>
 				</tbody>

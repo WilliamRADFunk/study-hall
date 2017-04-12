@@ -355,7 +355,9 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 	self.state = app.state;
 
 	self.eventData.comment;
+	self.eventData.commentToCreate;
 	self.eventData.editing = false;
+	self.eventData.create = false;
 
 	// Create the leaflet map, and attach it to the map with that id.
 	var map = L.map('map-event');
@@ -395,8 +397,8 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 		app.DeleteComment(self.state.userId, eventId);
 	};
 
-	self.createComment = function(eventId=null, comm=null){
-		app.CreateComment(self.state.userId, eventId, comm);
+	self.createComment = function(){
+		app.CreateComment(self.state.userId, self.eventData.event['e_id'], self.eventData.commentToCreate);
 	};
 
 	self.toggleEdit = function(lastComment=null){
@@ -408,9 +410,21 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 		else
 		{
 			self.eventData.editing = false;
-			self.eventData.comment = "";
+			self.eventData.comment= "";
 		}
 	};
+
+	self.toggleCreate = function(){
+		if(self.eventData.create === false)
+		{
+			self.eventData.create = true;
+		}
+		else
+		{
+			self.eventData.create = false;
+			self.eventData.commentToCreate = "";
+		}
+	}
 
 	// Called by service everytime the list of events is changed.
 	var updateEvent = function() {

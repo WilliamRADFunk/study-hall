@@ -71,7 +71,12 @@
 		</div>
 		<div class="col-lg-12 no-padding-left">
 			</br>
-			<h3>Comments: <button ng-if ="!eventCtrl.eventData.editing" class="col-lg-2 btn btn-info right" ng-click="">Add Comment <span class="fa fa-pencil"></span></button></h3>
+			<h3>Comments: <button ng-if ="!eventCtrl.eventData.editing" class="col-lg-2 btn btn-info right" ng-click="eventCtrl.toggleCreate()">Add Comment <span class="fa fa-pencil"></span></button></h3>
+			<div ng-if ="eventCtrl.eventData.create" class="panel-body">
+					<textArea name="comment" class="form-control" ng-init="" ng-model="eventCtrl.eventData.commentToCreate" rows="10" cols="27"></textArea>
+					<div class="panel-heading panel-edits"><button class="col-lg-2 btn btn-danger btn-custom-edit right" ng-click="eventCtrl.createComment()">Create <span class="fa fa-thumbs-o-down"></span></button></div>
+				</br>
+			</div>
 			<div ng-if="eventCtrl.eventData.comments !== '{}'" ng-repeat="x in eventCtrl.eventData.comments" class="panel panel-default">
 				<div class="panel-heading panel-edits">{{x.username}}<button class="col-lg-2 btn btn-danger btn-custom-edit right" ng-if="x.s_id === eventCtrl.state.userId" ng-click="eventCtrl.toggleEdit(x.comment)">Edit <span class="fa fa-thumbs-o-down"></span></button></div>
 				<div ng-if ="!eventCtrl.eventData.editing" class="panel-body">{{x.comment}}

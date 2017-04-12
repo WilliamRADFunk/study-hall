@@ -78,12 +78,15 @@
 				</br>
 			</div>
 			<div ng-if="eventCtrl.eventData.comments !== '{}'" ng-repeat="x in eventCtrl.eventData.comments" class="panel panel-default">
-				<div class="panel-heading panel-edits">{{x.username}}<button class="col-lg-2 btn btn-danger btn-custom-edit right" ng-if="x.s_id === eventCtrl.state.userId" ng-click="eventCtrl.toggleEdit(x.comment)">Edit <span class="fa fa-thumbs-o-down"></span></button></div>
+				<div class="panel-heading panel-edits">{{x.username}}<button class="col-lg-2 btn btn-warning btn-custom-edit right" ng-if="x.s_id === eventCtrl.state.userId" ng-click="eventCtrl.toggleEdit(x.comment)">Edit <span class="fa fa-edit"></span></button></div>
 				<div ng-if ="!eventCtrl.eventData.editing" class="panel-body">{{x.comment}}
 				</div>
 				<div ng-if ="eventCtrl.eventData.editing" class="panel-body">
 					<textArea name="comment" class="form-control" ng-model="eventCtrl.eventData.comment" rows="10" cols="27"></textArea>
-					<div class="panel-heading panel-edits"><button class="col-lg-2 btn btn-danger btn-custom-edit right" ng-click="eventCtrl.editComment()">Confirm Edit <span class="fa fa-thumbs-o-down"></span></button></div>
+					<div class="panel-heading panel-edits">
+						<button class="col-lg-2 btn btn-danger btn-custom-edit left" ng-click="eventCtrl.deleteComment()">Delete <span class="fa fa-trash"></span></button>
+						<button class="col-lg-2 btn btn-success btn-custom-edit right" ng-click="eventCtrl.editComment()">Confirm Edit <span class="fa fa-check"></span></button>
+					</div>
 				</div>
 				<p class="text-right no-padding-bottom date-styling">{{x.date}}</p>
 			</div>

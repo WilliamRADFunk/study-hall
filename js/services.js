@@ -401,7 +401,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	{
 		$http({
 			method: 'POST',
-			url: './actions/comments.php',
+			url: './actions/comment.php',
 			data:
 			{
 			    "type": "delete",

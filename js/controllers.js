@@ -393,8 +393,8 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 		app.UpdateComment(self.state.userId, self.eventData.event['e_id'], self.eventData.comment);
 	};
 
-	self.deleteComment = function(eventId=null){
-		app.DeleteComment(self.state.userId, eventId);
+	self.deleteComment = function(){
+		app.DeleteComment(self.state.userId, self.eventData.event['e_id']);
 	};
 
 	self.createComment = function(){

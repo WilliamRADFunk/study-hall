@@ -354,6 +354,7 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 	self.eventData = app.eventData;
 	self.state = app.state;
 
+	self.eventData.comment;
 	self.eventData.editing = false;
 
 	// Create the leaflet map, and attach it to the map with that id.
@@ -386,14 +387,28 @@ studyHallApp.controller('EventController', ['appData', function(app) {
 		app.GetComments(self.eventData.event['e_id']);
 	};
 
-	self.toggleEdit = function(){
+	self.editComment = function(){
+		app.UpdateComment(self.state.userId, self.eventData.event['e_id'], self.eventData.comment);
+	};
+
+	self.deleteComment = function(eventId=null){
+		app.DeleteComment(self.state.userId, eventId);
+	};
+
+	self.createComment = function(eventId=null, comm=null){
+		app.CreateComment(self.state.userId, eventId, comm);
+	};
+
+	self.toggleEdit = function(lastComment=null){
 		if(self.eventData.editing === false)
 		{
+			self.eventData.comment = lastComment;
 			self.eventData.editing = true;
 		}
 		else
 		{
 			self.eventData.editing = false;
+			self.eventData.comment = "";
 		}
 	};
 

@@ -372,7 +372,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 	{
 		$http({
 			method: 'POST',
-			url: './actions/comments.php',
+			url: './actions/comment.php',
 			data:
 			{
 			    "type": "update",
@@ -397,7 +397,7 @@ studyHallApp.factory('appData', ['$http', function($http) {
 		});
 	};
 
-	app.DeleteComment = function(id=null, eventId=null, comment=null)
+	app.DeleteComment = function(id=null, eventId=null)
 	{
 		$http({
 			method: 'POST',

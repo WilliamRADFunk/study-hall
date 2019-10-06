@@ -1,5 +1,5 @@
 # study-hall
-(Complete) A front-end UI for event creation/management using Angular 1.5.x and Leaflet Maps
+A front-end UI for event creation/management using Angular 1.5.x and Leaflet Maps
 
 ---
 
